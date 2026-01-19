@@ -1,11 +1,16 @@
 import type { ReactNode } from "react";
 
 interface IProps {
+  position?: "center" | "left";
   children: ReactNode;
 }
-const H2 = ({ children }: IProps) => {
+const H2 = ({ position = "left", children }: IProps) => {
+  const postion = position === "center" ? "text-center" : "";
+
   return (
-    <h2 className="font-heading text-gray-900 font-bold text-[28px] tablet:text-[44px] desktop:text-[52px]">
+    <h2
+      className={`${postion} font-heading text-gray-900 font-bold text-[28px] tablet:text-[44px] desktop:text-[52px]`}
+    >
       {children}
     </h2>
   );
