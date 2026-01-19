@@ -1,25 +1,23 @@
 import type { MouseEventHandler, ReactNode } from "react";
 
 type TVariant = "primary" | "secondary";
-type TSize = "small" | "big";
 
 interface IProps {
-  variant: TVariant;
-  size: TSize;
+  variant?: TVariant;
   disabled?: boolean;
   isActive?: boolean;
+  className?: string;
   onClick: MouseEventHandler<HTMLButtonElement>;
   children: ReactNode;
 }
 const Button = ({
   variant,
-  size,
   disabled = false,
   isActive = false,
+  className,
   onClick,
   children,
 }: IProps) => {
-  const paddings = size === "big" ? "py-[10.5px] px-3 " : "py-1 px-2.5 ";
   const disabledStyles = disabled
     ? "opacity-30 cursor-not-allowed"
     : "cursor-pointer";
@@ -60,7 +58,7 @@ const Button = ({
 
   return (
     <button
-      className={`font-main font-medium text-lg rounded-lg ${paddings} ${styles} ${disabledStyles}`}
+      className={`font-main font-medium text-lg rounded-lg  ${styles} ${disabledStyles} ${className}`}
       disabled={disabled}
       onClick={disabled ? undefined : onClick}
     >
