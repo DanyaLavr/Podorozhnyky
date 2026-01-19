@@ -1,10 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import Link from "./ui/Link";
-import TextArea from "./ui/TextArea";
-import { Form, Formik } from "formik";
-import SelectItem from "./ui/SelectItem";
-import Container from "./ui/Container";
-import Section from "./ui/Section";
 
 function App() {
   return (
@@ -14,14 +8,7 @@ function App() {
           <Route path="login" element={""} />
           <Route path="register" element={""} />
         </Route>
-        <Route
-          path="/"
-          element={
-            <Section size="big">
-              <Container>container</Container>
-            </Section>
-          }
-        >
+        <Route path="/" element={""}>
           <Route path="stories" element={""}>
             <Route path=":storyNumber" element={""} />
           </Route>

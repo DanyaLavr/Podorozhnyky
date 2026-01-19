@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+package-lock.json
+bun.lock
+
+# Build outputs
+dist/
+build/
+*.tsbuildinfo
+
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Generated files
+coverage/
+.nyc_output/
+
+# Public assets (optional - якщо не хочете форматувати SVG)
+# public/
