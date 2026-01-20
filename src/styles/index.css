@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./global.scss";
 
 @theme {
   --color-blue-50: #e8eeff;

@@ -1,0 +1,6 @@
+.section {
+  @apply px-5 py-16 mobile:px-0 desktop:py-18;
+}
+.container {
+  @apply mx-auto mobile:w-83.75 tablet:w-176 desktop:w-328;
+}
