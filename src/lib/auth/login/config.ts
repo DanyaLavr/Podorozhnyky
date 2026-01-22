@@ -1,26 +1,32 @@
 import { loginInitialValues, loginShema } from "./formik";
+import type { IAuthFormConfig } from "@/types";
 
-const loginFormConfig = {
+const loginFormConfig: IAuthFormConfig = {
   name: "login",
   initialValues: loginInitialValues,
   validationSchema: loginShema,
   inputs: [
     {
       variant: "input",
-      congig: {
+      config: {
         name: "email",
-        placeholder: "Email",
+        title: "Пошта*",
+        placeholder: "hello@podorozhnyky.ua",
         type: "email",
       },
     },
     {
       variant: "input",
-      congig: {
+      config: {
         name: "password",
-        placeholder: "Password",
+        title: "Пароль*",
+        placeholder: "********",
         type: "password",
       },
     },
   ],
+  button: {
+    content: "Увійти",
+  },
 };
 export default loginFormConfig;
