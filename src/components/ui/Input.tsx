@@ -28,13 +28,13 @@ type InputConfig =
       };
     };
 
-const Input: React.FC<InputConfig> = ({ variant, config }) => {
+const Input = ({ variant, config }: InputConfig) => {
   switch (variant) {
     case "input":
       return (
         <TextInput
           name={config.name}
-          type={config.type ?? "text"}
+          type={config.type}
           placeholder={config.placeholder}
         />
       );
@@ -45,7 +45,7 @@ const Input: React.FC<InputConfig> = ({ variant, config }) => {
       );
 
     case "area":
-      return <TextArea placeholder={config.placeholder} name={config.name} />;
+      return <TextArea name={config.name} placeholder={config.placeholder} />;
 
     default:
       return null;

@@ -1,12 +1,15 @@
 import { Route, Routes } from "react-router-dom";
+import Auth from "./pages/auth/Auth";
+import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="auth" element={""}>
-          <Route path="login" element={""} />
-          <Route path="register" element={""} />
+        <Route path="auth" element={<Auth />}>
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
         </Route>
         <Route
           path="/"
