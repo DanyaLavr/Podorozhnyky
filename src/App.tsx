@@ -1,5 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 
+import JoinToUs from "./components/ui/JoinToUs/JoinToUs";
+
 function App() {
   return (
     <>
@@ -8,7 +10,7 @@ function App() {
           <Route path="login" element={""} />
           <Route path="register" element={""} />
         </Route>
-        <Route path="/" element={""}>
+        <Route path="/" element={<JoinToUs></JoinToUs>}>
           <Route path="stories" element={""}>
             <Route path=":storyNumber" element={""} />
           </Route>

@@ -7,7 +7,7 @@ interface IProps {
 const Container = ({ className, children }: IProps) => {
   return (
     <div
-      className={`m-auto mobile:w-[335px] tablet:w-176 desktop:w-328 border-2 border-red-700 ${className}`}
+      className={`m-auto mobile:w-[335px] tablet:w-176 desktop:w-328   ${className}`}
     >
       {children}
     </div>
