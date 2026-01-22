@@ -7,7 +7,7 @@ interface IProps {
   disabled?: boolean;
   isActive?: boolean;
   className?: string;
-  onClick: MouseEventHandler<HTMLButtonElement>;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
   children: ReactNode;
 }
 const Button = ({

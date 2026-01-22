@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-
+//* section's container
 interface IProps {
   position?: "center" | "left";
   children: ReactNode;

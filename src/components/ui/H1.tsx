@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-
+//* page's heading
 interface IProps {
   variant?: "light" | "dark";
   position?: "center" | "left";
