@@ -5,9 +5,16 @@ interface IProps {
   type?: TType;
   link: string;
   disabled?: boolean;
+  className?: string;
   children?: ReactNode;
 }
-const Link = ({ type = "text", link, disabled = false, children }: IProps) => {
+const Link = ({
+  type = "text",
+  link,
+  disabled = false,
+  className,
+  children,
+}: IProps) => {
   const paddings = type === "text" ? `px-2 ` : `p-0.5 inline-block`;
   return (
     <a
@@ -21,6 +28,7 @@ const Link = ({ type = "text", link, disabled = false, children }: IProps) => {
         ? "opacity-30 cursor-not-allowed!"
         : "cursor-pointer hover:border-gray-900 focus:border focus:border-gray-900 active:border active:border-gray-900 active:bg-gray-350 dark:hover:border-gray-50  dark:focus:border-gray-50  dark:active:border-gray-50 dark:active:bg-gray-500"
     }
+    ${className}
   `}
     >
       {type === "text" ? children : <SaveIcon />}
