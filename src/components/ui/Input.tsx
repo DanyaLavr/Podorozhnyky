@@ -1,4 +1,4 @@
-import type { TInputConfig } from "@/types/index";
+import type { TInputConfig } from "@/types/auth/inputs";
 import SelectItem from "./SelectItem";
 import TextArea from "./TextArea";
 import TextInput from "./TextInput";
@@ -10,8 +10,8 @@ const Input = ({ variant, config }: TInputConfig) => {
         <TextInput
           name={config.name}
           type={config.type}
-          placeholder={config?.placeholder}
           title={config?.title}
+          placeholder={config?.placeholder}
         />
       );
 

@@ -1,4 +1,4 @@
-import type { IAuthFormConfig } from "@/types";
+import type { IAuthFormConfig } from "@/types/auth/form";
 import { registerInitialValues, registerShema } from "./formik";
 
 const registerFormConfig: IAuthFormConfig = {
