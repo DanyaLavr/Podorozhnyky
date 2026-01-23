@@ -1,51 +1,30 @@
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
-import type { IAuthFormConfig } from "@/types/index";
+import { selectAuthError, selectAuthIsLoading } from "@/redux/auth/selectors";
+import { useAppSelector } from "@/redux/hooks";
+import type { IAuthFormConfig } from "@/types/auth/form";
 import { Form, Formik } from "formik";
 
-// type TSelectOption = {
-//   label: string;
-//   value: string;
-// };
-// type AuthInput =
-//   | {
-//       variant: "input";
-//       config: {
-//         name: string;
-//         type: TType;
-//         placeholder?: string;
-//         title?: string;
-//       };
-//     }
-//   | {
-//       variant: "select";
-//       config: {
-//         name: string;
-//         placeholder: string;
-//         options: TSelectOption[];
-//       };
-//     }
-//   | {
-//       variant: "area";
-//       config: { name: string; placeholder: string };
-//     };
-interface IProps {
+interface IProps<T> {
   shema: IAuthFormConfig;
-  onSubmit: () => void;
+  onSubmit: (values: T) => void;
 }
-const AuthForm = ({ shema, onSubmit }: IProps) => {
+const AuthForm = <T extends object>({ shema, onSubmit }: IProps<T>) => {
   const { validationSchema, initialValues, inputs, button } = shema;
+  const disabled = useAppSelector(selectAuthIsLoading);
+  const error = useAppSelector(selectAuthError);
   return (
-    <Formik
+    <Formik<T>
       validationSchema={validationSchema}
-      initialValues={initialValues}
+      initialValues={initialValues as T}
       onSubmit={onSubmit}
     >
       <Form className="grid gap-6 mt-8">
         {inputs.map((elem) => (
           <Input key={elem.config.name} {...elem} />
         ))}
-        <Button variant="primary" className="py-2.5">
+        {error && <p className="text-error">{error}</p>}
+        <Button variant="primary" className="py-2.5" disabled={disabled}>
           {button.content}
         </Button>
       </Form>

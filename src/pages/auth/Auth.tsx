@@ -3,7 +3,7 @@ import AuthNav from "@/components/auth/navigation/AuthNav";
 import { Outlet } from "react-router-dom";
 const Auth = () => {
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <header>
         <div className="flex gap-0.5">
           {/* <Logo /> */}
@@ -25,7 +25,7 @@ const Auth = () => {
           </p>
         </div>
       </footer>
-    </>
+    </div>
   );
 };
 
