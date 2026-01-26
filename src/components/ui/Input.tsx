@@ -1,7 +1,7 @@
 import type { TInputConfig } from "@/types/auth/inputs";
 import SelectItem from "./SelectItem";
 import TextArea from "./TextArea";
-import TextInput from "./TextInput";
+import TextInput from "./text-input";
 
 const Input = ({ variant, config }: TInputConfig) => {
   switch (variant) {

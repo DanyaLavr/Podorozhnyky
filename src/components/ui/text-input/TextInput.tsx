@@ -1,4 +1,5 @@
 import { ErrorMessage, Field } from "formik";
+import styles from "./text-input.module.scss";
 interface IProps {
   type: string;
   name: string;
@@ -7,7 +8,7 @@ interface IProps {
 }
 const TextInput = ({ type, name, placeholder, title }: IProps) => {
   return (
-    <div className="grid gap-2">
+    <div className={`${styles.container} grid gap-2`}>
       {title && <p className="font-main desktop:text-lg">{title}</p>}
       <Field
         className="rounded-lg border border-gray-900/15 text-gray-900 p-2 font-main text-lg focus:border-blue-400 placeholder:text-gray-900/60 placeholder:font-main placeholder:text-lg"
@@ -15,7 +16,11 @@ const TextInput = ({ type, name, placeholder, title }: IProps) => {
         name={name}
         placeholder={placeholder}
       />
-      <ErrorMessage name={name} component="div" />
+      <ErrorMessage
+        name={name}
+        component="div"
+        className={`${styles.error} text-error text-xs font-main`}
+      />
     </div>
   );
 };
