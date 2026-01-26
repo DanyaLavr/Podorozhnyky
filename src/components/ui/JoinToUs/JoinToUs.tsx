@@ -1,7 +1,10 @@
+import { Link } from "react-router-dom";
+
 import Button from "../Button";
+import H2 from "../H2";
 
 import { createBem } from "@/utils/createBem";
-import styles from "./JoinToUs.module.css";
+import styles from "./_JoinToUs.module.scss";
 
 const bem = createBem("joinToUs", styles);
 
@@ -10,16 +13,29 @@ export default function JoinToUs() {
     <section className="section">
       <div className="container">
         <div className={bem()}>
-          <h2 className={bem("title")}>Приєднуйтесь до нашої спільноти</h2>
+          <div className={bem("wrapper")}>
+            <div className={bem("wrapper--text")}>
+              <H2 variant="light" className={bem("title")}>
+                Приєднуйтесь до нашої спільноти
+              </H2>
 
-          <p className={bem("description")}>
-            Долучайтеся до мандрівників, які діляться своїми історіями та
-            надихають на нові пригоди.
-          </p>
+              <p className={bem("description")}>
+                Долучайтеся до мандрівників, які діляться своїми історіями та
+                надихають на нові пригоди.
+              </p>
+            </div>
 
-          <Button variant="primary" onClick={() => {}}>
-            Зареєструватися
-          </Button>
+              <Link to="/auth/register" className={bem("link")}>
+                <Button
+                  variant="primary"
+                  onClick={() => {}}
+                  className={bem("button")}
+                >
+                  Зареєструватися
+                </Button>
+              </Link>
+
+          </div>
         </div>
       </div>
     </section>
