@@ -1,7 +1,7 @@
 import type { TInputConfig } from "@/types/auth/inputs";
 import SelectItem from "./SelectItem";
 import TextArea from "./TextArea";
-import TextInput from "./TextInput";
+import TextInput from "./text-input";
 
 const Input = ({ variant, config }: TInputConfig) => {
   switch (variant) {
@@ -10,7 +10,8 @@ const Input = ({ variant, config }: TInputConfig) => {
         <TextInput
           name={config.name}
           type={config.type}
-          placeholder={config.placeholder}
+          title={config?.title}
+          placeholder={config?.placeholder}
         />
       );
 
@@ -20,7 +21,7 @@ const Input = ({ variant, config }: TInputConfig) => {
       );
 
     case "area":
-      return <TextArea placeholder={config.placeholder} name={config.name} />;
+      return <TextArea name={config.name} placeholder={config.placeholder} />;
 
     default:
       return null;

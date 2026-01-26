@@ -1,0 +1,8 @@
+@use "@/styles/variables" as *;
+.container:has(.error) input {
+  color: $error;
+  border-color: $error;
+  &::placeholder {
+    color: $error;
+  }
+}
