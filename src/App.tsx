@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import UserPage from "./pages/UserPage";
 
 function App() {
   return (
@@ -13,7 +14,9 @@ function App() {
             <Route path=":storyNumber" element={""} />
           </Route>
           <Route path="travellers" element={""} />
-          <Route path="traveller" element={""} />
+          <Route path="traveller" element={""}>
+            <Route path=":travellerUid" element={<UserPage />} />
+          </Route>
           <Route path="profile" element={""} />
           <Route path="new-story" element={""} />
         </Route>
