@@ -1,5 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import UserPage from "./pages/UserPage";
+import Profile from "./pages/Profile";
+import ProfileUserPosts from "./pages/ProfileUserPosts";
 
 function App() {
   return (
@@ -17,7 +19,10 @@ function App() {
           <Route path="traveller" element={""}>
             <Route path=":travellerUid" element={<UserPage />} />
           </Route>
-          <Route path="profile" element={""} />
+          <Route path="profile" element={<Profile />}>
+            <Route path="favorite" element={""} />
+            <Route path="user-posts" element={<ProfileUserPosts />} />
+          </Route>
           <Route path="new-story" element={""} />
         </Route>
       </Routes>

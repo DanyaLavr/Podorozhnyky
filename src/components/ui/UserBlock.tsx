@@ -7,7 +7,7 @@ const UserBlock = ({ user }: IProps) => {
   const { uid, displayName, description } = user;
   return (
     <section className="section pb-0!">
-      <div className="container ">
+      <div className="m-auto mobile:w-77.75 tablet:w-176 desktop:w-328">
         <div className="grid gap-6 justify-items-center text-center tablet:flex tablet:items-center tablet:text-start desktop:w-147.5! desktop:justify-items-start">
           <img
             src={`https://res.cloudinary.com/dizg6rj7g/image/upload/v1769524892/${uid}`}
