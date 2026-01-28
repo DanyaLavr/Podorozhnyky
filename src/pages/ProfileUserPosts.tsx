@@ -18,7 +18,7 @@ const ProfileUserPosts = () => {
       try {
         const result = await run<Story[]>(() => getUserStories(user.uid));
         if (result) {
-          setStories((prev) => [...prev, ...result]);
+          setStories(result);
         }
       } catch (e) {}
     };
@@ -40,7 +40,7 @@ const ProfileUserPosts = () => {
   return (
     <div>
       {stories.map((elem) => (
-        <p key={elem.id}>{elem.title}</p>
+        <p>{elem.title}</p>
       ))}
     </div>
   );

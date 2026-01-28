@@ -1,12 +1,5 @@
 import { db } from "@/lib/firebase/app";
-import {
-  collection,
-  getDocs,
-  limit,
-  orderBy,
-  query,
-  where,
-} from "firebase/firestore";
+import { collection, getDocs, limit, query, where } from "firebase/firestore";
 import type { Story } from "@/types/user/user";
 
 export const getUserStories = async (creatorUid: string): Promise<Story[]> => {
@@ -14,7 +7,6 @@ export const getUserStories = async (creatorUid: string): Promise<Story[]> => {
     const q = query(
       collection(db, "posts"),
       where("creator", "==", creatorUid),
-      orderBy("createdAt", "desc"),
       limit(6)
     );
 
