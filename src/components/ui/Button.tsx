@@ -62,6 +62,7 @@ const Button = ({
     <button
       className={`font-main font-medium text-lg rounded-lg  ${styles} ${disabledStyles} ${className}`}
       disabled={disabled}
+      type={type}
       onClick={disabled ? undefined : onClick}
     >
       {children}
