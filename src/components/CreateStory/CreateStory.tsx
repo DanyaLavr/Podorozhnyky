@@ -1,22 +1,19 @@
 import { createBem } from "@/utils/createBem";
-
 import styles from "./_CreateStory.module.scss";
 import H1 from "@/components/ui/H1.tsx";
-
 import Button from "../ui/Button";
-// import TextInput from "../ui/TextInput";
-import TextArea from "../ui/TextArea";
-
-import Input from "../ui/Input";
-
 import { useState, useRef } from "react";
+
+
 
 const bem = createBem("createStories", styles);
 
+
+
 export default function CreateStory() {
   const [image, setImage] = useState<string | null>(null);
-
   const fileRef = useRef<HTMLInputElement | null>(null);
+
 
   const handleButtonClick = () => {
     fileRef.current?.click();
@@ -28,6 +25,7 @@ export default function CreateStory() {
 
     setImage(URL.createObjectURL(file));
   };
+
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -94,8 +92,6 @@ export default function CreateStory() {
                   type="text"
                   placeholder="Введіть заголовок історії"
                 />
-                {/* <TextInput type='text' name=''/> */}
-                {/* <TextArea name='' placeholder=""></TextArea> */}
               </div>
 
               <div className={bem("inputGroup")}>
@@ -120,25 +116,16 @@ export default function CreateStory() {
             </div>
 
             <div className={bem("buttonWrapper")}>
-              <Button className={bem("submitButton")} variant="primary">
+              <Button type="submit" className={bem("submitButton")} variant="primary">
                 Зберегти
               </Button>
-              {/* <button type="submit" className={bem("submitButton")}>
-                Зберегти
-              </button> */}
+
               <Button className={bem("submitButton")} variant="secondary">
                 Відмінити
               </Button>
             </div>
 
-            {/* <Input
-              variant="input"
-              config={{
-                name: "title",
-                type: "text",
-                placeholder: "Введіть заголовок історії",
-              }}
-            /> */}
+
           </form>
         </div>
       </div>
