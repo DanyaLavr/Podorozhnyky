@@ -7,7 +7,7 @@ export interface IUserBlock {
   description?: string;
   favoritePosts?: string[];
 }
-export interface Story {
+export interface IStory {
   id: string;
   category: string;
   createdAt: number;
@@ -19,6 +19,6 @@ export interface Story {
   title: string;
 }
 export type TGetUserStoriesResult = {
-  stories: Story[];
+  stories: IStory[];
   lastDoc: QueryDocumentSnapshot<DocumentData> | null;
 };

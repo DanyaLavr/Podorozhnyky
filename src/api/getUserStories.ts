@@ -11,7 +11,7 @@ import {
   where,
   type DocumentData,
 } from "firebase/firestore";
-import type { Story, TGetUserStoriesResult } from "@/types/user/user";
+import type { IStory, TGetUserStoriesResult } from "@/types/user/user";
 
 export const getUserStories = async (
   creatorUid: string,
@@ -35,7 +35,7 @@ export const getUserStories = async (
     }));
     const lastDoc = snapshot.docs[snapshot.docs.length - 1];
     return {
-      stories: stories as Story[],
+      stories: stories as IStory[],
       lastDoc,
     };
   } catch (e) {

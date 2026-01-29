@@ -2,7 +2,7 @@ import { getUserStories } from "@/api/getUserStories";
 import Button from "@/components/ui/Button";
 import StoriesMessage from "@/components/ui/StoriesMessage";
 import useAsync from "@/hooks/useRequestState";
-import type { Story, TGetUserStoriesResult } from "@/types/user/user";
+import type { IStory, TGetUserStoriesResult } from "@/types/user/user";
 import type { QueryDocumentSnapshot } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 
@@ -13,7 +13,7 @@ const user = {
     "lorem100lor em100lorem100l orem100lorem100lo rem100lorem10 0lorem100lorem10 0lorem 100 lorem1 00lor em100lor em100lore m100lorem100lorem100",
 };
 const ProfileUserPosts = () => {
-  const [stories, setStories] = useState<Story[]>([]);
+  const [stories, setStories] = useState<IStory[]>([]);
   const lastDocRef = useRef<QueryDocumentSnapshot | null>(null);
   const { run, isLoading } = useAsync();
   useEffect(() => {
