@@ -22,3 +22,7 @@
   --breakpoint-tablet: 768px;
   --breakpoint-desktop: 1440px;
 }
+
+.container {
+  margin: 0 auto;
+}
