@@ -1,7 +1,7 @@
 import { getUserStories } from "@/api/getUserStories";
 import Button from "@/components/ui/Button";
 import StoriesMessage from "@/components/ui/StoriesMessage";
-import useAsync from "@/hooks/useRequestState";
+import useAsync from "@/hooks/useAsync";
 import type { IStory, TGetUserStoriesResult } from "@/types/user/user";
 import type { QueryDocumentSnapshot } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
@@ -37,7 +37,6 @@ const ProfileUserPosts = () => {
       const result = await run<TGetUserStoriesResult>(() =>
         getUserStories(user.uid, lastDocRef.current)
       );
-      console.log("result :>> ", result);
       if (result) {
         setStories((prev) => [...prev, ...result.stories]);
         lastDocRef.current = result.lastDoc;

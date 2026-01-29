@@ -1,6 +1,6 @@
 import type { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
 
-export interface IUserBlock {
+export interface IUser {
   uid: string;
   displayName: string;
   imageUrl?: string;

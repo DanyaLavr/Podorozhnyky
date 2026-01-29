@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import H2 from "../ui/H2";
 import StoriesMessage from "../ui/StoriesMessage";
 import { useParams } from "react-router-dom";
-import type { Story } from "@/types/user/user";
+import type { IStory } from "@/types/user/user";
 import { getUserStories } from "@/api/getUserStories";
 import type { QueryDocumentSnapshot } from "firebase/firestore";
 
 const UserStories = () => {
-  const [stories, setStories] = useState<Story[]>([]);
+  const [stories, setStories] = useState<IStory[]>([]);
   const lastDocRef = useRef<QueryDocumentSnapshot | null>(null);
   const { travellerUid } = useParams();
 

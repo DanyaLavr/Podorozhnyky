@@ -21,7 +21,7 @@ export const getUserStories = async (
     const constraints: QueryConstraint[] = [
       where("creator", "==", creatorUid),
       orderBy("createdAt", "desc"),
-      limit(2),
+      limit(6),
     ];
     if (lastElem) {
       constraints.push(startAfter(lastElem));

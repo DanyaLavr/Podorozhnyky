@@ -1,4 +1,4 @@
-import ProfilePostsSection from "@/components/sections/ProfilePostsSection";
+import ProfilePosts from "@/components/sections/ProfilePosts";
 import UserBlock from "@/components/ui/UserBlock";
 const user = {
   uid: "id-123456",
@@ -13,7 +13,7 @@ const Profile = () => {
   return (
     <>
       <UserBlock user={user} />
-      <ProfilePostsSection />
+      <ProfilePosts />
     </>
   );
 };

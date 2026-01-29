@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import NavToggle from "../ui/NavToggle";
 
-const ProfilePostsSection = () => {
+const ProfilePosts = () => {
   return (
     <section className="section">
       <div className="container">
@@ -23,4 +23,4 @@ const ProfilePostsSection = () => {
   );
 };
 
-export default ProfilePostsSection;
+export default ProfilePosts;
