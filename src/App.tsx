@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
+import CreateStory from "./components/CreateStory/CreateStory";
 
-import JoinToUs from "./components/ui/JoinToUs/JoinToUs";
+
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
           <Route path="login" element={""} />
           <Route path="register" element={""} />
         </Route>
-        <Route path="/" element={<JoinToUs></JoinToUs>}>
+        <Route path="/" element={<CreateStory></CreateStory>}>
           <Route path="stories" element={""}>
             <Route path=":storyNumber" element={""} />
           </Route>
