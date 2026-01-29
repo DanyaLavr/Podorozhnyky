@@ -1,10 +1,13 @@
 import ProfilePostsSection from "@/components/sections/ProfilePostsSection";
 import UserBlock from "@/components/ui/UserBlock";
 const user = {
-  uid: "IMG_0717_bwjnt9",
-  displayName: "Danylo Nutella",
+  uid: "id-123456",
+  imageUrl:
+    "https://res.cloudinary.com/dizg6rj7g/image/upload/v1769524892/IMG_0717_bwjnt9",
+  displayName: "Danya Lavr",
+  favoritesPosts: ["cS8YdTRM1o2MY8cS8kju", "chqDjvte98jo1A963W32"],
   description:
-    "lorem100lor em100lorem100l orem100lorem100lo rem100lorem10 0lorem100lorem10 0lorem 100 lorem1 00lor em100lor em100lore m100lorem100lorem100",
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros ipsum dolor sit amet,  ipsum dolor stem",
 };
 const Profile = () => {
   return (

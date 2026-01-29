@@ -1,8 +1,10 @@
 import { getUserStories } from "@/api/getUserStories";
+import Button from "@/components/ui/Button";
 import StoriesMessage from "@/components/ui/StoriesMessage";
 import useAsync from "@/hooks/useRequestState";
-import type { Story } from "@/types/user/user";
-import { useEffect, useState } from "react";
+import type { Story, TGetUserStoriesResult } from "@/types/user/user";
+import type { QueryDocumentSnapshot } from "firebase/firestore";
+import { useEffect, useRef, useState } from "react";
 
 const user = {
   uid: "id-123456",
@@ -12,22 +14,37 @@ const user = {
 };
 const ProfileUserPosts = () => {
   const [stories, setStories] = useState<Story[]>([]);
+  const lastDocRef = useRef<QueryDocumentSnapshot | null>(null);
   const { run, isLoading } = useAsync();
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await run<Story[]>(() => getUserStories(user.uid));
+        if (stories.length) return;
+
+        const result = await run<TGetUserStoriesResult>(() =>
+          getUserStories(user.uid, null)
+        );
         if (result) {
-          setStories(result);
+          setStories(result.stories);
         }
       } catch (e) {}
     };
     fetchData();
   }, []);
 
-  if (isLoading) {
-    return "Loading...";
-  }
+  const handlePagination = async () => {
+    try {
+      const result = await run<TGetUserStoriesResult>(() =>
+        getUserStories(user.uid, lastDocRef.current)
+      );
+      console.log("result :>> ", result);
+      if (result) {
+        setStories((prev) => [...prev, ...result.stories]);
+        lastDocRef.current = result.lastDoc;
+      }
+    } catch (e) {}
+  };
+
   if (!stories.length && !isLoading) {
     return (
       <StoriesMessage
@@ -42,6 +59,10 @@ const ProfileUserPosts = () => {
       {stories.map((elem) => (
         <p>{elem.title}</p>
       ))}
+      {isLoading && "Loading..."}
+      <Button variant="primary" onClick={handlePagination}>
+        завантажити більше!
+      </Button>
     </div>
   );
 };

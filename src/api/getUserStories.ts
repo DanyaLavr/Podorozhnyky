@@ -1,23 +1,48 @@
 import { db } from "@/lib/firebase/app";
-import { collection, getDocs, limit, query, where } from "firebase/firestore";
-import type { Story } from "@/types/user/user";
+import {
+  collection,
+  getDocs,
+  limit,
+  orderBy,
+  query,
+  QueryConstraint,
+  QueryDocumentSnapshot,
+  startAfter,
+  where,
+  type DocumentData,
+} from "firebase/firestore";
+import type { Story, TGetUserStoriesResult } from "@/types/user/user";
 
-export const getUserStories = async (creatorUid: string): Promise<Story[]> => {
+export const getUserStories = async (
+  creatorUid: string,
+  lastElem: QueryDocumentSnapshot<DocumentData> | null
+): Promise<TGetUserStoriesResult> => {
   try {
-    const q = query(
-      collection(db, "posts"),
+    const constraints: QueryConstraint[] = [
       where("creator", "==", creatorUid),
-      limit(6)
-    );
+      orderBy("createdAt", "desc"),
+      limit(2),
+    ];
+    if (lastElem) {
+      constraints.push(startAfter(lastElem));
+    }
 
+    const q = query(collection(db, "posts"), ...constraints);
     const snapshot = await getDocs(q);
-
-    return snapshot.docs.map((doc) => ({
+    const stories = snapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
-    })) as Story[];
+    }));
+    const lastDoc = snapshot.docs[snapshot.docs.length - 1];
+    return {
+      stories: stories as Story[],
+      lastDoc,
+    };
   } catch (e) {
     console.log("error:", e);
-    return [];
+    return {
+      stories: [],
+      lastDoc: null,
+    };
   }
 };
