@@ -15,8 +15,12 @@ const user = {
 const Profile = () => {
   return (
     <>
-      <UserBlock user={user} />
-      <ProfilePosts />
+      {/* <Header/> */}
+      <main>
+        <UserBlock user={user} />
+        <ProfilePosts />
+      </main>
+      {/* <Footer/> */}
     </>
   );
 };
