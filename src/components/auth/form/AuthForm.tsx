@@ -26,7 +26,7 @@ const AuthForm = <T extends object>({ shema, onSubmit }: IProps<T>) => {
       initialValues={initialValues as T}
       onSubmit={onSubmit}
     >
-      <Form className={`grid gap-6 mt-8`}>
+      <Form className={`grid gap-9 mt-8`}>
         {inputs.map((elem) => (
           <Input key={elem.config.name} {...elem} />
         ))}
