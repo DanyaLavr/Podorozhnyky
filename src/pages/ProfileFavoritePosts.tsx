@@ -1,30 +1,40 @@
-import { getUserStories } from "@/api/getUserStories";
+import getFavoritesPosts from "@/api/getFavoritesPosts";
 import StoriesMessage from "@/components/ui/StoriesMessage";
 import useAsync from "@/hooks/useAsync";
-import type { IStory, TGetUserStoriesResult } from "@/types/user/user";
-import type { QueryDocumentSnapshot } from "firebase/firestore";
-import { useEffect, useRef, useState } from "react";
+import type { IStory } from "@/types/user/user";
+import { useEffect, useMemo, useState } from "react";
+
 const user = {
   uid: "id-123456",
-  displayName: "Danylo Nutella",
+  imageUrl:
+    "https://res.cloudinary.com/dizg6rj7g/image/upload/v1769524892/IMG_0717_bwjnt9",
+  displayName: "Danya Lavr",
+  favoritesPosts: [
+    { id: "cS8YdTRM1o2MY8cS8kju", data: 1 },
+    { id: "chqDjvte98jo1A963W32", data: 2 },
+    { id: "AGrISrdZjTcPMSXkqFIW", data: 10 },
+  ],
   description:
-    "lorem100lor em100lorem100l orem100lorem100lo rem100lorem10 0lorem100lorem10 0lorem 100 lorem1 00lor em100lor em100lore m100lorem100lorem100",
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros ipsum dolor sit amet,  ipsum dolor stem",
 };
 const ProfileFavoritePosts = () => {
   const [stories, setStories] = useState<IStory[]>([]);
-  const lastDocRef = useRef<QueryDocumentSnapshot | null>(null);
   const { run, isLoading } = useAsync();
+  const ids = useMemo(() => {
+    return [...user.favoritesPosts]
+      .sort((a, b) => b.data - a.data)
+      .map((elem) => elem.id);
+  }, [user.favoritesPosts]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (stories.length) return;
-
-        const result = await run<TGetUserStoriesResult>(() =>
-          getUserStories(user.uid, null)
-        );
+        console.log("ids :>> ", ids);
+        const result = await run<IStory[]>(() => getFavoritesPosts(ids));
+        console.log("result :>> ", result);
         if (result) {
-          setStories(result.stories);
+          setStories(result);
         }
       } catch (e) {}
     };
@@ -33,12 +43,9 @@ const ProfileFavoritePosts = () => {
 
   const handlePagination = async () => {
     try {
-      const result = await run<TGetUserStoriesResult>(() =>
-        getUserStories(user.uid, lastDocRef.current)
-      );
+      const result = await run<IStory[]>(() => getFavoritesPosts(ids));
       if (result) {
-        setStories((prev) => [...prev, ...result.stories]);
-        lastDocRef.current = result.lastDoc;
+        setStories((prev) => [...prev, ...result]);
       }
     } catch (e) {}
   };

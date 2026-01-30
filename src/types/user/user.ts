@@ -5,7 +5,7 @@ export interface IUser {
   displayName: string;
   imageUrl?: string;
   description?: string;
-  favoritePosts?: string[];
+  favoritePosts?: { id: string; data: number }[];
 }
 export interface IStory {
   id: string;

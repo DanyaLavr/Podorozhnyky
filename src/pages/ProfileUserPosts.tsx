@@ -26,6 +26,7 @@ const ProfileUserPosts = () => {
         );
         if (result) {
           setStories(result.stories);
+          lastDocRef.current = result.lastDoc;
         }
       } catch (e) {}
     };
@@ -33,6 +34,7 @@ const ProfileUserPosts = () => {
   }, []);
 
   const handlePagination = async () => {
+    console.log("lastDocRef.current :>> ", lastDocRef.current);
     try {
       const result = await run<TGetUserStoriesResult>(() =>
         getUserStories(user.uid, lastDocRef.current)
