@@ -3,6 +3,7 @@ import StoriesMessage from "@/components/ui/StoriesMessage";
 import useAsync from "@/hooks/useAsync";
 import type { IStory } from "@/types/user/user";
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 const user = {
   uid: "id-123456",
@@ -18,6 +19,8 @@ const user = {
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros ipsum dolor sit amet,  ipsum dolor stem",
 };
 const ProfileFavoritePosts = () => {
+  const [searchParams, setSearchParmas] = useSearchParams();
+  const page = searchParams.get("page");
   const [stories, setStories] = useState<IStory[]>([]);
   const { run, isLoading } = useAsync();
   const ids = useMemo(() => {
@@ -27,10 +30,13 @@ const ProfileFavoritePosts = () => {
   }, [user.favoritesPosts]);
 
   useEffect(() => {
+    setSearchParmas({ page: "1" });
     const fetchData = async () => {
       try {
         if (stories.length) return;
         console.log("ids :>> ", ids);
+        console.log("searchParams :>> ", page);
+
         const result = await run<IStory[]>(() => getFavoritesPosts(ids));
         console.log("result :>> ", result);
         if (result) {
@@ -40,7 +46,9 @@ const ProfileFavoritePosts = () => {
     };
     fetchData();
   }, []);
-
+  useEffect(() => {
+    console.log("searchParams :>> ", searchParams.get("page"));
+  }, [searchParams]);
   const handlePagination = async () => {
     try {
       const result = await run<IStory[]>(() => getFavoritesPosts(ids));
