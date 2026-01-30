@@ -20,7 +20,7 @@ const TextArea = ({ name, placeholder }: IProps) => {
   }, []);
 
   return (
-    <div className="grid gap-2">
+    <div className="relative">
       <Field
         innerRef={inputRef}
         as="textarea"
@@ -28,9 +28,9 @@ const TextArea = ({ name, placeholder }: IProps) => {
         placeholder={placeholder}
         rows={6}
         onInput={autoResize}
-        className="resize-none overflow-hidden border border-gray-900/15 text-gray-900 p-2 font-main text-lg focus:border-blue-400 placeholder:text-gray-900/60 placeholder:font-main placeholder:text-lg"
+        className="resize-none w-full overflow-hidden border border-gray-900/15 text-gray-900 p-2 font-main text-lg focus:border-blue-400 placeholder:text-gray-900/60 placeholder:font-main placeholder:text-lg"
       />
-      <ErrorMessage name={name} />
+      <ErrorMessage name={name} className="absolute -bottom-5" />
     </div>
   );
 };
