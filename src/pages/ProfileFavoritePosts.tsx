@@ -1,4 +1,5 @@
 import getFavoritesPosts from "@/api/getFavoritesPosts";
+import Button from "@/components/ui/Button";
 import StoriesMessage from "@/components/ui/StoriesMessage";
 import useAsync from "@/hooks/useAsync";
 import type { IStory } from "@/types/user/user";
@@ -24,6 +25,8 @@ const ProfileFavoritePosts = () => {
   const [stories, setStories] = useState<IStory[]>([]);
   const { run, isLoading } = useAsync();
   const ids = useMemo(() => {
+    console.log("page :>> ", page);
+
     return [...user.favoritesPosts]
       .sort((a, b) => b.data - a.data)
       .map((elem) => elem.id);
@@ -34,11 +37,7 @@ const ProfileFavoritePosts = () => {
     const fetchData = async () => {
       try {
         if (stories.length) return;
-        console.log("ids :>> ", ids);
-        console.log("searchParams :>> ", page);
-
         const result = await run<IStory[]>(() => getFavoritesPosts(ids));
-        console.log("result :>> ", result);
         if (result) {
           setStories(result);
         }
@@ -46,9 +45,7 @@ const ProfileFavoritePosts = () => {
     };
     fetchData();
   }, []);
-  useEffect(() => {
-    console.log("searchParams :>> ", searchParams.get("page"));
-  }, [searchParams]);
+
   const handlePagination = async () => {
     try {
       const result = await run<IStory[]>(() => getFavoritesPosts(ids));
@@ -58,7 +55,7 @@ const ProfileFavoritePosts = () => {
     } catch (e) {}
   };
 
-  if (!stories.length) {
+  if (!stories.length && !isLoading) {
     return (
       <StoriesMessage
         text="У вас ще немає збережених історій, мершій збережіть вашу першу історію!"
@@ -72,6 +69,9 @@ const ProfileFavoritePosts = () => {
       {stories.map((elem) => (
         <p>{elem.title}</p>
       ))}
+      <Button variant="primary" onClick={handlePagination}>
+        завантажити більше!
+      </Button>
     </div>
   );
 };
