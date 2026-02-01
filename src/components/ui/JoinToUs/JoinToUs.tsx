@@ -14,7 +14,7 @@ export default function JoinToUs() {
       <div className="container">
         <div className={bem()}>
           <div className={bem("wrapper")}>
-            <div className={bem("wrapper--text")}>
+            <div className={bem("wrapper-text")}>
               <H2 variant="light" className={bem("title")}>
                 Приєднуйтесь до нашої спільноти
               </H2>

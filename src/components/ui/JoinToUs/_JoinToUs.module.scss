@@ -4,7 +4,13 @@
   box-sizing: border-box;
   height: 262px;
   width: 100%;
-  background-image: url("../../../../public/images/JoinToUS/background-coral.jpg");
+
+  background-image: image-set(
+    url("../../../../public/images/JoinToUS/mobileBg.jpg") 1x,
+    url("../../../../public/images/JoinToUS/mobileBg@2x.jpg") 2x,
+    url("../../../../public/images/JoinToUS/mobileBg@3x.jpg") 3x
+  );
+
   background-size: cover;
   background-position: center;
   border-radius: 20px;
@@ -31,19 +37,16 @@
   &__wrapper {
     display: flex;
     flex-direction: column;
-    width: 295px;
+
     gap: 24px;
   }
 
-  &__wrapper--text {
+  &__wrapper-text {
     display: flex;
     flex-direction: column;
     gap: 16px;
   }
-
-
 }
-
 
 /* adaptation */
 
@@ -51,6 +54,12 @@
   .joinToUs {
     height: 260px;
     padding: 32px 32px;
+
+    background-image: image-set(
+      url("../../../../public/images/JoinToUS/tabletBg.jpg") 1x,
+      url("../../../../public/images/JoinToUS/tabletBg@2x.jpg") 2x,
+      url("../../../../public/images/JoinToUS/tabletBg@3x.jpg") 3x
+    );
 
     &__title {
       font-size: 32px;
@@ -65,18 +74,21 @@
       width: 558px;
       gap: 16px;
     }
-    &__wrapper--text {
+    &__wrapper-text {
       gap: 8px;
     }
-
   }
-
 }
 
 @media screen and (min-width: $breakpoint-desktop) {
   .joinToUs {
     height: 436px;
     padding: 78px 64px;
+    background-image: image-set(
+      url("../../../../public/images/JoinToUS/desktopBg.jpg") 1x,
+      url("../../../../public/images/JoinToUS/desktopBg@2x.jpg") 2x,
+      url("../../../../public/images/JoinToUS/desktopBg@3x.jpg") 3x
+    );
 
     &__title {
       font-size: 48px;
@@ -96,9 +108,8 @@
       gap: 32px;
     }
 
-    &__wrapper--text {
+    &__wrapper-text {
       gap: 24px;
     }
   }
-
 }
