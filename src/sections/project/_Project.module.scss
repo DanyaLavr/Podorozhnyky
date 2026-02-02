@@ -10,7 +10,9 @@
         padding: 64px 0 32px 0;
     }
 
-    @media (min-width:$breakpoint-mobile) {}
+    @media (min-width:$breakpoint-mobile) {
+        padding: 64px 0 64px 0;
+    }
 
     &__title {
         color: $gray-900;
@@ -21,11 +23,11 @@
 
         @media (min-width:$breakpoint-mobile) {
             font-size: 28px;
+            padding: 0 0 24px 0;
         }
 
         @media (min-width:$breakpoint-tablet) {
             font-size: 44px;
-            /*             max-width: 340px; */
         }
 
         @media (min-width:$breakpoint-desktop) {
@@ -36,6 +38,9 @@
     }
 
     &__title_desc {
+
+        @media (min-width:$breakpoint-mobile) {}
+
         @media (min-width:$breakpoint-tablet) {
             display: flex;
             justify-content: center;
@@ -61,6 +66,7 @@
 
         @media (min-width:$breakpoint-tablet) {
             font-size: 16px;
+            max-width: 340px;
         }
 
         @media (min-width:$breakpoint-desktop) {
@@ -68,24 +74,29 @@
         }
     }
 
-    /*     &__mission {
-        @media (min-width:$breakpoint-mobile) {}
+    &__mission {
+        @media (min-width:$breakpoint-mobile) {
+            padding: 0 0 32px 0;
+        }
 
         @media (min-width:$breakpoint-tablet) {}
 
         @media (min-width:$breakpoint-desktop) {}
 
-        width: 405px;
-        height: 192px;
-    } */
+    }
 
     &__missions {
+        padding: 64px 0 0 0;
+
+        @media (min-width:$breakpoint-mobile) {}
+
         @media (min-width:$breakpoint-tablet) {
             display: flex;
+            gap: 32px;
+            justify-content: center;
         }
 
         @media (min-width:$breakpoint-desktop) {
-            padding: 64px 0 0 0;
             justify-content: center;
             display: flex;
             gap: 48px;
@@ -93,6 +104,13 @@
     }
 
     &__svg {
+        @media (min-width:$breakpoint-mobile) {
+            padding: 0 0 8px 0;
+        }
+
+        @media (min-width:$breakpoint-tablet) {
+            padding: 0 0 8px 0;
+        }
 
         @media (min-width:$breakpoint-desktop) {
             padding: 0 0 24px 0;
@@ -105,13 +123,15 @@
         letter-spacing: -0.01em;
 
         @media (min-width:$breakpoint-mobile) {
-            font-weight: 400;
-            font-size: 16px;
-            line-height: 150%;
+            padding: 0 0 8px 0;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 130%;
         }
 
         @media (min-width:$breakpoint-tablet) {
             font-size: 20px;
+            padding: 0 0 8px 0;
         }
 
         @media (min-width:$breakpoint-desktop) {
@@ -126,12 +146,12 @@
 
     &__desc2 {
         font-family: $font-main;
-        color: $gray-900;
+        color: $gray-500;
 
         @media (min-width:$breakpoint-mobile) {
-            font-weight: 700;
-            font-size: 20px;
-            line-height: 130%;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 150%;
             letter-spacing: -0.01em;
         }
 
