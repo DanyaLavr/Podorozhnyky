@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
-import Button from "../Button";
-import H2 from "../H2";
+import Button from "@/components/ui/Button";
+import H2 from "@/components/ui/H2";
 
 import { createBem } from "@/utils/createBem";
-import styles from "./_JoinToUs.module.scss";
+import styles from "@/styles/_JoinToUs.module.scss";
 
 const bem = createBem("joinToUs", styles);
 
@@ -25,16 +25,11 @@ export default function JoinToUs() {
               </p>
             </div>
 
-              <Link to="/auth/register" className={bem("link")}>
-                <Button
-                  variant="primary"
-                  onClick={() => {}}
-                  className={bem("button")}
-                >
-                  Зареєструватися
-                </Button>
-              </Link>
-
+            <Link to="/auth/register" className={bem("link")}>
+              <Button variant="primary" className={bem("button")}>
+                Зареєструватися
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
