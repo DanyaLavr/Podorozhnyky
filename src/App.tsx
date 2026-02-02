@@ -1,7 +1,15 @@
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 import Home from "./pages/Home";
 
 function App() {
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
   return (
     <>
       <Routes>
@@ -9,7 +17,8 @@ function App() {
           <Route path="login" element={""} />
           <Route path="register" element={""} />
         </Route>
-        <Route path="/" element={<Home></Home>}>
+
+        <Route path="/" element={<Home />}>
           <Route path="stories" element={""}>
             <Route path=":storyNumber" element={""} />
           </Route>

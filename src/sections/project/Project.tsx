@@ -4,14 +4,14 @@ const bem = createBem("project", style)
 
 const Project = () => {
     return (
-        <section className={bem()}>
+        <section className={bem()} data-aos="fade-up">
             <div className="container">
                 <div className={bem("title_desc")}>
-                    <h2 className={bem("title")}>
+                    <h2 className={bem("title")} data-aos="fade-right">
                         Проєкт, створений для тих,
                         хто живе подорожами
                     </h2>
-                    <p className={bem("desc")}>
+                    <p className={bem("desc")} data-aos="fade-left">
                         Ми віримо, що кожна подорож — це унікальна історія,
                         варта того, щоб нею поділилися. Наша платформа
                         створена, щоб обʼєднувати людей, закоханих у відкриття
@@ -20,8 +20,8 @@ const Project = () => {
                         разом з нами.
                     </p>
                 </div>
-                <div className={bem("missions")}>
-                    <div className={bem("mission")}>
+                <div className={bem("missions")} >
+                    <div className={bem("mission")} data-aos="flip-left">
                         <img src="../../../public/afterHero/magic_stick.svg" className={bem("svg")}></img>
                         <h3 className={bem("title2")} > Наша місія</h3>
                         <p className={bem("desc2")}>
@@ -30,7 +30,7 @@ const Project = () => {
                         </p>
                     </div>
 
-                    <div className={bem("mission")}>
+                    <div className={bem("mission")} data-aos="flip-up">
                         <img src="../../../public/afterHero/suitcase.svg" className={bem("svg")}></img>
                         <h3 className={bem("title2")}>Автентичні історії</h3>
                         <p className={bem("desc2")}>
@@ -39,7 +39,7 @@ const Project = () => {
                         </p>
                     </div>
 
-                    <div className={bem("mission")}>
+                    <div className={bem("mission")} data-aos="flip-right">
                         <img src="../../../public/afterHero/people.svg" className={bem("svg")}></img>
                         <h3 className={bem("title2")}>Ваша спільнота</h3>
                         <p className={bem("desc2")}>
