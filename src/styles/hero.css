@@ -1,0 +1,90 @@
+
+.hero {
+  min-height: 100vh;
+  background-image: url("../../public/images/bg.webp");
+  background-size: cover;
+  background-position: center;
+    padding-top: 80px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.hero-content {
+  position: relative;
+  max-width: 480px;
+  color: #fff;
+  padding: 140px 30px 330px;
+}
+
+.hero h1 {
+    font-family: "Sora", sans-serif;
+    font-weight: 700;
+  font-size: 32px;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.hero-text {
+    font-family: "Nunito Sans";
+    font-weight: 400;
+  font-size: 16px;
+  padding-bottom: 30px;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: #4f7cff;
+  color: #fff;
+  text-decoration: none;
+    width: 335px;
+    height: 39px;
+    padding-top: 8px;
+    text-align: center;
+    justify-content: center;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+
+@media (min-width: 768px) {
+
+  .hero {
+      background-image: url("../../public/images/bg-tablet.webp");
+
+  }
+
+  .hero-content {
+    padding: 48px;
+    max-width: 640px;
+  }
+
+  .hero h1 {
+    font-size: 44px;
+  }
+  .btn-primary {
+    width: 115px;
+    height: 39px;
+  }
+}
+
+
+@media (min-width: 1440px) {
+
+  .hero {
+      background-image: url("../../public/images/bg-pc.webp");
+
+  }
+  .hero-content {
+    margin-left: 80px;
+  }
+
+  .hero h1 {
+    font-size: 56px;
+  }
+
+  .btn-primary {
+    width: 126px;
+    height: 39px;
+  }
+}
