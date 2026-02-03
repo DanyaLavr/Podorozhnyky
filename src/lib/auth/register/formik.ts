@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-export const registerShema = Yup.object().shape({
+export const registerSchema = Yup.object().shape({
   fullName: Yup.string()
     .min(2, "Ваше імʼя занадто коротке!")
     .required("Імʼя - це обовʼязкове поле!"),

@@ -17,7 +17,7 @@ const TextArea = ({ name, placeholder }: IProps) => {
 
   useEffect(() => {
     autoResize();
-  }, []);
+  }, [autoResize]);
 
   return (
     <div className="relative">

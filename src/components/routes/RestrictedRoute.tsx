@@ -8,7 +8,7 @@ const RestrictedRoute = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate();
   useEffect(() => {
     if (user) navigate("/");
-  });
+  }, [navigate]);
   return <>{children}</>;
 };
 

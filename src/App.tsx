@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Auth from "./pages/auth/Auth";
-import Login from "./pages/login/Login";
-import Register from "./pages/register/Register";
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
 import RestrictedRoute from "./components/routes/RestrictedRoute";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
@@ -9,11 +9,12 @@ import { auth } from "./lib/firebase/app";
 import { useAppDispatch } from "./redux/hooks";
 import { setUser } from "./redux/auth/authSlice";
 import Cookies from "js-cookie";
+import Redirect from "./pages/auth/Redirect";
 
 function App() {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch(
           setUser({
@@ -27,9 +28,12 @@ function App() {
           Cookies.set("token", token);
         };
         setCookies();
+      } else {
+        dispatch(setUser(undefined));
       }
     });
-  }, []);
+    return () => unsubscribe();
+  }, [dispatch]);
   return (
     <>
       <Routes>
@@ -41,6 +45,7 @@ function App() {
             </RestrictedRoute>
           }
         >
+          <Route index element={<Redirect />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>

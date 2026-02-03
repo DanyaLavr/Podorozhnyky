@@ -20,7 +20,7 @@ const Register = () => {
         description="Раді вас бачити у спільноті мандрівників!"
       />
       <AuthForm<IRegisterUserProps>
-        shema={registerFormConfig}
+        schema={registerFormConfig}
         onSubmit={onSubmit}
       />
     </>

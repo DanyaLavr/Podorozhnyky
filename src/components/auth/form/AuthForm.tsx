@@ -9,17 +9,17 @@ import { Form, Formik } from "formik";
 import { useEffect } from "react";
 
 interface IProps<T> {
-  shema: IAuthFormConfig;
+  schema: IAuthFormConfig;
   onSubmit: (values: T) => void;
 }
-const AuthForm = <T extends object>({ shema, onSubmit }: IProps<T>) => {
-  const { validationSchema, initialValues, inputs, button } = shema;
+const AuthForm = <T extends object>({ schema, onSubmit }: IProps<T>) => {
+  const { validationSchema, initialValues, inputs, button } = schema;
   const dispatch = useAppDispatch();
   const disabled = useAppSelector(selectAuthIsLoading);
   const error = useAppSelector(selectAuthError);
   useEffect(() => {
     dispatch(resetError());
-  }, []);
+  }, [dispatch]);
   return (
     <Formik<T>
       validationSchema={validationSchema}

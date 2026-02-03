@@ -1,10 +1,10 @@
-import { loginInitialValues, loginShema } from "./formik";
+import { loginInitialValues, loginSchema } from "./formik";
 import type { IAuthFormConfig } from "@/types/auth/form";
 
 const loginFormConfig: IAuthFormConfig = {
   name: "login",
   initialValues: loginInitialValues,
-  validationSchema: loginShema,
+  validationSchema: loginSchema,
   inputs: [
     {
       variant: "input",

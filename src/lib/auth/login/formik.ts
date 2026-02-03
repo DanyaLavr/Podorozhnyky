@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-export const loginShema = Yup.object().shape({
+export const loginSchema = Yup.object().shape({
   email: Yup.string()
     .email("Невалідний формат пошти!")
     .required("Пошта - це обовʼязкове поле!"),

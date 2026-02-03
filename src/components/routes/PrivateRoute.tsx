@@ -8,7 +8,7 @@ const PrivateRoute = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate();
   useEffect(() => {
     if (!user) navigate("/auth/login");
-  });
+  }, [navigate]);
 
   return <>{children}</>;
 };

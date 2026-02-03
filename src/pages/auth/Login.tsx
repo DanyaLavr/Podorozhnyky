@@ -18,7 +18,7 @@ const Login = () => {
         title="Вхід"
         description="Вітаємо знову у спільноту мандрівників!"
       />
-      <AuthForm shema={loginFormConfig} onSubmit={onSubmit} />
+      <AuthForm schema={loginFormConfig} onSubmit={onSubmit} />
     </>
   );
 };
