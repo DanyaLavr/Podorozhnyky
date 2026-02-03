@@ -19,7 +19,7 @@ export const getUserStories = async (
 ): Promise<TGetUserStoriesResult> => {
   try {
     const constraints: QueryConstraint[] = [
-      where("creator", "==", creatorUid),
+      where("creatorId", "==", creatorUid),
       orderBy("createdAt", "desc"),
       limit(6),
     ];
