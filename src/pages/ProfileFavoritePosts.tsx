@@ -24,31 +24,35 @@ const ProfileFavoritePosts = () => {
   const page = searchParams.get("page");
   const [stories, setStories] = useState<IStory[]>([]);
   const { run, isLoading } = useAsync();
-  const ids = useMemo(() => {
-    console.log("page :>> ", page);
+  const getIds = (page: number) => {
+    const postsCount = 6;
 
     return [...user.favoritesPosts]
       .sort((a, b) => b.data - a.data)
-      .map((elem) => elem.id);
-  }, [user.favoritesPosts]);
+      .map((elem) => elem.id)
+      .slice((page - 1) * postsCount, page * postsCount);
+  };
 
   useEffect(() => {
     setSearchParmas({ page: "1" });
     const fetchData = async () => {
       try {
         if (stories.length) return;
-        const result = await run<IStory[]>(() => getFavoritesPosts(ids));
+        const result = await run<IStory[]>(() => getFavoritesPosts(getIds(1)));
         if (result) {
           setStories(result);
         }
       } catch (e) {}
     };
     fetchData();
-  }, []);
+  }, [setSearchParmas, setStories]);
 
   const handlePagination = async () => {
+    setSearchParmas({ page: String(Number(page) + 1) });
     try {
-      const result = await run<IStory[]>(() => getFavoritesPosts(ids));
+      const result = await run<IStory[]>(() =>
+        getFavoritesPosts(getIds(Number(page) + 1))
+      );
       if (result) {
         setStories((prev) => [...prev, ...result]);
       }

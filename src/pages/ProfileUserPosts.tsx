@@ -18,32 +18,27 @@ const ProfileUserPosts = () => {
   const { run, isLoading } = useAsync();
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        if (stories.length) return;
+      if (stories.length) return;
 
-        const result = await run<TGetUserStoriesResult>(() =>
-          getUserStories(user.uid, null)
-        );
-        if (result) {
-          setStories(result.stories);
-          lastDocRef.current = result.lastDoc;
-        }
-      } catch (e) {}
-    };
-    fetchData();
-  }, []);
-
-  const handlePagination = async () => {
-    console.log("lastDocRef.current :>> ", lastDocRef.current);
-    try {
       const result = await run<TGetUserStoriesResult>(() =>
-        getUserStories(user.uid, lastDocRef.current)
+        getUserStories(user.uid, null)
       );
       if (result) {
-        setStories((prev) => [...prev, ...result.stories]);
+        setStories(result.stories);
         lastDocRef.current = result.lastDoc;
       }
-    } catch (e) {}
+    };
+    fetchData();
+  }, [run, getUserStories, setStories]);
+
+  const handlePagination = async () => {
+    const result = await run<TGetUserStoriesResult>(() =>
+      getUserStories(user.uid, lastDocRef.current)
+    );
+    if (result) {
+      setStories((prev) => [...prev, ...result.stories]);
+      lastDocRef.current = result.lastDoc;
+    }
   };
 
   if (!stories.length && !isLoading) {
