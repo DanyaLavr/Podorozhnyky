@@ -3,7 +3,7 @@ import Button from "@/components/ui/Button";
 import StoriesMessage from "@/components/ui/StoriesMessage";
 import useAsync from "@/hooks/useAsync";
 import type { IStory } from "@/types/user/user";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 const user = {

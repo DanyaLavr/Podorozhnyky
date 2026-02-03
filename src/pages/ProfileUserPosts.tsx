@@ -29,7 +29,7 @@ const ProfileUserPosts = () => {
       }
     };
     fetchData();
-  }, [run, getUserStories, setStories]);
+  }, []);
 
   const handlePagination = async () => {
     const result = await run<TGetUserStoriesResult>(() =>
