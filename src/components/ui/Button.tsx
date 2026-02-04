@@ -1,12 +1,13 @@
 import type { MouseEventHandler, ReactNode } from "react";
 
 type TVariant = "primary" | "secondary";
-
+type TType = "button" | "submit" | "reset";
 interface IProps {
   variant?: TVariant;
   disabled?: boolean;
   isActive?: boolean;
   className?: string;
+  type?: TType;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   children: ReactNode;
 }
@@ -15,6 +16,7 @@ const Button = ({
   disabled = false,
   isActive = false,
   className,
+  type = "button",
   onClick,
   children,
 }: IProps) => {
@@ -60,6 +62,7 @@ const Button = ({
     <button
       className={`font-main font-medium text-lg rounded-lg  ${styles} ${disabledStyles} ${className}`}
       disabled={disabled}
+      type={type}
       onClick={disabled ? undefined : onClick}
     >
       {children}
