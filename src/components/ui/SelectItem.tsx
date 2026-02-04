@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import ArrowDown from "../../public/icons/ArrowDown.svg";
+import ArrowDown from "../../../public/icons/ArrowDown.svg";
 interface IProps {
   placeholder: string;
   options: { value: string; label: string }[];
@@ -27,7 +27,7 @@ const SelectItem = ({ placeholder, options }: IProps) => {
             setIsOpen((prev) => !prev);
           }}
         >
-          {/* <ArrowDown /> */}
+          <ArrowDown />
         </button>
       </div>
       {isOpen && (
