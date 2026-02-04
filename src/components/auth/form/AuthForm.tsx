@@ -32,7 +32,12 @@ const AuthForm = <T extends object>({ schema, onSubmit }: IProps<T>) => {
         ))}
         {error && <p className="text-error">{error}</p>}
         <Loader loading={disabled} />
-        <Button variant="primary" className="py-2.5" disabled={disabled}>
+        <Button
+          type="submit"
+          variant="primary"
+          className="py-2.5"
+          disabled={disabled}
+        >
           {button.content}
         </Button>
       </Form>
