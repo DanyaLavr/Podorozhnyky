@@ -1,4 +1,7 @@
 import { Route, Routes } from "react-router-dom";
+import CreateStoryForm from "./pages/CreateStory";
+
+
 
 function App() {
   return (
@@ -15,7 +18,7 @@ function App() {
           <Route path="travellers" element={""} />
           <Route path="traveller" element={""} />
           <Route path="profile" element={""} />
-          <Route path="new-story" element={""} />
+          <Route path="new-story" element={<CreateStoryForm/>} />
         </Route>
       </Routes>
     </>
