@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-
+import PopularStories from "./components/ui/PopularStories/PopularStories";
 function App() {
   return (
     <>
@@ -8,7 +8,7 @@ function App() {
           <Route path="login" element={""} />
           <Route path="register" element={""} />
         </Route>
-        <Route path="/" element={""}>
+        <Route path="/" element={<PopularStories></PopularStories>}>
           <Route path="stories" element={""}>
             <Route path=":storyNumber" element={""} />
           </Route>
