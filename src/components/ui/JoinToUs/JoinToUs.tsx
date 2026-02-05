@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 import Button from "../Button";
 import H2 from "../H2";
 
@@ -9,35 +7,37 @@ import styles from "./_JoinToUs.module.scss";
 const bem = createBem("joinToUs", styles);
 
 export default function JoinToUs() {
+
   return (
-    <section className="section">
-      <div className="container">
-        <div className={bem()}>
-          <div className={bem("wrapper")}>
-            <div className={bem("wrapper-text")}>
-              <H2 variant="light" className={bem("title")}>
-                Приєднуйтесь до нашої спільноти
-              </H2>
+    <>
 
-              <p className={bem("description")}>
-                Долучайтеся до мандрівників, які діляться своїми історіями та
-                надихають на нові пригоди.
-              </p>
-            </div>
+        <section className="section">
+          <div className="container">
+            <div className={bem()}>
+              <div className={bem("wrapper")}>
+                <div className={bem("wrapper-text")}>
+                  <H2 variant="light" className={bem("title")}>
+                    Приєднуйтесь до нашої спільноти
+                  </H2>
 
-              <Link to="/auth/register" className={bem("link")}>
+                  <p className={bem("description")}>
+                    Долучайтеся до мандрівників, які діляться своїми історіями
+                    та надихають на нові пригоди.
+                  </p>
+                </div>
+
                 <Button
+                  pathTo="/auth/register"
                   variant="primary"
-                  onClick={() => {}}
                   className={bem("button")}
                 >
                   Зареєструватися
                 </Button>
-              </Link>
-
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
+
+    </>
   );
 }
