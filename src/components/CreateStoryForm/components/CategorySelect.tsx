@@ -4,15 +4,10 @@ import SelectItem from "@/components/ui/SelectItem";
 
 import { useFormikContext } from "formik";
 
+import categoryOptions from "@/utils/json/categories.json";
+
 const bem = createBem("createStories", styles);
 
-const categoryOptions = [
-  { value: "europe", label: "Європа" },
-  { value: "asia", label: "Азія" },
-  { value: "deserts", label: "Пустелі" },
-  { value: "africa", label: "Африка" },
-
-];
 
 export const CategorySelect = () => {
 
