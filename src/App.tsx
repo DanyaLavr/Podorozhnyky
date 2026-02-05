@@ -11,7 +11,6 @@ import { setUser } from "./redux/auth/authSlice";
 import Cookies from "js-cookie";
 import Redirect from "./pages/auth/Redirect";
 
-import JoinToUs from "./components/ui/JoinToUs/JoinToUs";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -51,7 +50,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>
-        <Route path="/" element={<JoinToUs></JoinToUs>}>
+        <Route path="/" element={""}>
           <Route path="stories" element={""}>
             <Route path=":storyNumber" element={""} />
           </Route>

@@ -1,5 +1,9 @@
-import Button from "../Button";
-import H2 from "../H2";
+
+import Button from "@/components/ui/Button";
+
+
+import H2 from "@/components/ui/H2";
+
 
 import { createBem } from "@/utils/createBem";
 import styles from "./_JoinToUs.module.scss";
