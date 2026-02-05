@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import TravelerCard from "../../components/ui/TravelerCard";
 import "../../styles/TravelersSection.scss";
 import travelers from "../../lib/firebase/travelers.json";
@@ -11,17 +11,13 @@ interface Traveler {
   description: string;
 }
 
-const TravelersSection: React.FC = () => {
+const TravelersSection  = () => {
   const navigate = useNavigate();
 
   const handleViewProfile = (id: number) => {
-    navigate(`/travelers/${id}`);
+    navigate(`/travellers/${id}`);
   };
 
-  const handleShowAll = () => {
-    // Передаємо всі дані з JSON через state
-    navigate("/travelers", { state: { travelers } });
-  };
 
   return (
     <section className="travelers-section">
@@ -39,12 +35,8 @@ const TravelersSection: React.FC = () => {
             />
           ))}
         </div>
-
-        <div className="show-all-container">
-          <button className="show-all-btn" onClick={handleShowAll}>
-            Показати все
-          </button>
-        </div>
+        <Link to="/Alltravellers">Показати все</Link>
+        <div className="show-all-container"></div>
       </div>
     </section>
   );

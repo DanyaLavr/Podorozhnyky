@@ -17,7 +17,7 @@ function App() {
         </Route>
 
        
-        <Route path="travellers" element={<AllTravelersPage />} />
+        <Route path="Alltravellers" element={<AllTravelersPage />} />
 
       
 
