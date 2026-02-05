@@ -1,4 +1,4 @@
-import { auth } from "@/lib/firebase/app";
+import { auth, db } from "@/lib/firebase/app";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { FirebaseError } from "firebase/app";
 import Cookies from "js-cookie";
@@ -10,6 +10,8 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { getUser } from "@/api/getUser";
 
 export interface IRegisterUserProps {
   fullName: string;
@@ -64,6 +66,39 @@ export const logoutUser = createAsyncThunk(
     try {
       await signOut(auth);
       Cookies.remove("token", { path: "/" });
+    } catch (error) {
+      return rejectWithValue((error as FirebaseError).code);
+    }
+  }
+);
+
+export interface ICreateUserData {
+  uid: string;
+  displayName: string;
+}
+export const createUserData = createAsyncThunk(
+  "user/createUserData",
+  async ({ uid, displayName }: ICreateUserData, { rejectWithValue }) => {
+    try {
+      await setDoc(doc(db, "users", uid), {
+        displayName,
+        imageUrl: "",
+        description: "",
+        favoritePosts: [],
+      });
+    } catch (error) {
+      return rejectWithValue((error as FirebaseError).code);
+    }
+  }
+);
+export interface IGetUserData {
+  uid: string;
+}
+export const getUserData = createAsyncThunk(
+  "user/createUserData",
+  async ({ uid }: ICreateUserData, { rejectWithValue }) => {
+    try {
+      return await getUser(uid);
     } catch (error) {
       return rejectWithValue((error as FirebaseError).code);
     }

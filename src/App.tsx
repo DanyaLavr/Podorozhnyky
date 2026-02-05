@@ -14,6 +14,7 @@ import { useAppDispatch } from "./redux/hooks";
 import { setUser } from "./redux/auth/authSlice";
 import Cookies from "js-cookie";
 import Redirect from "./pages/auth/Redirect";
+import PrivateRoute from "./components/routes/PrivateRoute";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -49,7 +50,7 @@ function App() {
             </RestrictedRoute>
           }
         >
-          <Route index element={<Redirect />} />
+          <Route index element={<Redirect path="/auth/login" />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>
@@ -59,7 +60,15 @@ function App() {
           </Route>
           <Route path="travellers" element={""} />
           <Route path="traveller/:travellerUid" element={<UserPage />} />
-          <Route path="profile" element={<Profile />}>
+          <Route
+            path="profile"
+            element={
+              <PrivateRoute>
+                <Profile />
+              </PrivateRoute>
+            }
+          >
+            <Route index element={<Redirect path="/profile/favorite" />} />
             <Route path="favorite" element={<ProfileFavoritePosts />} />
             <Route path="user-posts" element={<ProfileUserPosts />} />
           </Route>

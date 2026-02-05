@@ -5,7 +5,7 @@ import {
   isRejected,
 } from "@reduxjs/toolkit";
 import { loginUser, registerUser } from "./operations";
-import type { IUser } from "@/types/auth/user";
+import type { IUser } from "@/types/user/user";
 
 const initialState = {
   user: undefined as IUser | undefined,
