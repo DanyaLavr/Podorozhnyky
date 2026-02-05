@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "name": "Анастасія Олійник",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
+    "avatar": "#"
+  },
+  {
+    "id": 2,
+    "name": "Назар Ткаченко",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
+    "avatar": "#"
+  },
+  {
+    "id": 3,
+    "name": "Єва Бондаренко",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
+    "avatar": "#"
+  },
+  {
+    "id": 4,
+    "name": "Дмитро Романенко",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
+    "avatar": "#"
+  },
+  {
+    "id": 5,
+    "name": "Олександра Бондар",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
+    "avatar": "#"
+  },
+  {
+    "id": 6,
+    "name": "Олександр Шевчук",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
+    "avatar": "#"
+  },
+  {
+    "id": 7,
+    "name": "Софія Мельник",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
+    "avatar": "#"
+  },
+  {
+    "id": 8,
+    "name": "Дарина Ковальчук",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
+    "avatar": "#"
+  },
+  {
+    "id": 9,
+    "name": "Владислав Поліщук",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
+    "avatar": "#"
+  },
+  {
+    "id": 10,
+    "name": "Поліна Романенко",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
+    "avatar": "#"
+  },
+  {
+    "id": 11,
+    "name": "Софія Ковальчук",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
+    "avatar": "#"
+  },
+  {
+    "id": 12,
+    "name": "Іван Ковальчук",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
+    "avatar": "#"
+  }
+]

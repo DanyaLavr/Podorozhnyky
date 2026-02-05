@@ -1,0 +1,54 @@
+.traveler-card {
+  background: #e8eaf6;
+  border-radius: 16px;
+  padding: 32px 24px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.traveler-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 16px;
+  display: block;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.traveler-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 12px;
+}
+
+.traveler-description {
+  font-size: 0.9rem;
+  color: #6e6e73;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.view-profile-btn {
+  background: transparent;
+  border: 1px solid #1d1d1f;
+  color: #1d1d1f;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+
+  &:hover {
+    background: #1d1d1f;
+    color: #fff;
+  }
+}

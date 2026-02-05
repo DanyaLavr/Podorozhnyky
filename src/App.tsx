@@ -1,3 +1,7 @@
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import AllTravelersPage from "./pages/AllTravelersPage";
+
 import { Route, Routes } from "react-router-dom";
 import Auth from "./pages/auth/Auth";
 import Login from "./pages/auth/Login";
@@ -35,6 +39,15 @@ function App() {
     return () => unsubscribe();
   }, [dispatch]);
   return (
+    <Routes>
+      <Route path="auth">
+        <Route path="login" element={""} />
+        <Route path="register" element={""} />
+      </Route>
+
+      <Route path="/" element={<Home />}>
+        <Route path="stories">
+          <Route path=":storyNumber" element={""} />
     <>
       <Routes>
         <Route
@@ -58,8 +71,17 @@ function App() {
           <Route path="profile" element={""} />
           <Route path="new-story" element={""} />
         </Route>
-      </Routes>
-    </>
+
+       
+        <Route path="travellers" element={<AllTravelersPage />} />
+
+      
+
+        <Route path="traveller" element={""} />
+        <Route path="profile" element={""} />
+        <Route path="new-story" element={""} />
+      </Route>
+    </Routes>
   );
 }
 
