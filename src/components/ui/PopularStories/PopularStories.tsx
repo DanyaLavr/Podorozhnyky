@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import type { AppDispatch } from "@/redux/store";
 import { fetchPosts } from "@/redux/posts/postsSlice";
@@ -19,30 +19,37 @@ export default function PopularStories() {
   const posts = useSelector(selectAllPosts);
   const isLoading = useSelector(selectPostsLoading);
 
-  const [visibleCount, setVisibleCount] = useState(4);
+  const [cardsPerView, setCardsPerView] = useState(4);
+  const [visibleCount, setVisibleCount] = useState(0);
 
   useEffect(() => {
-    if (posts.length === 0) {
+    if (!posts.length && !isLoading) {
       dispatch(fetchPosts());
     }
-  }, [dispatch, posts.length]);
+  }, [dispatch, posts.length, isLoading]);
 
   useEffect(() => {
-    const updateVisibleCount = () => {
-      window.innerWidth >= 1440 ? setVisibleCount(3) : setVisibleCount(4);
-    };
-    updateVisibleCount();
-    window.addEventListener("resize", updateVisibleCount);
-    return () => window.removeEventListener("resize", updateVisibleCount);
-  }, []);
+    const update = () => {
+      const perView = window.innerWidth >= 1440 ? 3 : 4;
+      setCardsPerView(perView);
 
-  const visibleStories = posts.slice(0, visibleCount);
+      setVisibleCount((prev) => (prev === 0 ? perView : prev));
+    };
+
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+  const visibleStories = useMemo(
+    () => posts.slice(0, visibleCount),
+    [posts, visibleCount]
+  );
 
   if (isLoading) return <p>Завантаження...</p>;
 
   return (
-    <section className={`${"section"} ${styles["section-stories"]}`}>
-      <div className={`${"container"} ${styles["stories-container"]}`}>
+    <section className={`section ${styles["section-stories"]}`}>
+      <div className={`container ${styles["stories-container"]}`}>
         <ul className={bem()}>
           {visibleStories.map((post) => (
             <StoryCard key={post.id} data={post} />
@@ -53,7 +60,7 @@ export default function PopularStories() {
           <Button
             variant="primary"
             className={bem("button--show")}
-            onClick={() => setVisibleCount((prev) => prev + 3)}
+            onClick={() => setVisibleCount((prev) => prev + cardsPerView)}
           >
             Переглянути всі
           </Button>
