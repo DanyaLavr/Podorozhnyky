@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ArrowDown from "../../public/icons/ArrowDown.svg";
+import ArrowDown from "../../../public/icons/ArrowDown.svg";
 interface IProps {
   placeholder: string;
   options: { value: string; label: string }[];
