@@ -13,3 +13,22 @@ export interface IAuthFormConfig {
     content: string;
   };
 }
+export interface ILoginUserProps {
+  email: string;
+  password: string;
+}
+
+export interface IRegisterUserProps {
+  fullName: string;
+  email: string;
+  password: string;
+}
+
+export interface ICreateUserData {
+  uid: string;
+  displayName: string;
+}
+
+export interface IGetUserData {
+  uid: string;
+}

@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import H2 from "../ui/H2";
-import StoriesMessage from "../ui/StoriesMessage";
+import H2 from "../components/ui/H2";
+import StoriesMessage from "../components/ui/StoriesMessage";
 import { useParams } from "react-router-dom";
 import type { IStory } from "@/types/user/user";
-import { getUserStories } from "@/api/getUserStories";
+import { getUserStories } from "@/api/user/getUserStories";
 import type { QueryDocumentSnapshot } from "firebase/firestore";
 
 const UserStories = () => {

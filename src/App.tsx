@@ -12,27 +12,17 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./lib/firebase/app";
 import { useAppDispatch } from "./redux/hooks";
 import { setUser } from "./redux/auth/authSlice";
-import Cookies from "js-cookie";
 import Redirect from "./pages/auth/Redirect";
 import PrivateRoute from "./components/routes/PrivateRoute";
+import { getUser } from "./api/user/getUser";
 
 function App() {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        dispatch(
-          setUser({
-            uid: user.uid,
-            displayName: user.displayName,
-            email: user.email,
-          })
-        );
-        const setCookies = async () => {
-          const token = await user.getIdToken();
-          Cookies.set("token", token);
-        };
-        setCookies();
+        const data = await getUser(user?.uid);
+        dispatch(setUser(data));
       } else {
         dispatch(setUser(undefined));
       }

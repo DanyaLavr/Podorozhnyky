@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import NavToggle from "../ui/NavToggle";
+import NavToggle from "../components/ui/NavToggle";
 
 const ProfilePosts = () => {
   return (

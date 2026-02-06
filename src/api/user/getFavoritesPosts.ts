@@ -9,6 +9,7 @@ import {
 } from "firebase/firestore";
 
 const getFavoritesPosts = async (ids: string[]) => {
+  if (!ids.length) return [];
   const q = query(collection(db, "posts"), where(documentId(), "in", ids));
   const snap = await getDocs(q);
 

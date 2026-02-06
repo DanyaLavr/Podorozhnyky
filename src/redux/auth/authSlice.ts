@@ -41,7 +41,12 @@ const authSlice = createSlice({
           case "auth/invalid-credential":
             state.error = "Не вдалося увійти. Перевірте пошту та пароль.";
             break;
+          case "auth/email-already-in-use":
+            state.error =
+              "Не вдалося зареєструватися. Ця електронна пошта вже використовується.";
+            break;
           default:
+            console.log("action.payload :>> ", action.payload);
             state.error = "Сталась помилка, спробуйте ще раз.";
         }
       });

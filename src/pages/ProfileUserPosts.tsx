@@ -1,22 +1,23 @@
-import { getUserStories } from "@/api/getUserStories";
+import { getUserStories } from "@/api/user/getUserStories";
 import Button from "@/components/ui/Button";
+import Loader from "@/components/ui/Loader";
 import StoriesMessage from "@/components/ui/StoriesMessage";
 import useAsync from "@/hooks/useAsync";
+import { selectUser } from "@/redux/auth/selectors";
+import { useAppSelector } from "@/redux/hooks";
 import type { IStory, TGetUserStoriesResult } from "@/types/user/user";
 import type { QueryDocumentSnapshot } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 
-const user = {
-  uid: "id-123456",
-  displayName: "Danylo Nutella",
-  description:
-    "lorem100lor em100lorem100l orem100lorem100lo rem100lorem10 0lorem100lorem10 0lorem 100 lorem1 00lor em100lor em100lore m100lorem100lorem100",
-};
 const ProfileUserPosts = () => {
   const [stories, setStories] = useState<IStory[]>([]);
   const lastDocRef = useRef<QueryDocumentSnapshot | null>(null);
+  const user = useAppSelector(selectUser);
   const { run, isLoading } = useAsync();
   useEffect(() => {
+    if (!user) {
+      return;
+    }
     const fetchData = async () => {
       if (stories.length) return;
 
@@ -32,6 +33,7 @@ const ProfileUserPosts = () => {
   }, []);
 
   const handlePagination = async () => {
+    if (!user) return;
     const result = await run<TGetUserStoriesResult>(() =>
       getUserStories(user.uid, lastDocRef.current)
     );
@@ -40,7 +42,9 @@ const ProfileUserPosts = () => {
       lastDocRef.current = result.lastDoc;
     }
   };
-
+  if (!stories.length && isLoading) {
+    return <Loader cssOverride={{ marginTop: "20px" }} loading={isLoading} />;
+  }
   if (!stories.length && !isLoading) {
     return (
       <StoriesMessage
@@ -55,7 +59,9 @@ const ProfileUserPosts = () => {
       {stories.map((elem) => (
         <p>{elem.title}</p>
       ))}
-      {isLoading && "Loading..."}
+      {isLoading && (
+        <Loader cssOverride={{ marginTop: "20px" }} loading={isLoading} />
+      )}
       <Button variant="primary" onClick={handlePagination}>
         завантажити більше!
       </Button>

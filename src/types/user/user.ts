@@ -3,9 +3,9 @@ import type { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
 export interface IUser {
   uid: string;
   displayName: string;
-  imageUrl?: string;
-  description?: string;
-  favoritePosts?: { id: string; data: number }[];
+  imageUrl: string;
+  description: string;
+  favoritePosts: { id: string; data: number }[];
 }
 export interface IStory {
   id: string;

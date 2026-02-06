@@ -1,34 +1,22 @@
-import getFavoritesPosts from "@/api/getFavoritesPosts";
+import getFavoritesPosts from "@/api/user/getFavoritesPosts";
 import Button from "@/components/ui/Button";
+import Loader from "@/components/ui/Loader";
 import StoriesMessage from "@/components/ui/StoriesMessage";
 import useAsync from "@/hooks/useAsync";
-import type { IStory, IUser } from "@/types/user/user";
+import { selectUser } from "@/redux/auth/selectors";
+import { useAppSelector } from "@/redux/hooks";
+import type { IStory } from "@/types/user/user";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-// const user = {
-//   uid: "id-123456",
-//   imageUrl:
-//     "https://res.cloudinary.com/dizg6rj7g/image/upload/v1769524892/IMG_0717_bwjnt9",
-//   displayName: "Danya Lavr",
-//   favoritesPosts: [
-//     { id: "cS8YdTRM1o2MY8cS8kju", data: 1 },
-//     { id: "chqDjvte98jo1A963W32", data: 2 },
-//     { id: "AGrISrdZjTcPMSXkqFIW", data: 10 },
-//   ],
-//   description:
-//     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros ipsum dolor sit amet,  ipsum dolor stem",
-// };
-interface IProps {
-  user: IUser;
-}
-const ProfileFavoritePosts = ({ user }: IProps) => {
+const ProfileFavoritePosts = () => {
   const [searchParams, setSearchParmas] = useSearchParams();
   const page = searchParams.get("page");
   const [stories, setStories] = useState<IStory[]>([]);
+  const user = useAppSelector(selectUser);
   const { run, isLoading } = useAsync();
   const getIds = (page: number) => {
-    if (!user.favoritePosts?.length) {
+    if (!user || !user.favoritePosts?.length) {
       return [];
     }
     const postsCount = 6;
@@ -64,7 +52,9 @@ const ProfileFavoritePosts = ({ user }: IProps) => {
       }
     } catch (e) {}
   };
-
+  if (!stories.length && isLoading) {
+    return <Loader cssOverride={{ marginTop: "20px" }} loading={isLoading} />;
+  }
   if (!stories.length && !isLoading) {
     return (
       <StoriesMessage
@@ -79,6 +69,9 @@ const ProfileFavoritePosts = ({ user }: IProps) => {
       {stories.map((elem) => (
         <p>{elem.title}</p>
       ))}
+      {isLoading && (
+        <Loader cssOverride={{ marginTop: "20px" }} loading={isLoading} />
+      )}
       <Button variant="primary" onClick={handlePagination}>
         завантажити більше!
       </Button>

@@ -1,5 +1,5 @@
-import { getUser } from "@/api/getUser";
-import UserStories from "@/components/sections/UserStories";
+import { getUser } from "@/api/user/getUser";
+import UserStories from "@/sections/UserStories";
 import UserBlock from "@/components/ui/UserBlock";
 import type { IUser } from "@/types/user/user";
 import { useEffect, useState } from "react";
