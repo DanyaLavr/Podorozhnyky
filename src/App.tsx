@@ -11,6 +11,7 @@ import { setUser } from "./redux/auth/authSlice";
 import Cookies from "js-cookie";
 import Redirect from "./pages/auth/Redirect";
 
+
 function App() {
   const dispatch = useAppDispatch();
   useEffect(() => {
