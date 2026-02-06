@@ -1,8 +1,9 @@
 import AuthForm from "@/components/auth/form/AuthForm";
 import AuthHeading from "@/components/auth/heading/AuthHeading";
 import loginFormConfig from "@/lib/auth/login/config";
-import { loginUser, type ILoginUserProps } from "@/redux/auth/operations";
+import { loginUser } from "@/redux/auth/operations";
 import { useAppDispatch } from "@/redux/hooks";
+import type { ILoginUserProps } from "@/types/auth/form";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {

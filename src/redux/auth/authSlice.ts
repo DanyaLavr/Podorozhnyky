@@ -5,7 +5,7 @@ import {
   isRejected,
 } from "@reduxjs/toolkit";
 import { loginUser, registerUser } from "./operations";
-import type { IUser } from "@/types/auth/user";
+import type { IUser } from "@/types/user/user";
 
 const initialState = {
   user: undefined as IUser | undefined,
@@ -40,6 +40,10 @@ const authSlice = createSlice({
         switch (action.payload) {
           case "auth/invalid-credential":
             state.error = "Не вдалося увійти. Перевірте пошту та пароль.";
+            break;
+          case "auth/email-already-in-use":
+            state.error =
+              "Не вдалося зареєструватися. Ця електронна пошта вже використовується.";
             break;
           default:
             state.error = "Сталась помилка, спробуйте ще раз.";

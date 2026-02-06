@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 
-const Redirect = () => {
-  return <Navigate to="/auth/login" />;
+const Redirect = ({ path }: { path: string }) => {
+  return <Navigate to={path} />;
 };
 
 export default Redirect;
