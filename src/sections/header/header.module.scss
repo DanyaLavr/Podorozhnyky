@@ -24,8 +24,25 @@
   &__actions {
     display: none;
   }
-}
 
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 300;
+    color: #ffffff;
+  }
+
+  &__nav-desktop {
+    display: none;
+    gap: 20px;
+    a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 400;
+    }
+  }
+}
 .header.scrolled {
   background: #ffffff;
   backdrop-filter: blur(8px);
@@ -33,13 +50,7 @@
 }
 
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-weight: 300;
-  color: #ffffff;
-}
+
 
 .logo span {
   color: inherit;
@@ -49,17 +60,6 @@
   color: #111;
 }
 
-
-.nav-desktop {
-  display: none;
-  gap: 20px;
-}
-
-.nav-desktop a {
-  color: #ffffff;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
 
 .header.scrolled .nav-desktop a {
   color: #111;

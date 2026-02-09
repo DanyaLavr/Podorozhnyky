@@ -8,6 +8,7 @@ import LogoutIcon from "../../../public/icons/Logout.svg";
 
 import styles from "./header.module.scss";
 import { createBem } from "@/utils/createBem";
+import Button from "@/components/ui/Button";
 
 const bem = createBem("header", styles);
 
@@ -48,12 +49,12 @@ export const Header = () => {
             <div className={bem("actions")}>
             {!isAuth ? (
               <>
-                <Link to="/login" className="btn ghost">Вхід</Link>
-                <Link to="/register" className="btn primary">Реєстрація</Link>
+                <Button pathTo="/login">Вхід</Button>
+                <Button pathTo="/register" variant="primary">Реєстрація</Button>
               </>
             ) : (
               <>
-                <button className="btn primary publish-btn-header">Опублікувати історію</button>
+                <Button pathTo="/new-story" variant="primary">Опублікувати історію</Button>
                 <p className="user">Імʼя</p>
               </>
             )}
