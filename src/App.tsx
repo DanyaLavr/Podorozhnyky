@@ -10,7 +10,7 @@ import { auth } from "./lib/firebase/app";
 import { useAppDispatch } from "./redux/hooks";
 import { setUser } from "./redux/auth/authSlice";
 import Redirect from "./pages/auth/Redirect";
-
+import Layout from "./pages/Layout";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -45,7 +45,8 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>
-        <Route path="/" element={<Home />}>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
           <Route path="stories" element={""}>
             <Route path=":storyNumber" element={""} />
           </Route>
