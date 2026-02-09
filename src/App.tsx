@@ -10,14 +10,14 @@ function App() {
         <Route path="login" element={""} />
         <Route path="register" element={""} />
       </Route>
-
+    <Route path="Alltravellers" element={<AllTravelersPage />} />
       <Route path="/" element={<Home />}>
         <Route path="stories">
           <Route path=":storyNumber" element={""} />
         </Route>
 
        
-        <Route path="Alltravellers" element={<AllTravelersPage />} />
+    
 
       
 

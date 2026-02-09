@@ -26,19 +26,18 @@ h1 {
 
 .show-all-container {
   text-align: center;
-  margin-top: 40px;
 }
 
-.show-all-btn {
+.show-all-link {
+  display: inline-block;
   background: #2563eb;
   color: white;
-  border: none;
+  text-decoration: none;
   padding: 14px 32px;
   border-radius: 8px;
   font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
   font-weight: 600;
+  transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
 
   &:hover {
@@ -48,44 +47,9 @@ h1 {
   }
 }
 
-@media (max-width: 768px) {
-  .travelers-section {
-    padding: 32px 16px;
-  }
-
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 32px;
-  }
-
-  .travelers-grid {
-    gap: 20px;
-  }
-
-  .show-all-btn {
-    padding: 12px 28px;
-  }
-}
-
-
 @media (max-width: 480px) {
-  h1 {
-    font-size: 1.6rem;
-    margin-bottom: 24px;
-  }
-
-  .travelers-grid {
-    grid-template-columns: 1fr; 
-    gap: 16px;
-  }
-
-  .show-all-container {
-    margin-top: 24px;
-  }
-
-  .show-all-btn {
+  .show-all-link {
     width: 100%;
     max-width: 320px;
-    font-size: 0.95rem;
   }
 }
