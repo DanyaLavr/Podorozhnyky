@@ -10,14 +10,17 @@ import RestrictedRoute from "./components/routes/RestrictedRoute";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./lib/firebase/app";
-import { useAppDispatch } from "./redux/hooks";
+import { useAppDispatch, useAppSelector } from "./redux/hooks";
 import { setUser } from "./redux/auth/authSlice";
 import Redirect from "./pages/auth/Redirect";
 import PrivateRoute from "./components/routes/PrivateRoute";
 import { getUser } from "./api/user/getUser";
+import { selectUser } from "./redux/auth/selectors";
 
 function App() {
   const dispatch = useAppDispatch();
+  const user = useAppSelector(selectUser);
+  console.log("user App :>> ", user);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {

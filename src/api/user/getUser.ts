@@ -2,7 +2,7 @@ import { db } from "@/lib/firebase/app";
 import type { IUser } from "@/types/user/user";
 import { doc, getDoc } from "firebase/firestore";
 
-export const getUser = async (id: string): Promise<IUser | null> => {
+export const getUser = async (id: string): Promise<IUser> => {
   try {
     const docRef = doc(db, "users", id);
     const docSnap = await getDoc(docRef);
@@ -12,7 +12,6 @@ export const getUser = async (id: string): Promise<IUser | null> => {
     const data = docSnap.data() as Omit<IUser, "uid">;
     return { uid: id, ...data };
   } catch (e) {
-    console.log(e);
-    return null;
+    throw e;
   }
 };
