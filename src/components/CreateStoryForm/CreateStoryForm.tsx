@@ -12,6 +12,10 @@ import { Textarea } from "./components/Textarea";
 
 import { createStorySchema } from "@/schemas/validationSchema";
 
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { storage, db } from "@/lib/firebase/app";
+
 
 const bem = createBem("createStories", styles);
 
@@ -22,10 +26,20 @@ interface FormValues {
   category: string;
   text: string;
   image: File | null;
+  id?: string;
+  createdAt?: number;
+  creator?: string;
+  creatorUid?: string;
+  description?: string;
+  imageUrl?: string;
+  story?: string;
+
+
 }
 
+
 export default function CreateStoryForm() {
-  // const fileRef = useRef<HTMLInputElement | null>(null);
+
 
   const initialValues: FormValues = {
     title: "",
@@ -33,6 +47,52 @@ export default function CreateStoryForm() {
     text: "",
     image: null,
   };
+
+    const handleSubmit = async (values: FormValues, { resetForm }: any) => {
+    try {
+      const { image, title, category, text } = values;
+  
+      if (!image) {
+        alert("Додай картинку");
+        return;
+      }
+  
+      // 1️⃣ Upload картинки
+      const imageRef = ref(
+        storage,
+        `${Date.now()}_${image.name}`
+      );
+  
+      await uploadBytes(imageRef, image);
+  
+      // 2️⃣ URL
+      const imageUrl = await getDownloadURL(imageRef);
+  
+      // 3️⃣ Запис у Firestore
+      await addDoc(collection(db, "posts"), {
+        title,
+        category,
+        text,
+        imageUrl,
+        createdAt: serverTimestamp(),
+
+
+      });
+  
+      alert("Історія збережена ✅");
+  
+      resetForm();
+    } catch (err) {
+      console.error(err);
+      alert("Помилка при збереженні ❌");
+    }
+  };
+
+  // const handleSubmitTest = (values: FormValues, { resetForm }: any) => {
+    
+  // }
+
+
 
   return (
     <div className={bem("")}>
@@ -44,6 +104,7 @@ export default function CreateStoryForm() {
             ...values,
             image: values.image,
           });
+          handleSubmit(values, { resetForm });
           resetForm();
         }}
       >
