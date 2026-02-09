@@ -5,16 +5,38 @@
   top: 0;
   left: 0;
   width: 100%;
-  color: #ffffff;
+  color: $gray-50;
+  padding-top: 0;
+  padding-bottom: 0;
   background: transparent;
-  font-family: 'Sora', sans-serif;
   z-index: 999;
-  transition:
-    background 0.35s ease,
-    box-shadow 0.35s ease,
-    backdrop-filter 0.35s ease;
-
-    &__inner {
+  transition: all 0.35s ease;
+  &--scrolled {
+    background: $gray-50;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    .header {
+      &__logo {
+        color: $gray-900;
+      }
+      &__burger svg path {
+        fill: $gray-900;
+      }
+      &__nav-desktop a {
+        color: $gray-900;
+      }
+    }
+  }
+  &__btn--ghost {
+    background: rgba(255, 255, 255, 0.3) !important;
+    color: $gray-50 !important;
+    &-mobile {
+      background: rgba(0, 0, 0, 0.05) !important;
+      color: $gray-900 !important;
+      border: 1px solid #9c9c9c !important;
+    }
+  }
+  &__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -30,90 +52,68 @@
     align-items: center;
     gap: 6px;
     font-weight: 300;
-    color: #ffffff;
+    color: $gray-50;
+    span {
+      color: inherit;
+    }
+  }
+  &__burger {
+    background: rgba(255, 255, 255, 0.12);
+    border: none;
+    padding: 6px;
+    border-radius: 10px;
+    cursor: pointer;
+    svg {
+      transition: transform 0.3s ease;
+      path {
+        fill: $gray-50;
+      }
+      &--open svg {
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  &__mobile-menu {
+    position: absolute;
+    top: 76px;
+    left: 0;
+    right: 0;
+    background: $gray-50;
+    height: 100vh;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transform: translateX(100%);
+    transition: all 0.35s ease;
+    &--open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(0);
+    }
+  }
+  &__mobile-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px 0 0;
+    height: 100%;
+    text-align: center;
+    a {
+      color: $gray-900;
+      text-decoration: none;
+    }
   }
 
   &__nav-desktop {
     display: none;
     gap: 20px;
     a {
-      color: #ffffff;
+      color: $gray-50;
       text-decoration: none;
       font-weight: 400;
     }
   }
-}
-.header.scrolled {
-  background: #ffffff;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-}
-
-
-
-
-.logo span {
-  color: inherit;
-}
-
-.header.scrolled .logo {
-  color: #111;
-}
-
-
-.header.scrolled .nav-desktop a {
-  color: #111;
-}
-
-
-.btn {
-  padding: 8px 14px;
-  border-radius: 10px;
-  font-size: 14px;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.btn.primary {
-  background: #4f6ef7;
-  color: #ffffff;
-}
-
-.btn.ghost {
-  background: rgba(255, 255, 255, 0.3);
-  color: #ffffff;
-}
-
-.ghost-mobile {
-  background: rgba(0, 0, 0, 0.05);
-  color: #000000;
-  border: 1px solid #9c9c9c;
-}
-
-
-.burger {
-  background: rgba(255, 255, 255, 0.12);
-  border: none;
-  padding: 6px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.burger svg {
-  transition: transform 0.3s ease;
-}
-
-.burger.open svg {
-  transform: rotate(90deg);
-}
-
-.burger svg path {
-  fill: white;
-}
-
-.header.scrolled .burger svg path {
-  fill: #111;
 }
 
 .publish-btn-header {
@@ -125,49 +125,11 @@
   justify-content: center;
 }
 
-.mobile-menu {
-  position: absolute;
-  top: 72px;
-  left: 0;
-  width: 100%;
-  background: #ffffff;
-
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  pointer-events: none;
-
-  transition:
-    max-height 0.4s ease,
-    opacity 0.25s ease;
+.user-name {
+  color: $gray-900;
 }
 
-.mobile-menu.open {
-  max-height: 100vh;
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.mobile-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 30px 0 0;
-  height: 100%;
-  text-align: center;
-}
-
-.mobile-nav a {
-  color: #111;
-  text-decoration: none;
-}
-
-.user-name{
-  font-weight: 400;
-  color: #111;
-}
-
-.user{
+.user {
   display: none;
   height: 24px;
   padding-top: 7px;
@@ -193,7 +155,7 @@
 .divider {
   width: 1px;
   height: 24px;
-  background: #d0d0d0;
+  background: $gray-350;
 }
 
 .logout-btn {
@@ -202,16 +164,15 @@
   cursor: pointer;
 }
 
-
 @media (min-width: $breakpoint-tablet) {
-
-  .header__actions {
-    display: flex;
-    gap: 12px;
+  .header {
+    &__actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
   }
-  
-
-   .publish-btn-header {
+  .publish-btn-header {
     display: flex;
   }
 
@@ -225,8 +186,16 @@
 }
 
 @media (min-width: $breakpoint-desktop) {
-  .nav-desktop {
-    display: flex;
+  .header {
+    &__nav-desktop {
+      display: flex;
+    }
+    &__burger {
+      display: none;
+    }
+    &__mobile-menu {
+      display: none;
+    }
   }
 
   .publish-btn-header {
@@ -235,9 +204,5 @@
 
   .user {
     display: block;
-  }
-
-  .burger {
-    display: none;
   }
 }

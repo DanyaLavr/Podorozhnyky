@@ -1,5 +1,5 @@
 import { Header } from "@/sections/header/Header";
-import { Hero } from "@/components/ui/Hero";
+import { Hero } from "@/sections/hero/Hero";
 import { Test } from "@/components/ui/Test";
 
 const Home = () => {

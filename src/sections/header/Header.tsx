@@ -13,14 +13,14 @@ import Button from "@/components/ui/Button";
 const bem = createBem("header", styles);
 
 export const Header = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  const isAuth = true; 
+  const isAuth = true;
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 40);
+      setIsScrolled(window.scrollY > 40);
     };
 
     window.addEventListener("scroll", onScroll);
@@ -28,79 +28,119 @@ export const Header = () => {
   }, []);
 
   return (
-    <header className={`header ${menuOpen || scrolled ? "scrolled" : ""}`}>
+    <header
+      className={`section ${bem("", { scrolled: isMenuOpen || isScrolled })}`}
+    >
       <div className="container">
         <div className={bem("inner")}>
-
-          
           <div className={bem("logo")}>
             <Logo />
             <span>Подорожники</span>
           </div>
+          <div className="flex gap-8 items-center">
+            <nav className={bem("nav-desktop")}>
+              <Link to="/">Головна</Link>
+              <Link to="/stories">Історії</Link>
+              <Link to="/travelers">Мандрівники</Link>
+              {isAuth && <Link to="/profile">Мій профіль</Link>}
+            </nav>
 
-          <nav className={bem("nav-desktop")}>
-            <Link to="/">Головна</Link>
-            <Link to="/stories">Історії</Link>
-            <Link to="/travelers">Мандрівники</Link>
-            {isAuth && <Link to="/profile">Мій профіль</Link>}
-          </nav>
+            <div className="flex gap-4">
+              <div className={bem("actions")}>
+                {!isMenuOpen &&
+                  (!isAuth ? (
+                    <>
+                      <Button className="py-1 px-2.5" pathTo="/login">
+                        Вхід
+                      </Button>
+                      <Button
+                        className="py-1 px-2.5"
+                        pathTo="/register"
+                        variant="primary"
+                      >
+                        Реєстрація
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      <Button
+                        pathTo="/new-story"
+                        variant="primary"
+                        className="py-1 px-2.5"
+                      >
+                        Опублікувати історію
+                      </Button>
+                      <div className=" flex gap-2">
+                        <p className="user">Імʼя</p>
+                        <span
+                          className={`block h-7 w-px ${isMenuOpen || isScrolled ? "bg-gray-900/15" : "bg-gray-50/50"}`}
+                        ></span>
+                        <LogoutIcon />
+                      </div>
+                    </>
+                  ))}
+              </div>
 
-          <div className="flex gap-4">
-            <div className={bem("actions")}>
-            {!isAuth ? (
-              <>
-                <Button pathTo="/login">Вхід</Button>
-                <Button pathTo="/register" variant="primary">Реєстрація</Button>
-              </>
-            ) : (
-              <>
-                <Button pathTo="/new-story" variant="primary">Опублікувати історію</Button>
-                <p className="user">Імʼя</p>
-              </>
-            )}
+              <button
+                className={`${bem("burger", { open: isMenuOpen })}`}
+                onClick={() => setIsMenuOpen((prev) => !prev)}
+                aria-label="Toggle menu"
+              >
+                {isMenuOpen ? <CloseIcon /> : <BurgerIcon />}
+              </button>
+            </div>
           </div>
-
-         
-          <button
-            className={`burger ${menuOpen ? "open" : ""}`}
-            onClick={() => setMenuOpen(prev => !prev)}
-            aria-label="Toggle menu"
-          >
-            {menuOpen ? <CloseIcon /> : <BurgerIcon />}
-          </button>
-          </div>
-          
-
         </div>
 
-        
-        <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
-          <nav className="mobile-nav">
-            <Link to="/" onClick={() => setMenuOpen(false)}>Головна</Link>
-            <Link to="/stories" onClick={() => setMenuOpen(false)}>Історії</Link>
-            <Link to="/travelers" onClick={() => setMenuOpen(false)}>Мандрівники</Link>
+        <div className={`section ${bem("mobile-menu", { open: isMenuOpen })} `}>
+          <div className="container">
+            <nav className={bem("mobile-nav")}>
+              <Link to="/" onClick={() => setIsMenuOpen(false)}>
+                Головна
+              </Link>
+              <Link to="/stories" onClick={() => setIsMenuOpen(false)}>
+                Історії
+              </Link>
+              <Link to="/travelers" onClick={() => setIsMenuOpen(false)}>
+                Мандрівники
+              </Link>
 
-            {!isAuth ? (
-              <>
-                <Link to="/login" className="btn ghost-mobile">Вхід</Link>
-                <Link to="/register" className="btn primary">Реєстрація</Link>
-              </>
-            ) : (
-              <>
-                <Link to="/profile">Мій профіль</Link>
-                <button className="btn primary publish-btn-mobile">Опублікувати історію</button>
-
-                <div className="user-menu">
-                  <div className="avatar" />
-                  <span className="user-name">Імʼя</span>
-                  <span className="divider" />
-                  <button className="logout-btn">
-                    <LogoutIcon />
+              {!isAuth ? (
+                <>
+                  <Button
+                    className={`py-1 px-2.5 ${bem("btn--ghost-mobile")}`}
+                    pathTo="/login"
+                    variant="primary"
+                  >
+                    Вхід
+                  </Button>
+                  <Button
+                    className="py-1 px-2.5 text-gray-50!"
+                    pathTo="/register"
+                    variant="primary"
+                  >
+                    Реєстрація
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Link to="/profile">Мій профіль</Link>
+                  <button className="btn primary publish-btn-mobile">
+                    Опублікувати історію
                   </button>
-                </div>
-              </>
-            )}
-          </nav>
+
+                  <div className="user-menu">
+                    <div className="avatar" />
+                    <span className="user-name">Імʼя</span>
+                    <span className="divider" />
+                    <button className="logout-btn">
+                      <LogoutIcon />
+                    </button>
+                  </div>
+                </>
+              )}
+            </nav>
+          </div>
         </div>
       </div>
     </header>
