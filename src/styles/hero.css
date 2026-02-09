@@ -14,12 +14,12 @@
   position: relative;
   max-width: 480px;
   color: #fff;
-  padding: 140px 30px 330px;
+
 }
 
 .hero h1 {
     font-family: "Sora", sans-serif;
-    font-weight: 700;
+    font-weight: 600;
   font-size: 32px;
   line-height: 1.2;
   margin-bottom: 16px;
@@ -43,7 +43,13 @@
     text-align: center;
     justify-content: center;
   border-radius: 10px;
-  font-weight: 500;
+  font-weight: 400;
+}
+
+.test{
+    color: black;
+    width: 100px;
+    height: 1000px;
 }
 
 
@@ -54,10 +60,6 @@
 
   }
 
-  .hero-content {
-    padding: 48px;
-    max-width: 640px;
-  }
 
   .hero h1 {
     font-size: 44px;
@@ -74,9 +76,6 @@
   .hero {
       background-image: url("../../public/images/bg-pc.webp");
 
-  }
-  .hero-content {
-    margin-left: 80px;
   }
 
   .hero h1 {

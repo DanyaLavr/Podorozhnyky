@@ -1,0 +1,243 @@
+@use "@/styles/variables" as *;
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  color: #ffffff;
+  background: transparent;
+  font-family: 'Sora', sans-serif;
+  z-index: 999;
+  transition:
+    background 0.35s ease,
+    box-shadow 0.35s ease,
+    backdrop-filter 0.35s ease;
+
+    &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+  }
+
+  &__actions {
+    display: none;
+  }
+}
+
+.header.scrolled {
+  background: #ffffff;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 300;
+  color: #ffffff;
+}
+
+.logo span {
+  color: inherit;
+}
+
+.header.scrolled .logo {
+  color: #111;
+}
+
+
+.nav-desktop {
+  display: none;
+  gap: 20px;
+}
+
+.nav-desktop a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.header.scrolled .nav-desktop a {
+  color: #111;
+}
+
+
+.btn {
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn.primary {
+  background: #4f6ef7;
+  color: #ffffff;
+}
+
+.btn.ghost {
+  background: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+
+.ghost-mobile {
+  background: rgba(0, 0, 0, 0.05);
+  color: #000000;
+  border: 1px solid #9c9c9c;
+}
+
+
+.burger {
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  padding: 6px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.burger svg {
+  transition: transform 0.3s ease;
+}
+
+.burger.open svg {
+  transform: rotate(90deg);
+}
+
+.burger svg path {
+  fill: white;
+}
+
+.header.scrolled .burger svg path {
+  fill: #111;
+}
+
+.publish-btn-header {
+  display: none;
+}
+
+.publish-btn-mobile {
+  display: flex;
+  justify-content: center;
+}
+
+.mobile-menu {
+  position: absolute;
+  top: 72px;
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+
+  transition:
+    max-height 0.4s ease,
+    opacity 0.25s ease;
+}
+
+.mobile-menu.open {
+  max-height: 100vh;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 30px 0 0;
+  height: 100%;
+  text-align: center;
+}
+
+.mobile-nav a {
+  color: #111;
+  text-decoration: none;
+}
+
+.user-name{
+  font-weight: 400;
+  color: #111;
+}
+
+.user{
+  display: none;
+  height: 24px;
+  padding-top: 7px;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 6px 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ddd;
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background: #d0d0d0;
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+
+@media (min-width: $breakpoint-tablet) {
+
+  .header__actions {
+    display: flex;
+    gap: 12px;
+  }
+  
+
+   .publish-btn-header {
+    display: flex;
+  }
+
+  .publish-btn-mobile {
+    display: none;
+  }
+
+  .burger {
+    display: inline-flex;
+  }
+}
+
+@media (min-width: $breakpoint-desktop) {
+  .nav-desktop {
+    display: flex;
+  }
+
+  .publish-btn-header {
+    display: flex;
+  }
+
+  .user {
+    display: block;
+  }
+
+  .burger {
+    display: none;
+  }
+}

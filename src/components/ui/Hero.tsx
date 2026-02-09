@@ -4,7 +4,8 @@ import {Link} from "react-router-dom";
 export const Hero = () => {
   return (
     <section className="hero">
-        <div className="hero-content">
+        <div className="container">
+          <div className="hero-content">
             <h1>Відкрийте світ<br />подорожей з нами!</h1>
             <p className="hero-text">
             Приєднуйтесь до нашої спільноти мандрівників, де ви зможете
@@ -14,6 +15,10 @@ export const Hero = () => {
             Доєднатись
             </Link>
         </div>
+        </div>
+        
     </section>
+  
+
   );
 }
