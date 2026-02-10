@@ -9,13 +9,19 @@ import type { IUser } from "@/types/user/user";
 
 const initialState = {
   user: undefined as IUser | undefined,
-  isLoading: false,
+  isLoading: true,
   error: null as string | null,
 };
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    startLoading(state) {
+      state.isLoading = true;
+    },
+    stopLoading(state) {
+      state.isLoading = false;
+    },
     setUser(state, action) {
       state.user = action.payload;
     },
@@ -51,5 +57,6 @@ const authSlice = createSlice({
       });
   },
 });
-export const { setUser, resetError } = authSlice.actions;
+export const { startLoading, stopLoading, setUser, resetError } =
+  authSlice.actions;
 export const authReducer = authSlice.reducer;
