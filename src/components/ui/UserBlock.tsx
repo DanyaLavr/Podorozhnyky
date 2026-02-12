@@ -1,7 +1,7 @@
-import type { IUserBlock } from "@/types/user/user";
+import type { IUser } from "@/types/user/user";
 
 interface IProps {
-  user: IUserBlock;
+  user: IUser;
 }
 const UserBlock = ({ user }: IProps) => {
   const { imageUrl, displayName, description } = user;
