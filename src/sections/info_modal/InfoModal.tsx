@@ -1,0 +1,43 @@
+import { useState } from "react";
+import style from "./_InfoModal.module.scss";
+import { createBem } from "@/utils/createBem";
+
+const bem = createBem("info_modal", style);
+
+
+
+const InfoModal = ({
+    title,
+    text,
+    confirmButtonText,
+    cancelButtonText,
+    onConfirm,
+    onCancel,
+}: confirmModalProps) => {
+    const [isModalOpen, setIsModalOpen] = useState(true);
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+    if (!isModalOpen) return null;
+
+    return (
+        <section className={bem()} data-aos="fade-up">
+            <div className={bem("content")}>
+                <img className={bem("cross")} src="../../../public/icons/close.svg" alt="cross" onClick={closeModal} />
+                <h2 className={bem("title")}>{title}</h2>
+                <p className={bem("desc")}>{text}</p>
+                <div className={bem("btn")}>
+                    <button onClick={onCancel} className={bem("cancel")}>
+                        {confirmButtonText}
+                    </button>
+                    <button onClick={onConfirm} className={bem("exit")}>
+                        {cancelButtonText}
+                    </button>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+export default InfoModal;
