@@ -52,15 +52,15 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>
-    <Route path="/" element={<Home />}>
+        <Route path="/" element={<Home />}>
           <Route path="stories" element={""}>
             <Route path=":storyNumber" element={""} />
           </Route>
-          <Route path="travellers" element={<AllTravelersPage />} />
-          <Route path="traveller" element={""} />
-          <Route path="profile" element={""} />
-          <Route path="new-story" element={""} />
         </Route>
+        <Route path="travellers" element={<AllTravelersPage />} />
+        <Route path="traveller" element={""} />
+        <Route path="profile" element={""} />
+        <Route path="new-story" element={""} />
       </Routes>
     </>
   );

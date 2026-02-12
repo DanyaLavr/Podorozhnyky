@@ -1,5 +1,6 @@
 import "../../styles/TravelerCard.scss";
 
+
 interface Props {
   name: string;
   avatar: string;

@@ -48,7 +48,7 @@ const TravelersSection = () => {
             </div>
 
             <div className="show-all-container">
-              <Link to="/Alltravellers" className="show-all-link">
+              <Link to="/travellers" className="show-all-link">
                 Показати всіх
               </Link>
             </div>
