@@ -7,8 +7,8 @@ import { db } from "@/lib/firebase/app";
 
 interface Traveler {
   id: string;
-  name: string;
-  avatar: string;
+  displayName: string;
+  imageUrl: string;
   description: string;
 }
 
@@ -37,8 +37,8 @@ const TravelersSection = () => {
           {travelers.slice(0, 4).map((traveler) => (
             <TravelerCard
               key={traveler.id}
-              name={traveler.name}
-              avatar={traveler.avatar}
+              name={traveler.displayName}
+              avatar={traveler.imageUrl}
               description={traveler.description} onViewProfile={function (): void {
                 throw new Error("Function not implemented.");
               } }            />

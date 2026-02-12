@@ -5,6 +5,10 @@
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
   &:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
@@ -16,7 +20,7 @@
   height: 80px;
   border-radius: 50%;
   object-fit: cover;
-  margin: 0 auto 16px;
+  margin: 60px 25px 10px ;
   display: block;
   border: 3px solid #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -46,6 +50,9 @@
   cursor: pointer;
   transition: all 0.3s ease;
   font-weight: 500;
+
+  margin-top: auto; /* головне правило */
+  align-self: center;
 
   &:hover {
     background: #1d1d1f;
