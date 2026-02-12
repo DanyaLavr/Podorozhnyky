@@ -14,6 +14,7 @@ import Cookies from "js-cookie";
 import Redirect from "./pages/auth/Redirect";
 
 
+
 function App() {
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -52,7 +53,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>
-        <Route path="/" element={""}>
+        <Route path="/" element={""} >
           <Route path="stories" element={""}>
             <Route path=":storyNumber" element={""} />
           </Route>

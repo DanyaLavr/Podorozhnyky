@@ -1,25 +1,23 @@
 import { createBem } from "@/utils/createBem";
 import styles from "./_CreateStoryForm.module.scss";
 
+import { useState } from "react";
 import Button from "../ui/Button";
 
-import { Formik, Form} from "formik";
+import { Formik, Form } from "formik";
 
 import { ImageInput } from "./components/ImageInput";
 import { TextInput } from "./components/TextInput";
 import { CategorySelect } from "./components/CategorySelect";
 import { Textarea } from "./components/Textarea";
-
+import Loader from "../ui/Loader";
 import { createStorySchema } from "@/schemas/validationSchema";
 
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { storage, db } from "@/lib/firebase/app";
 
-
 const bem = createBem("createStories", styles);
-
-
 
 interface FormValues {
   title: string;
@@ -33,13 +31,12 @@ interface FormValues {
   description?: string;
   imageUrl?: string;
   story?: string;
-
-
 }
 
-
 export default function CreateStoryForm() {
+  const [isLoading, setIsLoading] = useState(false);
 
+  const [successMessage, setSuccessMessage] = useState("");
 
   const initialValues: FormValues = {
     title: "",
@@ -48,26 +45,25 @@ export default function CreateStoryForm() {
     image: null,
   };
 
-    const handleSubmit = async (values: FormValues, { resetForm }: any) => {
+  const handleSubmit = async (values: FormValues, { resetForm }: any) => {
     try {
       const { image, title, category, text } = values;
-  
+
+      setIsLoading(true);
+
       if (!image) {
         alert("Додай картинку");
         return;
       }
-  
+
       // 1️⃣ Upload картинки
-      const imageRef = ref(
-        storage,
-        `${Date.now()}_${image.name}`
-      );
-  
+      const imageRef = ref(storage, `${Date.now()}_${image.name}`);
+
       await uploadBytes(imageRef, image);
-  
+
       // 2️⃣ URL
       const imageUrl = await getDownloadURL(imageRef);
-  
+
       // 3️⃣ Запис у Firestore
       await addDoc(collection(db, "posts"), {
         title,
@@ -75,12 +71,15 @@ export default function CreateStoryForm() {
         text,
         imageUrl,
         createdAt: serverTimestamp(),
-
-
       });
-  
-      alert("Історія збережена ✅");
-  
+
+      // alert("Історія збережена ✅");
+      setSuccessMessage("Історія успішно збережена 🎉");
+
+      setTimeout(() => {
+        setSuccessMessage("");
+      }, 3000);
+      setIsLoading(false);
       resetForm();
     } catch (err) {
       console.error(err);
@@ -89,42 +88,50 @@ export default function CreateStoryForm() {
   };
 
   // const handleSubmitTest = (values: FormValues, { resetForm }: any) => {
-    
-  // }
+  //   setIsLoading(true);
+  //   setSuccessMessage("Історія успішно збережена 🎉");
 
+  //   setTimeout(() => {
+  //     setSuccessMessage("");
 
+  //     console.log("Waited for 2 seconds", values);
+  //     setIsLoading(false);
+  //     resetForm();
+  //   }, 2000);
+  // };
 
   return (
     <div className={bem("")}>
+      {successMessage && (
+        <div className={bem("successMessage")}>{successMessage}</div>
+      )}
+      <Loader loading={isLoading} />
       <Formik
         initialValues={initialValues}
         validationSchema={createStorySchema}
         onSubmit={(values, { resetForm }) => {
-          console.log({
-            ...values,
-            image: values.image,
-          });
+          // console.log({
+          //   ...values,
+          //   image: values.image,
+          // });
           handleSubmit(values, { resetForm });
           resetForm();
         }}
       >
-        {({ values }) => (
+        {() => (
           <Form className={bem("form")}>
             <div className={bem("inputWrapper")}>
               {/* image */}
-              <ImageInput/>
-
+              <ImageInput />
 
               {/* title */}
-                <TextInput/>
-
+              <TextInput />
 
               {/* // category */}
-              <CategorySelect/>
-
+              <CategorySelect />
 
               {/* text */}
-              <Textarea/>
+              <Textarea />
             </div>
 
             <div className={bem("buttonWrapper")}>
