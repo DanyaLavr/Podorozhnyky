@@ -8,10 +8,10 @@ export interface Post {
   title: string;
   description: string;
   creatorName: string;
-  date: string;
-  readTime: string;
+  readTime: number;
   locationImage: string;
   creatorImage: string;
+  createdAt: number;
 }
 
 interface PostsState {

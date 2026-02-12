@@ -64,6 +64,7 @@ const Button = ({
       disabled={disabled}
       type={type}
       onClick={disabled ? undefined : onClick}
+      data-active={isActive}
     >
       {children}
     </button>

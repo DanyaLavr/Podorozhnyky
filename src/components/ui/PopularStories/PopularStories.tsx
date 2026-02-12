@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import type { AppDispatch } from "@/redux/store";
 import { fetchPosts } from "@/redux/posts/postsSlice";
@@ -9,18 +9,24 @@ import {
 import StoryCard from "./StoryCard";
 import styles from "./_StoryCard.module.scss";
 import { createBem } from "@/utils/createBem";
-import Button from "../Button";
+import type { Post } from "@/redux/posts/postsSlice";
+import { useSavedStories } from "@/hooks/Stories/useSavedStories";
 
 const bem = createBem("storyCard__list", styles);
-
-export default function PopularStories() {
+type Props = {
+  region?: string;
+  visibleCount: number;
+};
+export default function PopularStories({
+  region,
+  visibleCount,
+}: Props) {
   const dispatch = useDispatch<AppDispatch>();
 
   const posts = useSelector(selectAllPosts);
   const isLoading = useSelector(selectPostsLoading);
 
-  const [cardsPerView, setCardsPerView] = useState(4);
-  const [visibleCount, setVisibleCount] = useState(0);
+  const savedStories = useSavedStories();
 
   useEffect(() => {
     if (!posts.length && !isLoading) {
@@ -28,44 +34,27 @@ export default function PopularStories() {
     }
   }, [dispatch, posts.length, isLoading]);
 
-  useEffect(() => {
-    const update = () => {
-      const perView = window.innerWidth >= 1440 ? 3 : 4;
-      setCardsPerView(perView);
+  const filteredPosts = useMemo(() => {
+    if (!region) return posts;
 
-      setVisibleCount((prev) => (prev === 0 ? perView : prev));
-    };
+    return posts.filter((post: Post) => post.region === region);
+  }, [posts, region]);
 
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
   const visibleStories = useMemo(
-    () => posts.slice(0, visibleCount),
-    [posts, visibleCount]
+    () => filteredPosts.slice(0, visibleCount),
+    [filteredPosts, visibleCount]
   );
+
+  console.log(posts);
+  
 
   if (isLoading) return <p>Завантаження...</p>;
 
   return (
-    <section className={`section ${styles["section-stories"]}`}>
-      <div className={`container ${styles["stories-container"]}`}>
-        <ul className={bem()}>
-          {visibleStories.map((post) => (
-            <StoryCard key={post.id} data={post} />
-          ))}
-        </ul>
-
-        {visibleCount < posts.length && (
-          <Button
-            variant="primary"
-            className={bem("button--show")}
-            onClick={() => setVisibleCount((prev) => prev + cardsPerView)}
-          >
-            Переглянути всі
-          </Button>
-        )}
-      </div>
-    </section>
+    <ul className={bem()}>
+      {visibleStories.map((post: Post) => (
+        <StoryCard key={post.id} data={post} savedStories={savedStories} />
+      ))}
+    </ul>
   );
 }

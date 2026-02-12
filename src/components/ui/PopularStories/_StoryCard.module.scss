@@ -133,26 +133,41 @@
   &__button--save {
     padding: 16px;
   }
+  &__button--save[data-active="true"]{
+  background-color: gray;
+  }
   &__item-btns-wrapper {
     display: flex;
     gap: 10px;
-  }
-  &__button--show {
-    background-color: $blue-400;
-    color: #fff;
-    width: 147px;
-    height: 48px;
-    font-size: 16px;
-    font-weight: 500;
-    display: block;
-    margin: 24px auto 0;
-    @media screen and (min-width: 1440px) {
-      width: 163px;
-    }
   }
   &__dot {
     font-weight: 700;
     font-size: 18px;
     margin: 0 7px;
+  }
+  &__img-wrapper {
+    position: relative;
+    width: 100%;
+    background-color: #f3f4f6;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+  &__img-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.05);
+    img {
+      width: 40px;
+      opacity: 0.4;
+    }
+  }
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
   }
 }

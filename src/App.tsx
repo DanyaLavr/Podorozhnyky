@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import PopularStories from "./components/ui/PopularStories/PopularStories";
+import PopularStoriesMain from "./sections/PopularStories/PopularStories";
 function App() {
   return (
     <>
@@ -8,15 +8,14 @@ function App() {
           <Route path="login" element={""} />
           <Route path="register" element={""} />
         </Route>
-        <Route path="/" element={<PopularStories></PopularStories>}>
-          <Route path="stories" element={""}>
-            <Route path=":storyNumber" element={""} />
-          </Route>
-          <Route path="travellers" element={""} />
-          <Route path="traveller" element={""} />
-          <Route path="profile" element={""} />
-          <Route path="new-story" element={""} />
+        <Route path="/" element={<PopularStoriesMain></PopularStoriesMain>} />
+        <Route path="stories" element={""}>
+          <Route path=":storyNumber" element={""} />
         </Route>
+        <Route path="travellers" element={""} />
+        <Route path="traveller" element={""} />
+        <Route path="profile" element={""} />
+        <Route path="new-story" element={""} />
       </Routes>
     </>
   );

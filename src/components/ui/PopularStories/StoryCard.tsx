@@ -1,37 +1,56 @@
 import { Link as RouterLink } from "react-router-dom";
+import { useState } from "react";
 import Button from "../Button";
 import { createBem } from "@/utils/createBem";
 import styles from "./_StoryCard.module.scss";
 import type { Post } from "@/redux/posts/postsSlice";
+import { useSavedStories } from "@/hooks/Stories/useSavedStories";
 
 const bem = createBem("storyCard__list", styles);
 
 interface IProps {
   data: Post;
+  savedStories: ReturnType<typeof useSavedStories>;
 }
 
-export default function StoryCard({ data }: IProps) {
+export default function StoryCard({ data, savedStories }: IProps) {
   const {
     region,
     title,
     description,
     creatorName,
-    date,
+    createdAt,
     readTime,
     locationImage,
     creatorImage,
     id,
   } = data;
 
+  const { isSaved, toggle } = savedStories;
+  const [imgError, setImgError] = useState(false);
+
+  const formatDate = (num: number) => new Date(num).toLocaleDateString("uk-UA");
+
   return (
     <li className={bem("item")}>
       <div className={bem("img-wrapper")}>
-        <img
-          src={locationImage}
-          alt={title}
-          loading="lazy"
-          className={bem("img")}
-        />
+        {!locationImage || imgError ? (
+          <div className={bem("img-fallback")}>
+            <img
+              src="/icons/image-placeholder.svg"
+              alt="No image"
+              loading="lazy"
+            />
+          </div>
+        ) : (
+          <img
+            src={locationImage}
+            alt={title}
+            loading="lazy"
+            className={bem("img")}
+            onError={() => setImgError(true)}
+          />
+        )}
       </div>
 
       <div className={bem("item-content-wrapper")}>
@@ -48,10 +67,13 @@ export default function StoryCard({ data }: IProps) {
               className={bem("author-img")}
             />
           </div>
+
           <div className={bem("date-info")}>
             <h5 className={bem("author-title")}>{creatorName}</h5>
             <p className={bem("author-info")}>
-              {date} <span className={bem("dot")}>•</span> {readTime}
+              {formatDate(createdAt)}
+              <span className={bem("dot")}> • </span>
+              {readTime}
             </p>
           </div>
         </div>
@@ -65,9 +87,12 @@ export default function StoryCard({ data }: IProps) {
               Переглянути статтю
             </Button>
           </RouterLink>
+
           <Button
             variant="secondary"
             className={`${bem("button")} ${bem("button--save")}`}
+            isActive={isSaved(id)}
+            onClick={() => toggle(id)}
           >
             <img
               src="/icons/save.svg"
