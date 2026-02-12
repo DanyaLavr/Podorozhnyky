@@ -1,7 +1,11 @@
 import AuthNav from "@/components/auth/navigation/AuthNav";
+import { selectUser } from "@/redux/auth/selectors";
+import { useAppSelector } from "@/redux/hooks";
 import { Outlet } from "react-router-dom";
 
 const Auth = () => {
+  const user = useAppSelector(selectUser);
+  console.log("user Auth :>> ", user);
   return (
     <div className="flex flex-col min-h-screen">
       {/* <Header/> */}
