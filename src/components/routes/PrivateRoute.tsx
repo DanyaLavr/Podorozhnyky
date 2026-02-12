@@ -5,10 +5,12 @@ import { useNavigate } from "react-router-dom";
 
 const PrivateRoute = ({ children }: { children: ReactNode }) => {
   const user = useAppSelector(selectUser);
+  console.log(user);
+  
   const navigate = useNavigate();
   useEffect(() => {
     if (!user) navigate("/auth/login");
-  }, [navigate]);
+  }, [navigate, user]);
 
   return <>{children}</>;
 };

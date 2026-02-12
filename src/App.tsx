@@ -12,8 +12,9 @@ import { useAppDispatch } from "./redux/hooks";
 import { setUser } from "./redux/auth/authSlice";
 import Cookies from "js-cookie";
 import Redirect from "./pages/auth/Redirect";
+import PrivateRoute from "./components/routes/PrivateRoute";
 
-
+import { logoutUser } from "./redux/auth/operations";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -35,7 +36,11 @@ function App() {
       } else {
         dispatch(setUser(undefined));
       }
+      // if (user) {
+      //   dispatch(logoutUser());
+      // }
     });
+
     return () => unsubscribe();
   }, [dispatch]);
   return (
@@ -53,14 +58,21 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>
-        <Route path="/" element={""} >
+        <Route path="/" element={""}>
           <Route path="stories" element={""}>
             <Route path=":storyNumber" element={""} />
           </Route>
           <Route path="travellers" element={""} />
           <Route path="traveller" element={""} />
           <Route path="profile" element={""} />
-          <Route path="new-story" element={<CreateStoryForm/>} />
+          <Route
+            path="new-story"
+            element={
+              <PrivateRoute>
+                <CreateStoryForm />
+              </PrivateRoute>
+            }
+          />
         </Route>
       </Routes>
     </>

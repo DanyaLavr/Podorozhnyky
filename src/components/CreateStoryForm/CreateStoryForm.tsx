@@ -12,10 +12,13 @@ import { CategorySelect } from "./components/CategorySelect";
 import { Textarea } from "./components/Textarea";
 import Loader from "../ui/Loader";
 import { createStorySchema } from "@/schemas/validationSchema";
+import { useSelector } from "react-redux";
+
 
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { storage, db } from "@/lib/firebase/app";
+
 
 const bem = createBem("createStories", styles);
 
@@ -37,6 +40,8 @@ export default function CreateStoryForm() {
   const [isLoading, setIsLoading] = useState(false);
 
   const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
 
   const initialValues: FormValues = {
     title: "",
