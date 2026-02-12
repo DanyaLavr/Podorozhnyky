@@ -72,7 +72,11 @@ const ProfileFavoritePosts = () => {
       {isLoading && (
         <Loader cssOverride={{ marginTop: "20px" }} loading={isLoading} />
       )}
-      <Button variant="primary" onClick={handlePagination}>
+      <Button
+        className="px-4 py-2"
+        variant="primary"
+        onClick={handlePagination}
+      >
         завантажити більше!
       </Button>
     </div>
