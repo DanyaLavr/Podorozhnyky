@@ -71,7 +71,7 @@ export const Header = () => {
                         Опублікувати історію
                       </Button>
                       <div className=" flex gap-2">
-                        <p className="user">Імʼя</p>
+                        <p className={bem("user")}>Імʼя</p>
                         <span
                           className={`block h-7 w-px ${isMenuOpen || isScrolled ? "bg-gray-900/15" : "bg-gray-50/50"}`}
                         ></span>
@@ -129,11 +129,11 @@ export const Header = () => {
                     Опублікувати історію
                   </button>
 
-                  <div className="user-menu">
-                    <div className="avatar" />
-                    <span className="user-name">Імʼя</span>
-                    <span className="divider" />
-                    <button className="logout-btn">
+                  <div className={bem("user-menu")}>
+                    <div className={bem("avatar")} />
+                    <span className={bem("user-name")}>Імʼя</span>
+                    <span className={bem("divider")} />
+                    <button className={bem("logout-btn")}>
                       <LogoutIcon />
                     </button>
                   </div>
