@@ -1,35 +1,23 @@
-import React from 'react';
+import "../../styles/TravelerCard.scss";
 
-interface TravelerCardProps {
+interface Props {
   name: string;
   avatar: string;
   description: string;
-  onViewProfile: () => void;
 }
 
-const TravelerCard: React.FC<TravelerCardProps> = ({ 
-  name, 
-  avatar, 
-  description, 
-  onViewProfile 
-}) => {
+export default function TravelerCard({ name, avatar, description }: Props) {
   return (
     <div className="traveler-card">
-      <img 
-        src={avatar} 
-        alt={name} 
-        className="traveler-avatar"
-      />
-      <div className="traveler-name">{name}</div>
-      <div className="traveler-description">{description}</div>
-      <button 
-        className="view-profile-btn"
-        onClick={onViewProfile}
-      >
+      <img src={avatar} alt={name} className="traveler-avatar" />
+
+      <h3 className="traveler-name">{name}</h3>
+
+      <p className="traveler-description">{description}</p>
+
+      <button className="view-profile-btn">
         Переглянути профіль
       </button>
     </div>
   );
-};
-
-export default TravelerCard;
+}

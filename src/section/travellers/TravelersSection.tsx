@@ -6,7 +6,6 @@ import { getDocs, collection } from "firebase/firestore";
 import { db } from "@/lib/firebase/app";
 
 interface Traveler {
-  id: string;
   displayName: string;
   imageUrl: string;
   description: string;
@@ -14,14 +13,14 @@ interface Traveler {
 
 const TravelersSection = () => {
   const [travelers, setTravelers] = useState<Traveler[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const getData = async () => {
+    setLoading(true);
     const querySnapshot = await getDocs(collection(db, "users"));
-    const data = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...(doc.data() as Omit<Traveler, "id">),
-    }));
+    const data = querySnapshot.docs.map((doc) => doc.data() as Traveler);
     setTravelers(data);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -31,25 +30,30 @@ const TravelersSection = () => {
   return (
     <section className="travelers-section">
       <div className="container">
-        <h1>Наші мандрівники</h1>
+        <h1 className="section-title">Наші мандрівники</h1>
 
-        <div className="travelers-grid">
-          {travelers.slice(0, 4).map((traveler) => (
-            <TravelerCard
-              key={traveler.id}
-              name={traveler.displayName}
-              avatar={traveler.imageUrl}
-              description={traveler.description} onViewProfile={function (): void {
-                throw new Error("Function not implemented.");
-              } }            />
-          ))}
-        </div>
+        {loading ? (
+          <div className="loader" />
+        ) : (
+          <>
+            <div className="travelers-grid">
+              {travelers.slice(0, 4).map((traveler, i) => (
+                <TravelerCard
+                  key={i}
+                  name={traveler.displayName}
+                  avatar={traveler.imageUrl}
+                  description={traveler.description}
+                />
+              ))}
+            </div>
 
-        <div className="show-all-container">
-          <Link to="/Alltravellers" className="show-all-link">
-            Показати все
-          </Link>
-        </div>
+            <div className="show-all-container">
+              <Link to="/Alltravellers" className="show-all-link">
+                Показати всіх
+              </Link>
+            </div>
+          </>
+        )}
       </div>
     </section>
   );
