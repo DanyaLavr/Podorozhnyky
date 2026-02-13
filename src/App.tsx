@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
 import UserPage from "./pages/UserPage";
 import Profile from "./pages/Profile";
 import ProfileUserPosts from "./pages/ProfileUserPosts";
@@ -15,7 +16,7 @@ import { setUser, stopLoading } from "./redux/auth/authSlice";
 import Redirect from "./pages/auth/Redirect";
 import PrivateRoute from "./components/routes/PrivateRoute";
 import { getUser } from "./api/user/getUser";
-
+import Layout from "./pages/Layout";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -47,7 +48,8 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>
-        <Route path="/" element={""}>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
           <Route path="stories" element={""}>
             <Route path=":storyNumber" element={""} />
           </Route>
