@@ -1,13 +1,6 @@
 @use "@/styles/variables" as *;
 
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding-top: 0;
-  padding-bottom: 0;
-  z-index: 999;
   transition: all 0.35s ease;
   &--scrolled {
     backdrop-filter: blur(8px);
@@ -16,14 +9,8 @@
       &__logo {
         color: $gray-900;
       }
-      &__user-block svg path {
-        fill: $gray-900;
-      }
-      &__burger svg path {
-        fill: $gray-900;
-      }
       &__nav-desktop a {
-        color: $gray-900;
+        // color: $gray-900;
       }
     }
   }
@@ -52,7 +39,6 @@
     align-items: center;
     gap: 6px;
     font-weight: 300;
-    color: $gray-50;
     span {
       color: inherit;
     }
@@ -66,11 +52,22 @@
     cursor: pointer;
     svg {
       transition: transform 0.3s ease;
-      path {
-        fill: $gray-50;
-      }
       &--open svg {
         transform: rotate(90deg);
+      }
+    }
+    &--dark {
+      svg {
+        path {
+          fill: $gray-900;
+        }
+      }
+    }
+    &--light {
+      svg {
+        path {
+          fill: $gray-50;
+        }
       }
     }
   }
@@ -110,20 +107,17 @@
     display: none;
     gap: 20px;
     a {
-      color: $gray-50;
-      text-decoration: none;
-      font-weight: 400;
+      // color: $gray-50;
+      // text-decoration: none;
+      // font-weight: 400;
     }
   }
-  &__user-name {
-    color: $gray-900;
-  }
 
-  &__.user {
-    display: none;
-    height: 24px;
-    padding-top: 7px;
-  }
+  // &__.user {
+  //   display: none;
+  //   height: 24px;
+  //   padding-top: 7px;
+  // }
 
   &__user-menu {
     display: flex;
@@ -153,6 +147,18 @@
     cursor: pointer;
     path {
       fill: $gray-900;
+    }
+  }
+  &__user-block {
+    &--light {
+      svg path {
+        fill: $gray-50;
+      }
+    }
+    &--dark {
+      svg path {
+        fill: $gray-900;
+      }
     }
   }
 }

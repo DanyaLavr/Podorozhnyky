@@ -4,7 +4,7 @@ import {
   isPending,
   isRejected,
 } from "@reduxjs/toolkit";
-import { loginUser, registerUser } from "./operations";
+import { loginUser, logoutUser, registerUser } from "./operations";
 import type { IUser } from "@/types/user/user";
 
 const initialState = {
@@ -31,7 +31,9 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.user = undefined;
+      })
       .addMatcher(isPending(registerUser, loginUser), (state) => {
         state.isLoading = true;
         state.error = null;

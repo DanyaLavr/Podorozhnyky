@@ -9,8 +9,9 @@ import LogoutIcon from "../../../public/icons/Logout.svg";
 import styles from "./header.module.scss";
 import { createBem } from "@/utils/createBem";
 import Button from "@/components/ui/Button";
-import { useAppSelector } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { selectUser } from "@/redux/auth/selectors";
+import { logoutUser } from "@/redux/auth/operations";
 
 const bem = createBem("header", styles);
 
@@ -19,6 +20,7 @@ interface IProps {
   variant?: "dark" | "light";
 }
 export const Header = ({ content = "full", variant = "light" }: IProps) => {
+  const dispatch = useAppDispatch();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -34,28 +36,46 @@ export const Header = ({ content = "full", variant = "light" }: IProps) => {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+  const currentBg =
+    variant === "light" || isScrolled || isMenuOpen ? "light" : "dark";
+  const currentColor =
+    variant === "light" || isScrolled || isMenuOpen ? "dark" : "light";
 
+  const colorStyles =
+    currentColor === "light"
+      ? `text-gray-50 fill-gray-50`
+      : `text-gray-900 fill-gray-900`;
   const headerStyles =
-    variant === "light" || isScrolled || isMenuOpen
+    currentBg === "light"
       ? `bg-gray-50 text-gray-900`
       : `bg-transparent text-gray-50`;
   return (
     <header
-      className={`section  ${headerStyles} ${variant === "dark" ? bem("", { scrolled: isMenuOpen || isScrolled }) : ""}`}
+      className={`section py-0! fixed w-full t-0 l-0 ${headerStyles} ${currentBg === "dark" ? bem("", { scrolled: isMenuOpen || isScrolled }) : ""}`}
     >
       <div className="container">
         <div className={bem("inner")}>
           <div className={bem("logo")}>
             <Logo />
-            <span>Подорожники</span>
+            <span className={colorStyles}>Подорожники</span>
           </div>
           {content === "full" && (
             <div className="flex gap-8 items-center">
               <nav className={bem("nav-desktop")}>
-                <Link to="/">Головна</Link>
-                <Link to="/stories">Історії</Link>
-                <Link to="/travelers">Мандрівники</Link>
-                {isAuth && <Link to="/profile">Мій профіль</Link>}
+                <Link className={colorStyles} to="/">
+                  Головна
+                </Link>
+                <Link className={colorStyles} to="/stories">
+                  Історії
+                </Link>
+                <Link className={colorStyles} to="/travelers">
+                  Мандрівники
+                </Link>
+                {isAuth && (
+                  <Link className={colorStyles} to="/profile">
+                    Мій профіль
+                  </Link>
+                )}
               </nav>
 
               <div className="flex gap-4">
@@ -63,12 +83,12 @@ export const Header = ({ content = "full", variant = "light" }: IProps) => {
                   {!isMenuOpen &&
                     (!isAuth ? (
                       <>
-                        <Button className="py-1 px-2.5" pathTo="/login">
+                        <Button className="py-1 px-2.5" pathTo="/auth/login">
                           Вхід
                         </Button>
                         <Button
                           className="py-1 px-2.5"
-                          pathTo="/register"
+                          pathTo="/auth/register"
                           variant="primary"
                         >
                           Реєстрація
@@ -83,19 +103,23 @@ export const Header = ({ content = "full", variant = "light" }: IProps) => {
                         >
                           Опублікувати історію
                         </Button>
-                        <div className={`flex gap-2 ${bem("user-block")}`}>
+                        <div
+                          className={`flex gap-2 ${bem("user-block", { dark: currentColor === "dark", light: currentColor === "light" })}`}
+                        >
                           <p className={bem("user")}>{user.displayName}</p>
                           <span
-                            className={`block h-7 w-px ${isMenuOpen || isScrolled ? "bg-gray-900/15" : "bg-gray-50/50"}`}
+                            className={`block h-7 w-px  ${currentColor === "dark" ? "bg-gray-900/15" : "bg-gray-50/50"}`}
                           ></span>
-                          <LogoutIcon />
+                          <button onClick={() => dispatch(logoutUser())}>
+                            <LogoutIcon />
+                          </button>
                         </div>
                       </>
                     ))}
                 </div>
 
                 <button
-                  className={`${bem("burger", { open: isMenuOpen })}`}
+                  className={`${currentColor} ${bem("burger", { open: isMenuOpen, dark: currentColor === "dark", light: currentColor === "light" })}`}
                   onClick={() => setIsMenuOpen((prev) => !prev)}
                   aria-label="Toggle menu"
                 >
@@ -144,7 +168,11 @@ export const Header = ({ content = "full", variant = "light" }: IProps) => {
                   </button>
 
                   <div className={bem("user-menu")}>
-                    <img src={user.uid} alt={user.displayName} />
+                    <img
+                      className="w-15 aspect-square rounded-full"
+                      src={user.imageUrl}
+                      alt={user.displayName}
+                    />
                     <span className={bem("user-name")}>{user.displayName}</span>
                     <span className={bem("divider")} />
                     <button className={bem("logout-btn")}>
