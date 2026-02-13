@@ -1,8 +1,9 @@
 import AuthForm from "@/components/auth/form/AuthForm";
 import AuthHeading from "@/components/auth/heading/AuthHeading";
 import registerFormConfig from "@/lib/auth/register/config";
-import { registerUser, type IRegisterUserProps } from "@/redux/auth/operations";
+import { registerUser } from "@/redux/auth/operations";
 import { useAppDispatch } from "@/redux/hooks";
+import type { IRegisterUserProps } from "@/types/auth/form";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
