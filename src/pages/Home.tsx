@@ -1,7 +1,15 @@
-import Project from "@/sections/project/Project"
-import InfoModal from "@/sections/info_modal/InfoModal"
+import { Hero } from "@/sections/hero/Hero";
+import JoinToUs from "@/sections/join-to-us/JoinToUs";
+import Project from "@/sections/project/Project";
 
-export default function Home() {
-    return <><Project></Project>
-        {/* <InfoModal title="Ви точно хочете вийти?" text="Ми будемо сумувати за вами!" confirmButtonText="Відмінити" cancelButtonText="Вийти" onConfirm={() => { }} onCancel={() => { }}></InfoModal> */}</>
-}
+const Home = () => {
+  return (
+    <>
+      <Hero />
+      <Project />
+      <JoinToUs />
+    </>
+  );
+};
+
+export default Home;

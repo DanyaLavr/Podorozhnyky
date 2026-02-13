@@ -1,22 +1,38 @@
 import type { MouseEventHandler, ReactNode } from "react";
+import { Link } from "react-router-dom";
 
 type TVariant = "primary" | "secondary";
 type TType = "button" | "submit" | "reset";
-interface IProps {
+
+interface IBaseProps {
   variant?: TVariant;
   disabled?: boolean;
-  isActive?: boolean;
   className?: string;
-  type?: TType;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
   children: ReactNode;
 }
+
+interface IButtonProps extends IBaseProps {
+  type?: TType;
+  isActive?: boolean;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+  pathTo?: never;
+}
+
+interface ILinkProps extends IBaseProps {
+  pathTo: string;
+  onClick?: never;
+  isActive?: never;
+  type?: never;
+}
+type IProps = IButtonProps | ILinkProps;
+
 const Button = ({
   variant,
   disabled = false,
   isActive = false,
   className,
   type = "button",
+  pathTo,
   onClick,
   children,
 }: IProps) => {
@@ -57,7 +73,16 @@ const Button = ({
            : ""
        }
      `;
-
+  if (pathTo) {
+    return (
+      <Link
+        className={`font-main font-medium text-lg rounded-lg text-center ${styles} ${disabledStyles} ${className}`}
+        to={disabled ? "" : pathTo}
+      >
+        {children}
+      </Link>
+    );
+  }
   return (
     <button
       className={`font-main font-medium text-lg rounded-lg  ${styles} ${disabledStyles} ${className}`}
