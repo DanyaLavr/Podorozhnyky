@@ -16,7 +16,6 @@ import Redirect from "./pages/auth/Redirect";
 import PrivateRoute from "./components/routes/PrivateRoute";
 import { getUser } from "./api/user/getUser";
 
-
 function App() {
   const dispatch = useAppDispatch();
 
@@ -52,6 +51,10 @@ function App() {
             <Route path=":storyNumber" element={""} />
           </Route>
           <Route path="travellers" element={""} />
+          <Route
+            path="traveller"
+            element={<Redirect path="/traveller/error" />}
+          />
           <Route path="traveller/:travellerUid" element={<UserPage />} />
           <Route
             path="profile"
