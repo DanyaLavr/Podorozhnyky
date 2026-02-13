@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer/Footer";
 import { Header } from "@/sections/header/Header";
 import { Outlet, useLocation } from "react-router-dom";
 
@@ -11,7 +12,7 @@ const Layout = () => {
       <main>
         <Outlet />
       </main>
-      {/* <Footer/> */}
+      <Footer />
     </>
   );
 };
