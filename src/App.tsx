@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import UserPage from "./pages/UserPage";
@@ -8,7 +9,6 @@ import Auth from "./pages/auth/Auth";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import RestrictedRoute from "./components/routes/RestrictedRoute";
-import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./lib/firebase/app";
 import { useAppDispatch } from "./redux/hooks";
@@ -18,7 +18,8 @@ import PrivateRoute from "./components/routes/PrivateRoute";
 import { getUser } from "./api/user/getUser";
 import Layout from "./pages/Layout";
 import Historia from "./components/Historia/Historia";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 function App() {
   const dispatch = useAppDispatch();
 
@@ -34,6 +35,9 @@ function App() {
     });
     return () => unsubscribe();
   }, [dispatch]);
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
     <>
       <Routes>
