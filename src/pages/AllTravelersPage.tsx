@@ -3,8 +3,11 @@ import TravelerCard from "../components/ui/TravelerCard";
 import "../styles/AllTravelersPage.scss";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "@/lib/firebase/app";
+import H1 from "@/components/ui/H1";
+import Loader from "@/components/ui/Loader";
 
 interface Traveler {
+  id: string;
   displayName: string;
   imageUrl: string;
   description: string;
@@ -18,7 +21,10 @@ export default function AllTravelersPage() {
   const getData = async () => {
     setLoading(true);
     const querySnapshot = await getDocs(collection(db, "users"));
-    const data = querySnapshot.docs.map((doc) => doc.data() as Traveler);
+    const data = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...(doc.data() as Omit<Traveler, "id">),
+    }));
     setTravelers(data);
     setLoading(false);
   };
@@ -30,16 +36,16 @@ export default function AllTravelersPage() {
   return (
     <section className="all-travelers-page">
       <div className="container">
-        <h1 className="page-title">Мандрівники</h1>
+        <H1 variant="dark">Мандрівники</H1>
 
         {loading ? (
-          <div className="loader" />
+          <Loader loading={loading} />
         ) : (
           <>
             <div className="travelers-grid">
-              {travelers.slice(0, visibleCount).map((traveler, i) => (
+              {travelers.slice(0, visibleCount).map((traveler) => (
                 <TravelerCard
-                  key={i}
+                  key={traveler.id}
                   name={traveler.displayName}
                   avatar={traveler.imageUrl}
                   description={traveler.description}
@@ -47,11 +53,11 @@ export default function AllTravelersPage() {
               ))}
             </div>
 
-            {visibleCount < 12 && (
+            {visibleCount < travelers.length && (
               <div className="show-more-container">
                 <button
                   className="show-more-btn"
-                  onClick={() => setVisibleCount(12)}
+                  onClick={() => setVisibleCount(travelers.length)}
                 >
                   Показати всіх
                 </button>

@@ -4,8 +4,11 @@ import TravelerCard from "../../components/ui/TravelerCard";
 import "../../styles/TravelersSection.scss";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "@/lib/firebase/app";
+import H2 from "@/components/ui/H2";
+import Loader from "@/components/ui/Loader";
 
 interface Traveler {
+  id: string;
   displayName: string;
   imageUrl: string;
   description: string;
@@ -18,7 +21,10 @@ const TravelersSection = () => {
   const getData = async () => {
     setLoading(true);
     const querySnapshot = await getDocs(collection(db, "users"));
-    const data = querySnapshot.docs.map((doc) => doc.data() as Traveler);
+    const data = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...(doc.data() as Omit<Traveler, "id">),
+    }));
     setTravelers(data);
     setLoading(false);
   };
@@ -30,16 +36,16 @@ const TravelersSection = () => {
   return (
     <section className="travelers-section">
       <div className="container">
-        <h1 className="section-title">Наші мандрівники</h1>
+        <H2>Наші мандрівники</H2>
 
         {loading ? (
-          <div className="loader" />
+          <Loader loading={loading} />
         ) : (
           <>
             <div className="travelers-grid">
-              {travelers.slice(0, 4).map((traveler, i) => (
+              {travelers.slice(0, 4).map((traveler) => (
                 <TravelerCard
-                  key={i}
+                  key={traveler.id}
                   name={traveler.displayName}
                   avatar={traveler.imageUrl}
                   description={traveler.description}

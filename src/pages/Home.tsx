@@ -1,4 +1,4 @@
-import TravelersSection from '../section/travellers/TravelersSection';
+import TravelersSection from '../sections/travellers/TravelersSection';
 export default function Home() {
     return <TravelersSection/>
 }
