@@ -1,12 +1,11 @@
-import { Header } from "@/sections/header/Header";
 import { Hero } from "@/sections/hero/Hero";
-import { Test } from "@/components/ui/Test";
+import JoinToUs from "@/sections/join-to-us/JoinToUs";
 
 const Home = () => {
   return (
     <>
       <Hero />
-      <Test />
+      <JoinToUs />
     </>
   );
 };
