@@ -11,16 +11,14 @@ import styles from "./_StoryCard.module.scss";
 import { createBem } from "@/utils/createBem";
 import type { Post } from "@/redux/posts/postsSlice";
 import { useSavedStories } from "@/hooks/Stories/useSavedStories";
+import Loader from "@/components/ui/Loader";
 
 const bem = createBem("storyCard__list", styles);
 type Props = {
   region?: string;
   visibleCount: number;
 };
-export default function PopularStories({
-  region,
-  visibleCount,
-}: Props) {
+export default function PopularStories({ region, visibleCount }: Props) {
   const dispatch = useDispatch<AppDispatch>();
 
   const posts = useSelector(selectAllPosts);
@@ -46,15 +44,15 @@ export default function PopularStories({
   );
 
   console.log(posts);
-  
-
-  if (isLoading) return <p>Завантаження...</p>;
 
   return (
-    <ul className={bem()}>
-      {visibleStories.map((post: Post) => (
-        <StoryCard key={post.id} data={post} savedStories={savedStories} />
-      ))}
-    </ul>
+    <>
+      <Loader loading={isLoading} />
+      <ul className={bem()}>
+        {visibleStories.map((post: Post) => (
+          <StoryCard key={post.id} data={post} savedStories={savedStories} />
+        ))}
+      </ul>
+    </>
   );
 }
