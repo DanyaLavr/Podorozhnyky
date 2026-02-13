@@ -17,7 +17,7 @@ const H1 = ({
   const postion = position === "center" ? "text-center" : "";
   return (
     <h1
-      className={`${color} ${postion} text-[32px] font-bold font-heading tablet:text-[44px] desktop:text-[56px] ${className}`}
+      className={`${color} ${postion} text-[32px] leading-[110%] font-bold font-heading tablet:text-[44px] desktop:text-[56px] ${className}`}
     >
       {children}
     </h1>
