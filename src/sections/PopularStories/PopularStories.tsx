@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useVisibleCount } from "@/hooks/Stories/useVisibleCount";
 const bem = createBem("popularStories", styles);
 
-export default function PopularStoriesMain() {
+export default function PopularStoriesSection() {
   const navigate = useNavigate();
   const { visibleCount } = useVisibleCount(3, 4, 4);
   return (

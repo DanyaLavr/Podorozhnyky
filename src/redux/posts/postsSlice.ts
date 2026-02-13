@@ -14,7 +14,7 @@ export interface Post {
   createdAt: number;
 }
 
-interface PostsState {
+export interface PostsState {
   items: Post[];
   isLoading: boolean;
   error: string | null;
