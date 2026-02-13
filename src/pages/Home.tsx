@@ -5,7 +5,6 @@ import { Test } from "@/components/ui/Test";
 const Home = () => {
   return (
     <>
-      <Header />
       <Hero />
       <Test />
     </>
