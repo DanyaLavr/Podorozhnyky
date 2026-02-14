@@ -18,6 +18,7 @@ import PrivateRoute from "./components/routes/PrivateRoute";
 import { getUser } from "./api/user/getUser";
 import Layout from "./pages/Layout";
 import Historia from "./components/Historia/Historia";
+import Stories from "./pages/stories/Stories";
 import AOS from "aos";
 import "aos/dist/aos.css";
 function App() {
@@ -55,7 +56,7 @@ function App() {
         </Route>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="stories" element={""}>
+          <Route path="stories" element={<Stories />}>
             <Route
               path=":storyNumber"
               element={

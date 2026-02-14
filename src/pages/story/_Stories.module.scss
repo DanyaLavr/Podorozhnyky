@@ -1,0 +1,49 @@
+@use "@/styles/variables" as *;
+.stories-page {
+  padding: 120px 0 72px;
+  &__button-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 40px auto;
+    width: 388px;
+    @media screen and (min-width: 1440px) {
+      width: 434px;
+    }
+  }
+  &__button {
+    border-radius: 8px;
+    font-size: 16px;
+    @media screen and (min-width: 768px) {
+      font-weight: 500;
+    }
+    @media screen and (min-width: 1440px) {
+      font-size: 18px;
+    }
+  }
+  &__button[data-active="true"] {
+    border: 1px solid #f2f2f2;
+    background-color: #f2f2f2;
+    color: #000;
+    @media screen and (min-width: 768px) {
+      width: 96px;
+      height: 36px;
+    }
+    @media screen and (min-width: 1440px) {
+      width: 105px;
+      height: 39px;
+    }
+  }
+  &__button--more {
+    background-color: $blue-400;
+    color: #fff;
+    width: 147px;
+    height: 48px;
+    font-size: 16px;
+    font-weight: 500;
+    display: block;
+    margin: 24px auto 0;
+    @media screen and (min-width: 1440px) {
+      width: 163px;
+    }
+  }
+}

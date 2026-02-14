@@ -2,9 +2,9 @@ import { useState } from "react";
 import styles from "./_Stories.module.scss";
 import { createBem } from "@/utils/createBem";
 import H1 from "../../components/ui/H1";
-import PopularStories from "@/components/ui/PopularStories/PopularStories";
+import PopularStories from "../../components/ui/popular-stories/PopularStories";
 import Button from "@/components/ui/Button";
-import { useVisibleCount } from "@/hooks/Stories/useVisibleCount";
+import { useVisibleCount } from "../../hooks/stories/useVisibleCount";
 const bem = createBem("stories-page", styles);
 
 type Region = "Всі історії" | "Європа" | "Азія" | "Пустелі" | "Африка";
@@ -39,18 +39,21 @@ export default function Stories() {
 
         <div className={bem("button-container")}>
           {regions.map((r) => (
-            <button
-              key={r}
+            <Button
+              variant="primary"
+              isActive={selectedRegion === r}
               onClick={() => setSelectedRegion(r)}
-              className={`${selectedRegion === r ? styles.active : ""} ${bem("button")}`}
+              className={`${bem("button")}`}
             >
               {r}
-            </button>
+            </Button>
           ))}
         </div>
 
         <PopularStories
-          region={selectedRegion !== "Всі історії" ? selectedRegion : undefined}
+          category={
+            selectedRegion !== "Всі історії" ? selectedRegion : undefined
+          }
           visibleCount={visibleCount}
         />
         <Button
