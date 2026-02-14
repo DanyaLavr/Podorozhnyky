@@ -10,7 +10,7 @@ import StoryCard from "./StoryCard";
 import styles from "./_StoryCard.module.scss";
 import { createBem } from "@/utils/createBem";
 import type { Post } from "@/redux/posts/postsSlice";
-import { useSavedStories } from "@/hooks/Stories/useSavedStories";
+import { useSavedStories } from "@/hooks/stories/useSavedStories";
 import Loader from "@/components/ui/Loader";
 
 const bem = createBem("storyCard__list", styles);

@@ -1,21 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase/app";
-
-export interface Post {
-  id: string;
-  region: string;
-  title: string;
-  description: string;
-  creatorName: string;
-  readTime: number;
-  locationImage: string;
-  creatorImage: string;
-  createdAt: number;
-}
+import type { IStory } from "@/types/user/user";
 
 export interface PostsState {
-  items: Post[];
+  items: IStory[];
   isLoading: boolean;
   error: string | null;
 }
@@ -31,7 +20,7 @@ export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
   return query.docs.map((doc) => ({
     id: doc.id,
     ...doc.data(),
-  })) as Post[];
+  })) as IStory[];
 });
 
 const postsSlice = createSlice({

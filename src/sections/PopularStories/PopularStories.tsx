@@ -4,7 +4,7 @@ import { createBem } from "@/utils/createBem";
 import styles from "./_PopularStories.module.scss";
 import Button from "../../components/ui/Button";
 import { useNavigate } from "react-router-dom";
-import { useVisibleCount } from "@/hooks/Stories/useVisibleCount";
+import { useVisibleCount } from "@/hooks/stories/useVisibleCount";
 const bem = createBem("popularStories", styles);
 
 export default function PopularStoriesSection() {

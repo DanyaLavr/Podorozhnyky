@@ -81,11 +81,9 @@
     }
   }
   &__button {
-    border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 8px;
     width: 229px;
     height: 48px;
-    background-color: rgba(0, 0, 0, 0.05);
     @media screen and (min-width: 1440px) {
       width: 315px;
     }
@@ -133,8 +131,8 @@
   &__button--save {
     padding: 16px;
   }
-  &__button--save[data-active="true"]{
-  background-color: gray;
+  &__button--save[data-active="true"] {
+    background-color: gray;
   }
   &__item-btns-wrapper {
     display: flex;

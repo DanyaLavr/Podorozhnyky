@@ -3,19 +3,20 @@ import { useState } from "react";
 import Button from "../Button";
 import { createBem } from "@/utils/createBem";
 import styles from "./_StoryCard.module.scss";
-import type { Post } from "@/redux/posts/postsSlice";
-import { useSavedStories } from "@/hooks/Stories/useSavedStories";
+
+import { useSavedStories } from "@/hooks/stories/useSavedStories";
+import type { IStory } from "@/types/user/user";
 
 const bem = createBem("storyCard__list", styles);
 
 interface IProps {
-  data: Post;
+  data: IStory;
   savedStories: ReturnType<typeof useSavedStories>;
 }
 
 export default function StoryCard({ data, savedStories }: IProps) {
   const {
-    region,
+    category,
     title,
     description,
     creatorName,
@@ -54,7 +55,7 @@ export default function StoryCard({ data, savedStories }: IProps) {
       </div>
 
       <div className={bem("item-content-wrapper")}>
-        <h5 className={`${bem("region-info")} ${bem("text")}`}>{region}</h5>
+        <h5 className={`${bem("region-info")} ${bem("text")}`}>{category}</h5>
         <h3 className={`${bem("title")} ${bem("text")}`}>{title}</h3>
         <p className={`${bem("place-desc")} ${bem("text")}`}>{description}</p>
 
@@ -81,7 +82,7 @@ export default function StoryCard({ data, savedStories }: IProps) {
         <div className={bem("item-btns-wrapper")}>
           <RouterLink to={`/stories/${id}`}>
             <Button
-              variant="primary"
+              variant="secondary"
               className={`${bem("button")} ${bem("button--see")}`}
             >
               Переглянути статтю
