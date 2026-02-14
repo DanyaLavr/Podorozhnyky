@@ -21,9 +21,9 @@
     }
   }
   &__button[data-active="true"], &__button:hover, &__button:focus{
-    border: 1px solid #f2f2f2;
-    background-color: #f2f2f2;
-    color: #000;
+    border: 1px solid $gray-100;
+    background-color: $gray-100;
+    color: $gray-900;
     @media screen and (min-width: 768px) {
       width: 96px;
       height: 36px;
@@ -35,7 +35,7 @@
   }
   &__button--more {
     background-color: $blue-400;
-    color: #fff;
+    color: $gray-50;
     width: 147px;
     height: 48px;
     font-size: 16px;
@@ -44,6 +44,11 @@
     margin: 24px auto 0;
     @media screen and (min-width: 1440px) {
       width: 163px;
+    }
+    &:hover, &:focus{
+      color: $gray-900;
+      background-color: $blue-50;
+      border: 1px solid $blue-400;
     }
   }
 }

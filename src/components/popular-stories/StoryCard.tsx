@@ -1,6 +1,6 @@
 import { Link as RouterLink } from "react-router-dom";
 import { useState } from "react";
-import Button from "../Button";
+import Button from "../ui/Button";
 import { createBem } from "@/utils/createBem";
 import styles from "./_StoryCard.module.scss";
 
@@ -96,7 +96,7 @@ export default function StoryCard({ data, savedStories }: IProps) {
             onClick={() => toggle(id)}
           >
             <img
-              src="/icons/save.svg"
+              src="/icons/Save.svg"
               alt="save-icon"
               className={bem("icon-btn--save")}
             />

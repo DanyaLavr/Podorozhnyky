@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./_Stories.module.scss";
 import { createBem } from "@/utils/createBem";
 import H1 from "../../components/ui/H1";
-import PopularStories from "../../components/ui/popular-stories/PopularStories";
+import PopularStories from "../../components/popular-stories/PopularStories";
 import Button from "@/components/ui/Button";
 import { useVisibleCount } from "../../hooks/stories/useVisibleCount";
 const bem = createBem("stories-page", styles);

@@ -1,4 +1,4 @@
-@use "../../../styles/variables" as *;
+@use "@/styles/variables" as *;
 .storyCard__list {
   display: flex;
   flex-direction: column;
@@ -91,6 +91,11 @@
       width: 48px;
       height: 48px;
     }
+    &:hover,
+    &:focus {
+      background-color: $blue-400;
+      color: $gray-50;
+    }
   }
   &__item-info {
     display: flex;
@@ -121,7 +126,7 @@
     align-items: center;
   }
   &__icon--save {
-    color: black;
+    color: $gray-900;
     display: block;
     width: 10px;
     height: 12px;
@@ -132,7 +137,7 @@
     padding: 16px;
   }
   &__button--save[data-active="true"] {
-    background-color: gray;
+    background-color: $blue-900;
   }
   &__item-btns-wrapper {
     display: flex;
