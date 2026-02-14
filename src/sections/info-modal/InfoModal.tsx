@@ -13,7 +13,8 @@ const InfoModal = ({
   onCancel = null,
 }: any) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleCancel = onCancel === null ? setIsModalOpen(false) : onCancel;
+  const handleCancel =
+    onCancel === null ? () => setIsModalOpen(false) : () => onCancel;
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -31,7 +32,7 @@ const InfoModal = ({
         <h2 className={bem("title")}>{title}</h2>
         <p className={bem("desc")}>{text}</p>
         <div className={bem("btn")}>
-          <button onClick={handleCancel} className={bem("cancel")}>
+          <button onClick={() => handleCancel} className={bem("cancel")}>
             {confirmButtonText}
           </button>
           <button onClick={onConfirm} className={bem("exit")}>
