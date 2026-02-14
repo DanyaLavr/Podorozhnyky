@@ -71,6 +71,10 @@ function App() {
             />
           </Route>
           <Route path="travellers" element={""} />
+          <Route
+            path="traveller"
+            element={<Redirect path="/traveller/error" />}
+          />
           <Route path="traveller/:travellerUid" element={<UserPage />} />
           <Route
             path="profile"
