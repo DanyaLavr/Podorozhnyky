@@ -1,4 +1,4 @@
-import PopularStories from "../../components/ui/popular-stories/PopularStories";
+import PopularStories from "../../components/popular-stories/PopularStories";
 import H2 from "@/components/ui/H2";
 import { createBem } from "@/utils/createBem";
 import styles from "./_PopularStories.module.scss";
