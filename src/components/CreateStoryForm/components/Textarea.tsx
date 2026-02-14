@@ -5,21 +5,21 @@ import { Field, useFormikContext } from "formik";
 const bem = createBem("createStories", styles);
 
 export const Textarea = () => {
-  const { errors, touched } = useFormikContext<{ text: string }>();
+  const { errors, touched } = useFormikContext<{ description: string }>();
 
-  const isError = touched.text && errors.text;
+  const isError = touched.description && errors.description;
   return (
     <div className={bem("inputGroup")}>
       <label className={bem("label")}>Текст історії</label>
       <Field
         as="textarea"
-        name="text"
+        name="description"
         rows={6}
         className={`${bem("textarea")}` + ` ${isError ? bem("error") : ""}`}
         placeholder="Ваша історія тут"
       />
 
-      {isError && <span className={bem("errorText")}>{errors.text}</span>}
+      {isError && <span className={bem("errorText")}>{errors.description}</span>}
     </div>
 
   );

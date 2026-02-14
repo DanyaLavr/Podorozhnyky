@@ -9,7 +9,6 @@
     object-fit: cover;
     border-radius: 16px;
     cursor: pointer;
-
   }
 
   &__button {
@@ -22,7 +21,6 @@
     margin-top: 24px;
     padding: 4px 10px;
     cursor: pointer;
-
   }
 
   &__inputGroup {
@@ -44,7 +42,6 @@
     width: 100%;
     height: 43px;
     color: $gray-500;
-
   }
   &__textarea {
     border: 1px solid rgba(0, 0, 0, 0.15);
@@ -53,7 +50,6 @@
     width: 100%;
     height: 180px;
     color: $gray-500;
-
   }
   &__inputWrapper {
     display: flex;
@@ -101,16 +97,40 @@
     color: #b00101;
   }
 
+  &__message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.3s ease;
+  }
+
   &__successMessage {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: #4caf50;
-  color: white;
-  padding: 12px 20px;
-  border-radius: 8px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-  animation: fadeIn 0.3s ease;
+        position: fixed;
+    top: 20px;
+    right: 20px;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.3s ease;
+    background: #4caf50;
+
+  }
+  &__errorMessage {
+        position: fixed;
+    top: 20px;
+    right: 20px;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.3s ease;
+    background: #b00101;
+
   }
 }
 

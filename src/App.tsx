@@ -65,14 +65,11 @@ function App() {
           <Route path="travellers" element={""} />
           <Route path="traveller" element={""} />
           <Route path="profile" element={""} />
-          <Route
-            path="new-story"
-            element={
-              <PrivateRoute>
-                <CreateStoryForm />
-              </PrivateRoute>
-            }
-          />
+          <Route path="new-story" element={
+            <PrivateRoute>
+              <CreateStoryForm />
+            </PrivateRoute>
+            } />
         </Route>
       </Routes>
     </>

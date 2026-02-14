@@ -11,10 +11,10 @@ export const ImageInput = () => {
 
   const { setFieldValue, setFieldTouched, errors, touched, values } =
     useFormikContext<{
-      image: File | null;
+      locationImage: File | null;
     }>();
 
-  const isError = touched.image && errors.image;
+  const isError = touched.locationImage && errors.locationImage;
 
   return (
     <div className={bem("inputGroup")}>
@@ -24,8 +24,8 @@ export const ImageInput = () => {
         <img
           className={bem("imagePreview")}
           src={
-            values.image
-              ? URL.createObjectURL(values.image)
+            values.locationImage
+              ? URL.createObjectURL(values.locationImage)
               : "/images/CreateStory/placeholderImage.png"
           }
           alt="Обкладинка статті"
@@ -39,8 +39,8 @@ export const ImageInput = () => {
           onChange={(e) => {
             const file = e.currentTarget.files?.[0];
             if (file) {
-              setFieldValue("image", file);
-              setFieldTouched("image", true);
+              setFieldValue("locationImage", file);
+              setFieldTouched("locationImage", true);
 
             }
           }}

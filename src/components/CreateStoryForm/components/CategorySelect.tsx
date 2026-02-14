@@ -11,16 +11,18 @@ const bem = createBem("createStories", styles);
 
 export const CategorySelect = () => {
 
-    const { errors, touched } = useFormikContext<{ text: string }>();
+    const { errors, touched } = useFormikContext<{ region: string }>();
   
-    const isError = touched.text && errors.text;
+    const isError = touched.region && errors.region;
   return (
     <div className={bem("inputGroup")}>
       <label className={bem("label")}>Категорія</label>
       
       <SelectItem placeholder="Категорія" options={categoryOptions} />
-      {isError && <span className={bem("errorText")}>{errors.text}</span>}
+      {isError && <span className={bem("errorText")}>{errors.region}</span>}
 
     </div>
   );
 };
+
+
