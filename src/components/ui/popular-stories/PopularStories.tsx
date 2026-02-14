@@ -9,7 +9,7 @@ import {
 import StoryCard from "./StoryCard";
 import styles from "./_StoryCard.module.scss";
 import { createBem } from "@/utils/createBem";
-import { useSavedStories } from "@/hooks/useSavedStories";
+import { useSavedStories } from "@/hooks/stories/useSavedStories";
 import Loader from "@/components/ui/Loader";
 import type { IStory } from "@/types/user/user";
 

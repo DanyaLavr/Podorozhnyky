@@ -4,7 +4,7 @@ import Button from "../Button";
 import { createBem } from "@/utils/createBem";
 import styles from "./_StoryCard.module.scss";
 
-import { useSavedStories } from "@/hooks/useSavedStories";
+import { useSavedStories } from "@/hooks/stories/useSavedStories";
 import type { IStory } from "@/types/user/user";
 
 const bem = createBem("storyCard__list", styles);
