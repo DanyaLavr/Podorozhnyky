@@ -1,7 +1,7 @@
-import type { IUserBlock } from "@/types/user/user";
+import type { IUser } from "@/types/user/user";
 
 interface IProps {
-  user: IUserBlock;
+  user: IUser;
 }
 const UserBlock = ({ user }: IProps) => {
   const { imageUrl, displayName, description } = user;
@@ -12,7 +12,7 @@ const UserBlock = ({ user }: IProps) => {
           <img
             src={imageUrl}
             alt={displayName}
-            className="aspect-square w-50 rounded-full"
+            className="aspect-square w-50 rounded-full object-cover"
           />
           <div className="">
             <h3 className="font-heading text-gray-900 text-xl font-bold desktop:text-[32px]">
