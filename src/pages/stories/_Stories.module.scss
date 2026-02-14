@@ -20,7 +20,7 @@
       font-size: 18px;
     }
   }
-  &__button[data-active="true"] {
+  &__button[data-active="true"], &__button:hover, &__button:focus{
     border: 1px solid #f2f2f2;
     background-color: #f2f2f2;
     color: #000;

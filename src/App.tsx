@@ -18,10 +18,10 @@ const Layout = lazy(() => import("./pages/Layout"));
 const Home = lazy(() => import("./pages/Home"));
 const UserPage = lazy(() => import("./pages/UserPage"));
 const Historia = lazy(() => import("./sections/historia/Historia"));
-const Stories = lazy(() => import("./pages/stories/Stories"));
 const Profile = lazy(() => import("./pages/Profile"));
 const ProfileUserPosts = lazy(() => import("./pages/ProfileUserPosts"));
 const ProfileFavoritePosts = lazy(() => import("./pages/ProfileFavoritePosts"));
+const Stories = lazy(() => import("./pages/stories/Stories"));
 const Auth = lazy(() => import("./pages/auth/Auth"));
 const Login = lazy(() => import("./pages/auth/Login"));
 const Register = lazy(() => import("./pages/auth/Register"));
@@ -64,7 +64,7 @@ function App() {
           </Route>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="stories" element={<Stories />}>
+            <Route path="stories" element={<Stories/>}>
               <Route
                 path=":storyNumber"
                 element={
