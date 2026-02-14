@@ -3,8 +3,10 @@ import ArrowDown from "../../../public/icons/ArrowDown.svg";
 interface IProps {
   placeholder: string;
   options: { value: string; label: string }[];
+  onChoose?: (value: string) => void;
+  className?: string;
 }
-const SelectItem = ({ placeholder, options }: IProps) => {
+const SelectItem = ({ placeholder, options, onChoose, className }: IProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [choose, setChoose] = useState<string>(placeholder);
   const border =
@@ -14,7 +16,7 @@ const SelectItem = ({ placeholder, options }: IProps) => {
   const color = choose !== placeholder ? "text-gray-500" : "text-gray-900";
   const rounded = isOpen ? "rounded-t-lg" : "rounded-lg";
   return (
-    <div className="relative">
+    <div className={`relative ${className || ""}`}>
       <div
         className={`flex gap-4 p-2 border ${border} ${rounded} font-main text-lg ${color} hover:border-blue-700 focus:border-blue-700`}
         onClick={() => setIsOpen((prev) => !prev)}
@@ -40,6 +42,7 @@ const SelectItem = ({ placeholder, options }: IProps) => {
               onClick={() => {
                 setChoose(elem.label);
                 setIsOpen(false);
+                onChoose?.(elem.value);
               }}
             >
               {elem.label}
