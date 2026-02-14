@@ -17,7 +17,7 @@ import Redirect from "./pages/auth/Redirect";
 import PrivateRoute from "./components/routes/PrivateRoute";
 import { getUser } from "./api/user/getUser";
 import Layout from "./pages/Layout";
-import Historia from "./components/Historia/Historia";
+import Historia from "./sections/historia/Historia";
 import AOS from "aos";
 import "aos/dist/aos.css";
 function App() {
@@ -71,6 +71,10 @@ function App() {
             />
           </Route>
           <Route path="travellers" element={""} />
+          <Route
+            path="traveller"
+            element={<Redirect path="/traveller/error" />}
+          />
           <Route path="traveller/:travellerUid" element={<UserPage />} />
           <Route
             path="profile"

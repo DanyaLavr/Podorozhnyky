@@ -10,7 +10,7 @@ export const getUser = async (id: string): Promise<IUser> => {
     if (!docSnap.exists()) throw new Error("User not found");
 
     const data = docSnap.data() as Omit<IUser, "uid">;
-    return { uid: id, ...data };
+    return { uid: id, ...data } as IUser;
   } catch (e) {
     throw e;
   }

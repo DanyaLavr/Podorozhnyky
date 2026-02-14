@@ -10,8 +10,12 @@ const useAsync = () => {
     try {
       return await callback();
     } catch (e) {
-      console.log("e :>> ", e);
-      setError(String(e));
+      console.log(e);
+      if (e instanceof Error) {
+        setError(e.message);
+      } else {
+        setError("Unknown error");
+      }
     } finally {
       setIsLoading(false);
     }

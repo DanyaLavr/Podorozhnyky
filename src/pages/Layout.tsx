@@ -1,4 +1,4 @@
-import Footer from "@/components/Footer/Footer";
+import Footer from "@/sections/footer/Footer";
 import { Header } from "@/sections/header/Header";
 import { Outlet, useLocation } from "react-router-dom";
 
