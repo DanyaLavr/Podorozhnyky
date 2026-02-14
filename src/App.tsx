@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
 import UserPage from "./pages/UserPage";
 import Profile from "./pages/Profile";
 import ProfileUserPosts from "./pages/ProfileUserPosts";
@@ -7,7 +9,6 @@ import Auth from "./pages/auth/Auth";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import RestrictedRoute from "./components/routes/RestrictedRoute";
-import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./lib/firebase/app";
 import { useAppDispatch } from "./redux/hooks";
@@ -15,7 +16,10 @@ import { setUser, stopLoading } from "./redux/auth/authSlice";
 import Redirect from "./pages/auth/Redirect";
 import PrivateRoute from "./components/routes/PrivateRoute";
 import { getUser } from "./api/user/getUser";
-
+import Layout from "./pages/Layout";
+import Historia from "./components/Historia/Historia";
+import AOS from "aos";
+import "aos/dist/aos.css";
 function App() {
   const dispatch = useAppDispatch();
 
@@ -31,6 +35,9 @@ function App() {
     });
     return () => unsubscribe();
   }, [dispatch]);
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
     <>
       <Routes>
@@ -46,9 +53,22 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>
-        <Route path="/" element={""}>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
           <Route path="stories" element={""}>
-            <Route path=":storyNumber" element={""} />
+            <Route
+              path=":storyNumber"
+              element={
+                <Historia
+                  title="Колумбія"
+                  author="Олександр Петренко"
+                  date="12.03.2024"
+                  continent="Південна Америка"
+                  imgURL="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Colombia.svg/250px-Flag_of_Colombia.svg.png"
+                  description="Колумбія - це країна, розташована в північній частині Південної Америки. Вона відома своєю багатою культурою, різноманітною природою та історією. Колумбія має багато визначних місць, таких як Картахена, Медельїн та Богота. Країна також славиться своєю музикою, танцями та кухнею."
+                />
+              }
+            />
           </Route>
           <Route path="travellers" element={""} />
           <Route
