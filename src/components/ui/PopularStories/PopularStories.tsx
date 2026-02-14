@@ -9,16 +9,16 @@ import {
 import StoryCard from "./StoryCard";
 import styles from "./_StoryCard.module.scss";
 import { createBem } from "@/utils/createBem";
-import type { Post } from "@/redux/posts/postsSlice";
 import { useSavedStories } from "@/hooks/stories/useSavedStories";
 import Loader from "@/components/ui/Loader";
+import type { IStory } from "@/types/user/user";
 
 const bem = createBem("storyCard__list", styles);
 type Props = {
-  region?: string;
+  category?: string;
   visibleCount: number;
 };
-export default function PopularStories({ region, visibleCount }: Props) {
+export default function PopularStories({ category, visibleCount }: Props) {
   const dispatch = useDispatch<AppDispatch>();
 
   const posts = useSelector(selectAllPosts);
@@ -33,23 +33,21 @@ export default function PopularStories({ region, visibleCount }: Props) {
   }, [dispatch, posts.length, isLoading]);
 
   const filteredPosts = useMemo(() => {
-    if (!region) return posts;
+    if (!category) return posts;
 
-    return posts.filter((post: Post) => post.region === region);
-  }, [posts, region]);
+    return posts.filter((post: IStory) => post.category === category);
+  }, [posts, category]);
 
   const visibleStories = useMemo(
     () => filteredPosts.slice(0, visibleCount),
     [filteredPosts, visibleCount]
   );
 
-  console.log(posts);
-
   return (
     <>
       <Loader loading={isLoading} />
       <ul className={bem()}>
-        {visibleStories.map((post: Post) => (
+        {visibleStories.map((post: IStory) => (
           <StoryCard key={post.id} data={post} savedStories={savedStories} />
         ))}
       </ul>
