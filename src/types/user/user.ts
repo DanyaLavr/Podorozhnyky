@@ -11,12 +11,13 @@ export interface IStory {
   id: string;
   category: string;
   createdAt: number;
-  creator: string;
+  creatorName: string;
   creatorUid: string;
   description: string;
-  imageUrl: string;
-  story: string;
+  locationImage: string;
+  creatorImage: string;
   title: string;
+  readTime: string;
 }
 export type TGetUserStoriesResult = {
   stories: IStory[];
