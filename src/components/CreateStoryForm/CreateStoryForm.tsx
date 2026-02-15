@@ -89,7 +89,7 @@ export default function CreateStoryForm() {
         creatorImage: "unknown",
         creatorName: user?.displayName || "unknown",
         description,
-        createdAt: serverTimestamp(),
+        createdAt: Date.now(),
 
         locationImage: imageUrl,
         readTime: 5,
