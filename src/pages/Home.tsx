@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { selectIsLogoutModalOpen } from "@/redux/ui/selectors";
 import { closeLogoutModal } from "@/redux/ui/uiSlice";
 import { logoutUser } from "@/redux/auth/operations";
+import TravelersSection from "@/sections/travellers/TravelersSection";
 
 const Home = () => {
   const dispatch = useAppDispatch();
@@ -26,6 +27,7 @@ const Home = () => {
       <Hero />
       <Project />
       <PopularStoriesSection />
+      <TravelersSection />
       <JoinToUs />
 
       <InfoModal

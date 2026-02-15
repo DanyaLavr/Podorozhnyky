@@ -1,0 +1,33 @@
+@use "@/styles/variables" as *;
+
+.travelers-section {
+  padding: 40px 20px;
+}
+
+.travelers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 48px;
+  margin-bottom: 40px;
+}
+
+.show-all-container {
+  text-align: center;
+}
+
+.show-all-link {
+  display: inline-block;
+  // background: $primary-color;
+  color: $gray-50;
+  text-decoration: none;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: 0.3s;
+
+  &:hover {
+    background: $blue-400;
+    transform: translateY(-2px);
+  }
+}

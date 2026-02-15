@@ -1,5 +1,6 @@
 import style from "./_InfoModal.module.scss";
 import { createBem } from "@/utils/createBem";
+import Button from "@/components/ui/Button";
 
 interface TInfoModalProps {
   isOpen: boolean;
@@ -36,12 +37,12 @@ const InfoModal = ({
         <h2 className={bem("title")}>{title}</h2>
         <p className={bem("desc")}>{text}</p>
         <div className={bem("btn")}>
-          <button type="button" onClick={onCancel} className={bem("cancel")}>
+          <Button type="button" variant="secondary" onClick={onCancel} className={bem("cancel")}>
             {confirmButtonText}
-          </button>
-          <button type="button" onClick={onConfirm} className={bem("exit")}>
+          </Button>
+          <Button type="button" variant="primary" onClick={onConfirm} className={bem("exit")}>
             {cancelButtonText}
-          </button>
+          </Button>
         </div>
       </div>
     </section>
