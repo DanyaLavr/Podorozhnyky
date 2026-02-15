@@ -1,0 +1,214 @@
+@use "@/styles/variables" as *;
+
+.header {
+  transition: all 0.35s ease;
+  &--scrolled {
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    .header {
+      &__logo {
+        color: $gray-900;
+      }
+      &__nav-desktop a {
+        // color: $gray-900;
+      }
+    }
+  }
+  &__btn--ghost {
+    background: rgba(255, 255, 255, 0.3) !important;
+    color: $gray-50 !important;
+    &-mobile {
+      background: rgba(0, 0, 0, 0.05) !important;
+      color: $gray-900 !important;
+      border: 1px solid #9c9c9c !important;
+    }
+  }
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+  }
+
+  &__actions {
+    display: none;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 300;
+    span {
+      color: inherit;
+    }
+  }
+
+  &__burger {
+    background: rgba(255, 255, 255, 0.12);
+    border: none;
+    padding: 6px;
+    border-radius: 10px;
+    cursor: pointer;
+    svg {
+      transition: transform 0.3s ease;
+      &--open svg {
+        transform: rotate(90deg);
+      }
+    }
+    &--dark {
+      svg {
+        path {
+          fill: $gray-900;
+        }
+      }
+    }
+    &--light {
+      svg {
+        path {
+          fill: $gray-50;
+        }
+      }
+    }
+  }
+
+  &__mobile-menu {
+    position: absolute;
+    top: 76px;
+    left: 0;
+    right: 0;
+    background: $gray-50;
+    height: 100vh;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transform: translateX(100%);
+    transition: all 0.35s ease;
+    &--open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(0);
+    }
+  }
+  &__mobile-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px 0 0;
+    height: 100%;
+    text-align: center;
+    a {
+      color: $gray-900;
+      text-decoration: none;
+    }
+  }
+
+  &__nav-desktop {
+    display: none;
+    gap: 20px;
+    a {
+      // color: $gray-50;
+      // text-decoration: none;
+      // font-weight: 400;
+    }
+  }
+
+  // &__.user {
+  //   display: none;
+  //   height: 24px;
+  //   padding-top: 7px;
+  // }
+
+  &__user-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 6px 10px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  &__avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #ddd;
+  }
+  &__divider {
+    width: 1px;
+    height: 24px;
+    background: $gray-350;
+  }
+
+  &__logout-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    path {
+      fill: $gray-900;
+    }
+  }
+  &__user-block {
+    &--light {
+      svg path {
+        fill: $gray-50;
+      }
+    }
+    &--dark {
+      svg path {
+        fill: $gray-900;
+      }
+    }
+  }
+}
+
+// .publish-btn-header {
+//   display: none;
+// }
+
+// .publish-btn-mobile {
+//   display: flex;
+//   justify-content: center;
+// }
+
+@media (min-width: $breakpoint-tablet) {
+  .header {
+    &__actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    &__burger {
+      display: inline-flex;
+    }
+  }
+  // .publish-btn-header {
+  //   display: flex;
+  // }
+
+  // .publish-btn-mobile {
+  //   display: none;
+  // }
+}
+
+@media (min-width: $breakpoint-desktop) {
+  .header {
+    &__nav-desktop {
+      display: flex;
+    }
+    &__burger {
+      display: none;
+    }
+    &__mobile-menu {
+      display: none;
+    }
+    &__user {
+      display: block;
+    }
+  }
+
+  .publish-btn-header {
+    display: flex;
+  }
+}
