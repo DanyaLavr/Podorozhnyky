@@ -35,17 +35,12 @@ function App() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       try {
-        if (!user) {
-          dispatch(setUser(null));
-          return;
+        if (user) {
+          const data = await getUser(user.uid);
+          dispatch(setUser(data));
         }
-    
-        const data = await getUser(user.uid);
-        dispatch(setUser(data));
       } catch (error) {
-        // optional: if User not found -> create user doc here
         dispatch(setUser(null));
-        console.error("Auth bootstrap error:", error);
       } finally {
         dispatch(stopLoading());
       }
