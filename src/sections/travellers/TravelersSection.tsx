@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+
 import TravelerCard from "../../components/ui/TravelerCard";
 import "../../styles/TravelersSection.scss";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "@/lib/firebase/app";
 import H2 from "@/components/ui/H2";
 import Loader from "@/components/ui/Loader";
+import Link from "@/components/ui/Link";
 
 interface Traveler {
   id: string;
@@ -54,7 +55,7 @@ const TravelersSection = () => {
             </div>
 
             <div className="show-all-container">
-              <Link to="/travellers" className="show-all-link">
+              <Link link="/travellers" className="show-all-link">
                 Показати всіх
               </Link>
             </div>
