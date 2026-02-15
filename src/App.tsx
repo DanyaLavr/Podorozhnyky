@@ -1,5 +1,6 @@
 import { useEffect, Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
+
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./lib/firebase/app";
 import { useAppDispatch } from "./redux/hooks";
@@ -16,6 +17,8 @@ import Loader from "./components/ui/Loader";
 
 const Layout = lazy(() => import("./pages/Layout"));
 const Home = lazy(() => import("./pages/Home"));
+const CreateStoryForm = lazy(() => import("./pages/CreateStory"));
+
 const UserPage = lazy(() => import("./pages/UserPage"));
 const Historia = lazy(() => import("./sections/historia/Historia"));
 const Profile = lazy(() => import("./pages/Profile"));
@@ -30,14 +33,23 @@ function App() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        const data = await getUser(user?.uid);
+      try {
+        if (!user) {
+          dispatch(setUser(null));
+          return;
+        }
+    
+        const data = await getUser(user.uid);
         dispatch(setUser(data));
-      } else {
+      } catch (error) {
+        // optional: if User not found -> create user doc here
         dispatch(setUser(null));
+        console.error("Auth bootstrap error:", error);
+      } finally {
+        dispatch(stopLoading());
       }
-      dispatch(stopLoading());
     });
+
     return () => unsubscribe();
   }, [dispatch]);
   useEffect(() => {
@@ -46,7 +58,18 @@ function App() {
   return (
     <>
       <Suspense
-        fallback={<Loader loading={true} cssOverride={{ marginTop: "50vh" }} />}
+        fallback={
+          <div
+            style={{
+              minHeight: "100vh",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Loader loading={true} />
+          </div>
+        }
       >
         <Routes>
           <Route
@@ -96,7 +119,29 @@ function App() {
               <Route path="favorite" element={<ProfileFavoritePosts />} />
               <Route path="user-posts" element={<ProfileUserPosts />} />
             </Route>
-            <Route path="new-story" element={""} />
+            <Route
+              path="new-story"
+              element={
+                <PrivateRoute>
+                  <Suspense
+                    fallback={
+                      <div
+                        style={{
+                          minHeight: "60vh",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Loader loading={true} />
+                      </div>
+                    }
+                  >
+                    <CreateStoryForm />
+                  </Suspense>
+                </PrivateRoute>
+              }
+            />
           </Route>
         </Routes>
       </Suspense>
