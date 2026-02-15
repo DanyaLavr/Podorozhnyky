@@ -1,0 +1,20 @@
+@use "@/styles/variables" as *;
+.popularStories {
+  padding: 0;
+  &__title{
+    margin-bottom: 24px;
+  }
+  &__button--show {
+    background-color: $blue-400;
+    color: #fff;
+    width: 147px;
+    height: 48px;
+    font-size: 16px;
+    font-weight: 500;
+    display: block;
+    margin: 24px auto 0;
+    @media screen and (min-width: 1440px) {
+      width: 163px;
+    }
+  }
+}

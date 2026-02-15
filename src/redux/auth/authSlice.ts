@@ -11,6 +11,7 @@ const initialState = {
   user: undefined as IUser | undefined,
   isLoading: true,
   error: null as string | null,
+  isAuthChecked: false,
 };
 const authSlice = createSlice({
   name: "auth",
@@ -24,6 +25,7 @@ const authSlice = createSlice({
     },
     setUser(state, action) {
       state.user = action.payload;
+      state.isAuthChecked = true;
     },
     resetError(state) {
       state.error = null;
@@ -41,6 +43,7 @@ const authSlice = createSlice({
       .addMatcher(isFulfilled(registerUser, loginUser), (state, action) => {
         state.isLoading = false;
         state.user = action.payload;
+        state.isAuthChecked = true;
       })
       .addMatcher(isRejected(registerUser, loginUser), (state, action) => {
         state.isLoading = false;
