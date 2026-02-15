@@ -11,13 +11,15 @@ import { TextInput } from "./components/TextInput";
 import { CategorySelect } from "./components/CategorySelect";
 import { Textarea } from "./components/Textarea";
 import Loader from "../ui/Loader";
-import { createStorySchema } from "@/schemas/validationSchema";
+import { createStorySchema } from "@/lib/schemas/validationSchema";
 import { selectUser } from "@/redux/auth/selectors";
 import { useSelector } from "react-redux";
 
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { storage, db } from "@/lib/firebase/app";
+
+
 
 const bem = createBem("createStories", styles);
 
@@ -33,7 +35,7 @@ interface FormValues {
   description?: string;
   locationImage?: File | null;
   readTime?: number;
-  region?: string;
+  category?: string;
   title: string;
 }
 
@@ -47,14 +49,14 @@ export default function CreateStoryForm() {
 
   const initialValues: FormValues = {
     title: "",
-    region: "",
+    category: "",
     description: "",
     locationImage: null,
   };
 
   const handleSubmit = async (values: FormValues, { resetForm }: any) => {
     try {
-      const { locationImage, title, region, description } = values;
+      const { locationImage, title, category, description } = values;
 
       setIsLoading(true);
 
@@ -91,7 +93,7 @@ export default function CreateStoryForm() {
 
         locationImage: imageUrl,
         readTime: 5,
-        region,
+        category,
         title,
       });
 
@@ -125,6 +127,7 @@ export default function CreateStoryForm() {
       )}
 
       <Loader loading={isLoading} />
+
       <Formik
         initialValues={initialValues}
         validationSchema={createStorySchema}
@@ -152,7 +155,7 @@ export default function CreateStoryForm() {
               </div>
 
               <div className={bem("buttonWrapper")}>
-                <Button
+                <Button disabled={isLoading}
                   type="submit"
                   className={bem("submitButton")}
                   variant="primary"
@@ -160,7 +163,7 @@ export default function CreateStoryForm() {
                   Зберегти
                 </Button>
 
-                <Button
+                <Button disabled={isLoading}
                   type="reset"
                   className={bem("submitButton")}
                   variant="secondary"

@@ -43,7 +43,7 @@ const SelectItem = ({ placeholder, options }: IProps) => {
               onClick={() => {
                 setChoose(elem.label);
                 setIsOpen(false);
-                setFieldValue("region", elem.value);
+                setFieldValue("category", elem.value);
               }}
             >
               {elem.label}
