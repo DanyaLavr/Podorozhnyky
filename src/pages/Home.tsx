@@ -15,6 +15,8 @@ const Home = () => {
         text="Ми будемо сумувати за вами!"
         confirmButtonText="Відмінити"
         cancelButtonText="Вийти"
+        onConfirm={() => {}}
+        onCancel={() => {}}
       />
     </>
   );

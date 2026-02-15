@@ -2,6 +2,15 @@ import { useState } from "react";
 import style from "./_InfoModal.module.scss";
 import { createBem } from "@/utils/createBem";
 
+interface TInfoModalProps {
+  title: string;
+  text: string;
+  confirmButtonText: string;
+  cancelButtonText: string;
+  onConfirm: () => void;
+  onCancel: () => void;
+}
+
 const bem = createBem("info_modal", style);
 
 const InfoModal = ({
@@ -10,10 +19,17 @@ const InfoModal = ({
   confirmButtonText,
   cancelButtonText,
   onConfirm,
-  onCancel = null,
-}: any) => {
+  onCancel
+}: TInfoModalProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleCancel = onCancel === null ? setIsModalOpen(false) : onCancel;
+  const handleCancel = () => {
+    if (onCancel) {
+      onCancel();
+      return;
+    }
+
+    setIsModalOpen(false);
+  };
   const closeModal = () => {
     setIsModalOpen(false);
   };
