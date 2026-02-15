@@ -16,11 +16,30 @@ const initialState: PostsState = {
 };
 
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
-  const query = await getDocs(collection(db, "posts"));
-  return query.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  })) as IStory[];
+  const snapshot = await getDocs(collection(db, "posts"));
+
+  return snapshot.docs.map<IStory>((doc) => {
+    const data = doc.data() as Omit<IStory, "id" | "createdAt"> & {
+      createdAt?: unknown;
+    };
+
+    const createdAt =
+      typeof data.createdAt === "number"
+        ? data.createdAt
+        : typeof data.createdAt === "object" &&
+          data.createdAt !== null &&
+          "toMillis" in data.createdAt &&
+          typeof (data.createdAt as { toMillis: () => number }).toMillis ===
+            "function"
+        ? (data.createdAt as { toMillis: () => number }).toMillis()
+        : Date.now();
+
+    return {
+      id: doc.id,
+      ...data,
+      createdAt,
+    };
+  });
 });
 
 const postsSlice = createSlice({
