@@ -33,13 +33,21 @@ function App() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        const data = await getUser(user?.uid);
+      try {
+        if (!user) {
+          dispatch(setUser(null));
+          return;
+        }
+    
+        const data = await getUser(user.uid);
         dispatch(setUser(data));
-      } else {
+      } catch (error) {
+        // optional: if User not found -> create user doc here
         dispatch(setUser(null));
+        console.error("Auth bootstrap error:", error);
+      } finally {
+        dispatch(stopLoading());
       }
-      dispatch(stopLoading());
     });
 
     return () => unsubscribe();
@@ -50,7 +58,18 @@ function App() {
   return (
     <>
       <Suspense
-        fallback={<Loader loading={true} cssOverride={{ marginTop: "50vh" }} />}
+        fallback={
+          <div
+            style={{
+              minHeight: "100vh",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Loader loading={true} />
+          </div>
+        }
       >
         <Routes>
           <Route
@@ -104,7 +123,22 @@ function App() {
               path="new-story"
               element={
                 <PrivateRoute>
-                  <CreateStoryForm />
+                  <Suspense
+                    fallback={
+                      <div
+                        style={{
+                          minHeight: "60vh",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Loader loading={true} />
+                      </div>
+                    }
+                  >
+                    <CreateStoryForm />
+                  </Suspense>
                 </PrivateRoute>
               }
             />
