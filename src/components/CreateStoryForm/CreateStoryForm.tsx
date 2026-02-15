@@ -16,10 +16,8 @@ import { selectUser } from "@/redux/auth/selectors";
 import { useSelector } from "react-redux";
 
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import { storage, db } from "@/lib/firebase/app";
-
-
 
 const bem = createBem("createStories", styles);
 
@@ -105,7 +103,6 @@ export default function CreateStoryForm() {
       setIsLoading(false);
       resetForm();
     } catch (err) {
-
       setErrorMessage("Помилка при збереженні ❌");
 
       setTimeout(() => {
@@ -155,7 +152,8 @@ export default function CreateStoryForm() {
               </div>
 
               <div className={bem("buttonWrapper")}>
-                <Button disabled={isLoading}
+                <Button
+                  disabled={isLoading}
                   type="submit"
                   className={bem("submitButton")}
                   variant="primary"
@@ -163,7 +161,8 @@ export default function CreateStoryForm() {
                   Зберегти
                 </Button>
 
-                <Button disabled={isLoading}
+                <Button
+                  disabled={isLoading}
                   type="reset"
                   className={bem("submitButton")}
                   variant="secondary"
