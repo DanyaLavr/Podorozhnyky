@@ -21,6 +21,7 @@ const CreateStoryForm = lazy(() => import("./pages/CreateStory"));
 
 const UserPage = lazy(() => import("./pages/UserPage"));
 const Historia = lazy(() => import("./sections/historia/Historia"));
+const AllTravelersPage = lazy(() => import("./pages/AllTravelersPage"));
 const Profile = lazy(() => import("./pages/Profile"));
 const ProfileUserPosts = lazy(() => import("./pages/ProfileUserPosts"));
 const ProfileFavoritePosts = lazy(() => import("./pages/ProfileFavoritePosts"));
@@ -101,7 +102,7 @@ function App() {
                 }
               />
             </Route>
-            <Route path="travellers" element={""} />
+            <Route path="travellers" element={<AllTravelersPage />} />
             <Route
               path="traveller"
               element={<Redirect path="/traveller/error" />}
