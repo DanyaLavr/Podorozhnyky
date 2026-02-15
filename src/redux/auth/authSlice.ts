@@ -7,7 +7,14 @@ import {
 import { loginUser, logoutUser, registerUser } from "./operations";
 import type { IUser } from "@/types/user/user";
 
-const initialState = {
+export interface AuthState {
+  user: IUser | undefined;
+  isLoading: boolean;
+  error: string | null;
+  isAuthChecked: boolean;
+}
+
+const initialState: AuthState = {
   user: undefined as IUser | undefined,
   isLoading: true,
   error: null as string | null,

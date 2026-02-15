@@ -1,10 +1,16 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore, type Reducer } from "@reduxjs/toolkit";
 import { authReducer } from "./auth/authSlice";
-import postsSlice from "./posts/postsSlice";
+import postsReducer, { type PostsState } from "./posts/postsSlice";
+import type { AuthState } from "./auth/authSlice";
 
-const rootReducer = combineReducers({
+export interface RootState {
+  auth: AuthState;
+  posts: PostsState;
+}
+
+const rootReducer: Reducer<RootState> = combineReducers({
   auth: authReducer,
-  posts: postsSlice,
+  posts: postsReducer,
 });
 
 export const setupStore = () =>
@@ -12,6 +18,5 @@ export const setupStore = () =>
     reducer: rootReducer,
   });
 
-export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof setupStore>;
 export type AppDispatch = AppStore["dispatch"];
