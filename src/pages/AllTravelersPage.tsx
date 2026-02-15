@@ -45,11 +45,11 @@ export default function AllTravelersPage() {
             <div className="travelers-grid">
               {travelers.slice(0, visibleCount).map((traveler) => (
                 <TravelerCard
+                  
                   key={traveler.id}
                   name={traveler.displayName}
                   avatar={traveler.imageUrl}
-                  description={traveler.description}
-                />
+                  description={traveler.description} id={""}                />
               ))}
             </div>
 
