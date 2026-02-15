@@ -4,3 +4,7 @@
 .container {
   @apply mx-auto mobile:w-83.75 tablet:w-176 desktop:w-328;
 }
+
+button {
+  @apply cursor-pointer;
+}
