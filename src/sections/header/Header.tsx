@@ -11,7 +11,7 @@ import { createBem } from "@/utils/createBem";
 import Button from "@/components/ui/Button";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { selectUser } from "@/redux/auth/selectors";
-import { logoutUser } from "@/redux/auth/operations";
+import { openLogoutModal } from "@/redux/ui/uiSlice";
 
 const bem = createBem("header", styles);
 
@@ -35,7 +35,7 @@ export const Header = ({ content = "full", variant = "light" }: IProps) => {
 
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [variant]);
   const currentBg =
     variant === "light" || isScrolled || isMenuOpen ? "light" : "dark";
   const currentColor =
@@ -57,7 +57,7 @@ export const Header = ({ content = "full", variant = "light" }: IProps) => {
         <div className={bem("inner")}>
           <div className={bem("logo")}>
             <Logo />
-            <span className={colorStyles}>Подорожники</span>
+            <span className={`${colorStyles} font-heading font-normal  `}>Подорожники</span>
           </div>
           {content === "full" && (
             <div className="flex gap-8 items-center">
@@ -104,13 +104,13 @@ export const Header = ({ content = "full", variant = "light" }: IProps) => {
                           Опублікувати історію
                         </Button>
                         <div
-                          className={`flex gap-2 ${bem("user-block", { dark: currentColor === "dark", light: currentColor === "light" })}`}
+                          className={`flex gap-2 md:hidden xl:flex ${bem("user-block", { dark: currentColor === "dark", light: currentColor === "light" })}`}
                         >
                           <p className={bem("user")}>{user.displayName}</p>
                           <span
                             className={`block h-7 w-px  ${currentColor === "dark" ? "bg-gray-900/15" : "bg-gray-50/50"}`}
                           ></span>
-                          <button onClick={() => dispatch(logoutUser())}>
+                          <button onClick={() => dispatch(openLogoutModal())}>
                             <LogoutIcon />
                           </button>
                         </div>
@@ -147,14 +147,14 @@ export const Header = ({ content = "full", variant = "light" }: IProps) => {
                 <>
                   <Button
                     className={`py-1 px-2.5 ${bem("btn--ghost-mobile")}`}
-                    pathTo="/login"
+                    pathTo="/auth/login"
                     variant="primary"
                   >
                     Вхід
                   </Button>
                   <Button
-                    className="py-1 px-2.5 text-gray-50!"
-                    pathTo="/register"
+                    className="py-1 px-2.5 text-gray-50! dark:bg-blue-400!"
+                    pathTo="/auth/register"
                     variant="primary"
                   >
                     Реєстрація
@@ -175,7 +175,13 @@ export const Header = ({ content = "full", variant = "light" }: IProps) => {
                     />
                     <span className={bem("user-name")}>{user.displayName}</span>
                     <span className={bem("divider")} />
-                    <button className={bem("logout-btn")}>
+                    <button
+                      className={bem("logout-btn")}
+                      onClick={() => {
+                        setIsMenuOpen(false);
+                        dispatch(openLogoutModal());
+                      }}
+                    >
                       <LogoutIcon />
                     </button>
                   </div>

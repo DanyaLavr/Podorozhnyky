@@ -22,7 +22,7 @@ export const Hero = () => {
             для себе нові місця та знайдіть однодумців!
           </p>
           <Button
-            pathTo="/register"
+            pathTo="/auth/register"
             variant="primary"
             className="py-2 mt-8 block w-full md:inline-block md:w-auto md:px-3"
           >
