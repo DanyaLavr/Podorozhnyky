@@ -16,7 +16,7 @@ export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const isAuth = true;
+  const isAuth = false; 
 
   useEffect(() => {
     const onScroll = () => {
@@ -29,7 +29,7 @@ export const Header = () => {
 
   return (
     <header
-      className={`section ${bem("", { scrolled: isMenuOpen || isScrolled })}`}
+      className={`z-50 section ${bem("", { scrolled: isMenuOpen || isScrolled })}`}
     >
       <div className="container">
         <div className={bem("inner")}>
@@ -50,7 +50,11 @@ export const Header = () => {
                 {!isMenuOpen &&
                   (!isAuth ? (
                     <>
-                      <Button className="py-1 px-2.5" pathTo="/login">
+                      <Button className={`py-1 px-2.5 transition ${
+                        isScrolled
+                          ? "bg-blue-500 text-black"
+                          : "bg-white/10 text-white"
+                      }`} pathTo="/login">
                         Вхід
                       </Button>
                       <Button
