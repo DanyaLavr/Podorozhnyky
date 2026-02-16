@@ -12,9 +12,22 @@ const PrivateRoute = ({ pathTo = "/auth/login", children }: IProps) => {
   const user = useAppSelector(selectUser);
   const isLoading = useAppSelector(selectAuthIsLoading);
 
-  if (isLoading)
-    return <Loader loading={isLoading} cssOverride={{ marginTop: "50vh" }} />;
-  return user ? <>{children}</> : <Navigate to={pathTo} />;
+  if (isLoading) {
+    return (
+      <div
+        style={{
+          minHeight: "60vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Loader loading={isLoading} />
+      </div>
+    );
+  }
+
+  return user ? <>{children}</> : <Navigate to={pathTo} replace />;
 };
 
 export default PrivateRoute;

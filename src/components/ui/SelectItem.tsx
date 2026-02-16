@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useFormikContext } from "formik";
+
 import ArrowDown from "../../../public/icons/ArrowDown.svg";
 interface IProps {
   placeholder: string;
@@ -6,7 +8,9 @@ interface IProps {
   onChoose?: (value: string) => void;
   className?: string;
 }
+
 const SelectItem = ({ placeholder, options, onChoose, className }: IProps) => {
+  const {setFieldValue} = useFormikContext()
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [choose, setChoose] = useState<string>(placeholder);
   const border =
@@ -43,6 +47,7 @@ const SelectItem = ({ placeholder, options, onChoose, className }: IProps) => {
                 setChoose(elem.label);
                 setIsOpen(false);
                 onChoose?.(elem.value);
+                setFieldValue("category", elem.value);
               }}
             >
               {elem.label}

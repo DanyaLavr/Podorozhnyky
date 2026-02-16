@@ -41,34 +41,37 @@ const Button = ({
     : "cursor-pointer";
   const styles =
     variant === "primary"
-      ? ` border border-blue-400 dark:border-gray-50 
+      ? //dark:border-gray-50
+        ` border border-blue-400 
+       
       ${
         isActive
-          ? "text-gray-900 bg-blue-700 dark:active:text-gray-50 dark:bg-gray-500 dark:border-gray-400"
-          : "text-gray-50 bg-blue-400 dark:text-gray-900 dark:bg-gray-50"
+          ? "text-gray-900 bg-blue-700" //dark:active:text-gray-50 dark:bg-gray-500 dark:border-gray-400
+          : "text-gray-50 bg-blue-400" //dark:text-gray-900 dark:bg-gray-50
       } 
        ${
          !disabled
-           ? `hover:bg-blue-50 hover:text-gray-900
-            focus:text-gray-900 focus:bg-blue-50
-            dark:hover:bg-gray-400 dark:hover:text-gray-50
-             dark:focus:bg-gray-400 dark:focus:text-gray-50`
+           ? //dark:hover:bg-gray-400 dark:hover:text-gray-50
+             //dark:focus:bg-gray-400 dark:focus:text-gray-50
+             `hover:bg-blue-50 hover:text-gray-900
+            focus:text-gray-900 focus:bg-blue-50`
            : ""
        }`
       : `
        border border-gray-900/15 
       ${
         isActive
-          ? "bg-blue-900 text-gray-50 dark:text-gray-900 dark:bg-blue-700"
-          : "text-gray-900 bg-gray-900/5 dark:text-gray-50 dark:bg-gray-50/10 dark:border-none"
+          ? "bg-blue-900 text-gray-50" //dark:text-gray-900 dark:bg-blue-700
+          : "text-gray-900 bg-gray-900/5" //dark:text-gray-50 dark:bg-gray-50/10 dark:border-none
       }
        ${
          !disabled
-           ? `hover:bg-blue-400 hover:text-gray-50
+           ? // dark:hover:bg-blue-50 dark:hover:text-gray-900
+             // dark:focus:bg-blue-50 dark:focus:text-gray-900
+             `hover:bg-blue-400 hover:text-gray-50
             focus:bg-blue-400 focus:text-gray-50
              
-            dark:hover:bg-blue-50 dark:hover:text-gray-900
-            dark:focus:bg-blue-50 dark:focus:text-gray-900
+
             `
            : ""
        }

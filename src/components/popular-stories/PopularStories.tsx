@@ -9,7 +9,6 @@ import {
 import StoryCard from "./StoryCard";
 import styles from "./_StoryCard.module.scss";
 import { createBem } from "@/utils/createBem";
-import { useSavedStories } from "@/hooks/stories/useSavedStories";
 import Loader from "@/components/ui/Loader";
 import type { IStory } from "@/types/user/user";
 
@@ -23,8 +22,6 @@ export default function PopularStories({ category, visibleCount }: Props) {
 
   const posts = useSelector(selectAllPosts);
   const isLoading = useSelector(selectPostsLoading);
-
-  const savedStories = useSavedStories();
 
   useEffect(() => {
     if (!posts.length && !isLoading) {
@@ -48,7 +45,7 @@ export default function PopularStories({ category, visibleCount }: Props) {
       <Loader loading={isLoading} />
       <ul className={bem()}>
         {visibleStories.map((post: IStory) => (
-          <StoryCard key={post.id} data={post} savedStories={savedStories} />
+          <StoryCard key={post.id} data={post} />
         ))}
       </ul>
     </>
