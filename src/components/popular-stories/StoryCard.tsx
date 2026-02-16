@@ -95,7 +95,7 @@ export default function StoryCard({ data }: IProps) {
             onClick={() => toggle(id)}
           >
             <img
-              src="/icons/Save.svg"
+              src="/icons/save.svg"
               alt="save-icon"
               className={bem("icon-btn--save")}
             />
