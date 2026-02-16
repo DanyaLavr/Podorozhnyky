@@ -22,9 +22,7 @@ import { storage, db } from "@/lib/firebase/app";
 const bem = createBem("createStories", styles);
 
 interface FormValues {
-  // category?: string;
-  // text: string;
-  // image: File | null;
+
 
   createdAt?: number;
   creatorId?: string;
@@ -74,14 +72,7 @@ export default function CreateStoryForm() {
 
       // 3️⃣ Запис у Firestore
       await addDoc(collection(db, "posts"), {
-        // title,
-        // region,
 
-        // imageUrl,
-        // createdAt: serverTimestamp(),
-        // creator: user?.displayName || "unknown",
-        // creatorId: user?.uid || "unknown",
-        // description,
 
         creatorId: user?.uid || "unknown",
         creatorImage: "unknown",

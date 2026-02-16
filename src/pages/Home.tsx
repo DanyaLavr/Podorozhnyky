@@ -9,7 +9,11 @@ import { closeLogoutModal } from "@/redux/ui/uiSlice";
 import { logoutUser } from "@/redux/auth/operations";
 import TravelersSection from "@/sections/travellers/TravelersSection";
 
+import {selectUser} from "@/redux/auth/selectors";
+import { useSelector } from "react-redux";
+
 const Home = () => {
+  const user = useSelector(selectUser);
   const dispatch = useAppDispatch();
   const isLogoutModalOpen = useAppSelector(selectIsLogoutModalOpen);
 
@@ -28,7 +32,8 @@ const Home = () => {
       <Project />
       <PopularStoriesSection />
       <TravelersSection />
-      <JoinToUs />
+      {!user && <JoinToUs />}
+
 
       <InfoModal
         isOpen={isLogoutModalOpen}
