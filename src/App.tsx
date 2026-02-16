@@ -25,6 +25,7 @@ const AllTravelersPage = lazy(() => import("./pages/AllTravelersPage"));
 const Profile = lazy(() => import("./pages/Profile"));
 const ProfileUserPosts = lazy(() => import("./pages/ProfileUserPosts"));
 const ProfileFavoritePosts = lazy(() => import("./pages/ProfileFavoritePosts"));
+const Stories = lazy(() => import("./pages/stories/Stories"));
 const Auth = lazy(() => import("./pages/auth/Auth"));
 const Login = lazy(() => import("./pages/auth/Login"));
 const Register = lazy(() => import("./pages/auth/Register"));
@@ -82,7 +83,7 @@ function App() {
           </Route>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="stories" element={""}>
+            <Route path="stories" element={<Stories/>}>
               <Route
                 path=":storyNumber"
                 element={

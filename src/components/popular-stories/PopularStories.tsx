@@ -6,6 +6,7 @@ import {
   selectAllPosts,
   selectPostsLoading,
 } from "@/redux/posts/postsSelectors";
+import { useFilteredStories } from "@/hooks/stories/useFilteredStories";
 import StoryCard from "./StoryCard";
 import styles from "./_StoryCard.module.scss";
 import { createBem } from "@/utils/createBem";
@@ -29,11 +30,7 @@ export default function PopularStories({ category, visibleCount }: Props) {
     }
   }, [dispatch, posts.length, isLoading]);
 
-  const filteredPosts = useMemo(() => {
-    if (!category) return posts;
-
-    return posts.filter((post: IStory) => post.category === category);
-  }, [posts, category]);
+  const filteredPosts = useFilteredStories(posts, category);
 
   const visibleStories = useMemo(
     () => filteredPosts.slice(0, visibleCount),
