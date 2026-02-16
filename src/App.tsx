@@ -40,7 +40,7 @@ function App() {
           const data = await getUser(user.uid);
           dispatch(setUser(data));
         }
-      } catch (error) {
+      } catch {
         dispatch(setUser(null));
       } finally {
         dispatch(stopLoading());
@@ -83,21 +83,11 @@ function App() {
           </Route>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="stories" element={<Stories/>}>
-              <Route
-                path=":storyNumber"
-                element={
-                  <Historia
-                    title="Колумбія"
-                    author="Олександр Петренко"
-                    date="12.03.2024"
-                    continent="Південна Америка"
-                    imgURL="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Colombia.svg/250px-Flag_of_Colombia.svg.png"
-                    description="Колумбія - це країна, розташована в північній частині Південної Америки. Вона відома своєю багатою культурою, різноманітною природою та історією. Колумбія має багато визначних місць, таких як Картахена, Медельїн та Богота. Країна також славиться своєю музикою, танцями та кухнею."
-                  />
-                }
-              />
-            </Route>
+            <Route path="stories" element={<Stories />} />
+            <Route
+              path="stories/:storyNumber"
+              element={<Historia />}
+            />
             <Route path="travellers" element={<AllTravelersPage />} />
             <Route
               path="traveller"
