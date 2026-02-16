@@ -7,14 +7,22 @@
   &__button--show {
     background-color: $blue-400;
     color: #fff;
-    width: 147px;
+    width: 335px;
     height: 48px;
     font-size: 16px;
     font-weight: 500;
     display: block;
     margin: 24px auto 0;
+    @media screen and (min-width: 768px) {
+      width: 147px;
+    }
     @media screen and (min-width: 1440px) {
       width: 163px;
+    }
+        &:hover, &:focus{
+      color: $gray-900;
+      background-color: $blue-50;
+      border: 1px solid $blue-400;
     }
   }
 }

@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+
 import TravelerCard from "../../components/ui/TravelerCard";
 import "../../styles/TravelersSection.scss";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "@/lib/firebase/app";
 import H2 from "@/components/ui/H2";
 import Loader from "@/components/ui/Loader";
+import Button from "@/components/ui/Button";
 
 interface Traveler {
   id: string;
@@ -48,15 +49,14 @@ const TravelersSection = () => {
                   key={traveler.id}
                   name={traveler.displayName}
                   avatar={traveler.imageUrl}
-                  description={traveler.description}
-                />
+                  description={traveler.description} id={""} />
               ))}
             </div>
 
             <div className="show-all-container">
-              <Link to="/travellers" className="show-all-link">
+              <Button pathTo="/travellers" variant="primary" className="show-all-link">
                 Показати всіх
-              </Link>
+              </Button>
             </div>
           </>
         )}
