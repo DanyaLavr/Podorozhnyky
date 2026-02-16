@@ -6,7 +6,7 @@ import { getDocs, collection } from "firebase/firestore";
 import { db } from "@/lib/firebase/app";
 import H2 from "@/components/ui/H2";
 import Loader from "@/components/ui/Loader";
-import Link from "@/components/ui/Link";
+import Button from "@/components/ui/Button";
 
 interface Traveler {
   id: string;
@@ -49,14 +49,14 @@ const TravelersSection = () => {
                   key={traveler.id}
                   name={traveler.displayName}
                   avatar={traveler.imageUrl}
-                  description={traveler.description} id={""}                />
+                  description={traveler.description} id={""} />
               ))}
             </div>
 
             <div className="show-all-container">
-              <Link link="/travellers" className="show-all-link">
+              <Button pathTo="/travellers" variant="primary" className="show-all-link">
                 Показати всіх
-              </Link>
+              </Button>
             </div>
           </>
         )}
