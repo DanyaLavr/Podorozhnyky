@@ -8,9 +8,8 @@ interface IProps {
   onChoose?: (value: string) => void;
   className?: string;
 }
-
 const SelectItem = ({ placeholder, options, onChoose, className }: IProps) => {
-  const {setFieldValue} = useFormikContext()
+  const { setFieldValue } = useFormikContext();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [choose, setChoose] = useState<string>(placeholder);
   const border =
@@ -46,8 +45,8 @@ const SelectItem = ({ placeholder, options, onChoose, className }: IProps) => {
               onClick={() => {
                 setChoose(elem.label);
                 setIsOpen(false);
-                onChoose?.(elem.value);
                 setFieldValue("category", elem.value);
+                onChoose?.(elem.value);
               }}
             >
               {elem.label}

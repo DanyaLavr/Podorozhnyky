@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Formik, Form } from "formik";
 import styles from "./_Stories.module.scss";
 import { createBem } from "@/utils/createBem";
 import H1 from "../../components/ui/H1";
@@ -42,12 +43,16 @@ export default function Stories() {
         {isMobile ? (
           <div className={bem("dropdown-container")}>
             <h5 className={bem("dropdown__title")}>Категорії</h5>
-            <SelectItem
-              placeholder="Виберіть регіон"
-              options={regions.map((r) => ({ value: r, label: r }))}
-              onChoose={(val: string) => setSelectedRegion(val as Region)}
-              className={bem("dropdown")}
-            />
+            <Formik initialValues={{ category: "" }} onSubmit={() => {}}>
+              <Form>
+                <SelectItem
+                  placeholder="Виберіть регіон"
+                  options={regions.map((r) => ({ value: r, label: r }))}
+                  onChoose={(val: string) => setSelectedRegion(val as Region)}
+                  className={bem("dropdown")}
+                />
+              </Form>
+            </Formik>
           </div>
         ) : (
           <div className={bem("button-container")}>
