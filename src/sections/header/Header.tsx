@@ -51,7 +51,7 @@ export const Header = ({ content = "full", variant = "light" }: IProps) => {
       : `bg-transparent text-gray-50`;
   return (
     <header
-      className={`section py-0! fixed w-full t-0 l-0 ${headerStyles} ${currentBg === "dark" ? bem("", { scrolled: isMenuOpen || isScrolled }) : ""}`}
+      className={`section z-50 py-0! fixed w-full t-0 l-0 ${headerStyles} ${currentBg === "dark" ? bem("", { scrolled: isMenuOpen || isScrolled }) : ""}`}
     >
       <div className="container">
         <div className={bem("inner")}>
@@ -83,7 +83,11 @@ export const Header = ({ content = "full", variant = "light" }: IProps) => {
                   {!isMenuOpen &&
                     (!isAuth ? (
                       <>
-                        <Button className="py-1 px-2.5" pathTo="/auth/login">
+                        <Button  pathTo="/auth/login" className={`py-1 px-2.5 transition ${
+                        isScrolled
+                          ? "bg-blue-500 text-black"
+                          : "bg-white/10 text-white"
+                      }`} >
                           Вхід
                         </Button>
                         <Button
