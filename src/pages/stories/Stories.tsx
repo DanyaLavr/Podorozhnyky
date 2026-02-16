@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { Formik, Form } from "formik";
 import styles from "./_Stories.module.scss";
 import { createBem } from "@/utils/createBem";
@@ -7,6 +8,8 @@ import SelectItem from "@/components/ui/SelectItem";
 import PopularStories from "../../components/popular-stories/PopularStories";
 import Button from "@/components/ui/Button";
 import { useVisibleCount } from "../../hooks/stories/useVisibleCount";
+import { useFilteredStories } from "@/hooks/stories/useFilteredStories";
+import { selectAllPosts } from "@/redux/posts/postsSelectors";
 const bem = createBem("stories-page", styles);
 
 type Region = "Всі історії" | "Європа" | "Азія" | "Пустелі" | "Африка";
@@ -19,6 +22,8 @@ export default function Stories() {
     "Пустелі",
     "Африка",
   ];
+
+  const posts = useSelector(selectAllPosts);
 
   const [selectedRegion, setSelectedRegion] = useState<Region>("Всі історії");
 
@@ -34,6 +39,14 @@ export default function Stories() {
 
     setVisibleCount((prev) => prev + increment);
   };
+
+  const filteredPosts = useFilteredStories(
+    posts,
+    selectedRegion === "Всі історії" ? undefined : selectedRegion
+  );
+
+  const hasMore = visibleCount < filteredPosts.length;
+
   return (
     <section className={bem()}>
       <div className={`container ${bem("container")}`}>
@@ -76,13 +89,15 @@ export default function Stories() {
           }
           visibleCount={visibleCount}
         />
-        <Button
-          variant="primary"
-          className={bem("button--more")}
-          onClick={handleAdd}
-        >
-          Показати ще
-        </Button>
+        {hasMore && (
+          <Button
+            variant="primary"
+            className={bem("button--more")}
+            onClick={handleAdd}
+          >
+            Показати ще
+          </Button>
+        )}
       </div>
     </section>
   );

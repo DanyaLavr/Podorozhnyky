@@ -11,9 +11,9 @@
     display: flex;
     justify-content: space-between;
     margin: 40px auto;
-    width: 388px;
+    width: 480px;
     @media screen and (min-width: 1440px) {
-      width: 434px;
+      width: 525px;
     }
   }
   &__button {
@@ -23,9 +23,13 @@
     border: 0px;
     @media screen and (min-width: 768px) {
       font-weight: 500;
+      width: 96px;
+      height: 36px;
     }
     @media screen and (min-width: 1440px) {
       font-size: 18px;
+       width: 525px;
+      height: 39px;
     }
   }
   &__button[data-active="true"],
@@ -34,14 +38,6 @@
     border: 1px solid $gray-100;
     background-color: $gray-100;
     color: $gray-900;
-    @media screen and (min-width: 768px) {
-      width: 96px;
-      height: 36px;
-    }
-    @media screen and (min-width: 1440px) {
-      width: 105px;
-      height: 39px;
-    }
   }
   &__button--more {
     background-color: $blue-400;
