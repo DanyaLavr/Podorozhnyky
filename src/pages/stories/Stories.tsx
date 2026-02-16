@@ -59,7 +59,7 @@ export default function Stories() {
             {regions.map((r) => (
               <Button
                 key={r}
-                variant="primary"
+                variant="secondary"
                 isActive={selectedRegion === r}
                 onClick={() => setSelectedRegion(r)}
                 className={bem("button")}
