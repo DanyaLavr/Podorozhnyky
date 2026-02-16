@@ -4,20 +4,28 @@ import {
   isPending,
   isRejected,
 } from "@reduxjs/toolkit";
-import { loginUser, registerUser } from "./operations";
-import type { IUser } from "@/types/auth/user";
+import { loginUser, logoutUser, registerUser } from "./operations";
+import type { IUser } from "@/types/user/user";
 
 const initialState = {
   user: undefined as IUser | undefined,
-  isLoading: false,
+  isLoading: true,
   error: null as string | null,
+  isAuthChecked: false,
 };
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    startLoading(state) {
+      state.isLoading = true;
+    },
+    stopLoading(state) {
+      state.isLoading = false;
+    },
     setUser(state, action) {
       state.user = action.payload;
+      state.isAuthChecked = true;
     },
     resetError(state) {
       state.error = null;
@@ -25,7 +33,9 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.user = undefined;
+      })
       .addMatcher(isPending(registerUser, loginUser), (state) => {
         state.isLoading = true;
         state.error = null;
@@ -33,6 +43,7 @@ const authSlice = createSlice({
       .addMatcher(isFulfilled(registerUser, loginUser), (state, action) => {
         state.isLoading = false;
         state.user = action.payload;
+        state.isAuthChecked = true;
       })
       .addMatcher(isRejected(registerUser, loginUser), (state, action) => {
         state.isLoading = false;
@@ -41,11 +52,16 @@ const authSlice = createSlice({
           case "auth/invalid-credential":
             state.error = "Не вдалося увійти. Перевірте пошту та пароль.";
             break;
+          case "auth/email-already-in-use":
+            state.error =
+              "Не вдалося зареєструватися. Ця електронна пошта вже використовується.";
+            break;
           default:
             state.error = "Сталась помилка, спробуйте ще раз.";
         }
       });
   },
 });
-export const { setUser, resetError } = authSlice.actions;
+export const { startLoading, stopLoading, setUser, resetError } =
+  authSlice.actions;
 export const authReducer = authSlice.reducer;

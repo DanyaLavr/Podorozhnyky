@@ -1,0 +1,178 @@
+@use "@/styles/variables" as *;
+
+.createStories {
+  font-family: $font-main;
+
+  &__imagePreview {
+    width: 335px;
+    height: 223px;
+    object-fit: cover;
+    border-radius: 16px;
+    cursor: pointer;
+  }
+
+  &__button {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    background-color: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    margin-top: 24px;
+    padding: 4px 10px;
+    cursor: pointer;
+  }
+
+  &__inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+  }
+
+  &__label {
+    color: $gray-900;
+  }
+  &__input {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 8px;
+    width: 100%;
+    height: 43px;
+    color: $gray-500;
+  }
+  &__textarea {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 8px;
+    width: 100%;
+    height: 180px;
+    color: $gray-500;
+  }
+  &__inputWrapper {
+    display: flex;
+    width: 100%;
+
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &__buttonWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+  &__submitButton {
+    padding: 12px 0;
+  }
+  &__form {
+    display: flex;
+    flex-direction: column;
+    width: 335px;
+    gap: 24px;
+  }
+
+  &__select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    background: #fff;
+    font-size: 16px;
+    padding-right: 48px;
+  }
+
+  &__errorText {
+    color: #b00101;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 150%;
+  }
+
+  &__error {
+    border-color: #b00101;
+    color: #b00101;
+  }
+
+  &__message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.3s ease;
+  }
+
+  &__successMessage {
+        position: fixed;
+    top: 20px;
+    right: 20px;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.3s ease;
+    background: #4caf50;
+
+  }
+  &__errorMessage {
+        position: fixed;
+    top: 20px;
+    right: 20px;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.3s ease;
+    background: #b00101;
+
+  }
+}
+
+@media screen and (min-width: $breakpoint-tablet) {
+  .createStories {
+    &__imagePreview {
+      width: 100%;
+      height: 557px;
+    }
+    &__form {
+      width: 704px;
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .createStories {
+    &__imagePreview {
+      width: 865px;
+      height: 576px;
+    }
+    &__inputWrapper {
+      width: 865px;
+    }
+    &__buttonWrapper {
+      width: 423px;
+    }
+    &__form {
+      flex-direction: row;
+      width: auto;
+    }
+    &__inputGroup {
+      font-size: 18px;
+    }
+    &__button {
+      font-size: 18px;
+    }
+    &__submitButton {
+      padding: 10.5px 0;
+    }
+    &__buttonWrapper {
+      margin-top: 36px;
+    }
+  }
+}
