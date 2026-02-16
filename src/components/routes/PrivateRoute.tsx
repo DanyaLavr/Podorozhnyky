@@ -1,16 +1,33 @@
-import { selectUser } from "@/redux/auth/selectors";
+import { selectAuthIsLoading, selectUser } from "@/redux/auth/selectors";
 import { useAppSelector } from "@/redux/hooks";
-import { useEffect, type ReactNode } from "react";
-import { useNavigate } from "react-router-dom";
+import { type ReactNode } from "react";
+import { Navigate } from "react-router-dom";
+import Loader from "../ui/Loader";
 
-const PrivateRoute = ({ children }: { children: ReactNode }) => {
+interface IProps {
+  pathTo?: string;
+  children: ReactNode;
+}
+const PrivateRoute = ({ pathTo = "/auth/login", children }: IProps) => {
   const user = useAppSelector(selectUser);
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (!user) navigate("/auth/login");
-  }, [navigate]);
+  const isLoading = useAppSelector(selectAuthIsLoading);
 
-  return <>{children}</>;
+  if (isLoading) {
+    return (
+      <div
+        style={{
+          minHeight: "60vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Loader loading={isLoading} />
+      </div>
+    );
+  }
+
+  return user ? <>{children}</> : <Navigate to={pathTo} replace />;
 };
 
 export default PrivateRoute;

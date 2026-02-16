@@ -1,77 +1,146 @@
+import { useEffect, Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
-import Auth from "./pages/auth/Auth";
-import Login from "./pages/auth/Login";
-import Register from "./pages/auth/Register";
-import RestrictedRoute from "./components/routes/RestrictedRoute";
-import { useEffect } from "react";
+
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./lib/firebase/app";
 import { useAppDispatch } from "./redux/hooks";
-import { setUser } from "./redux/auth/authSlice";
-import Cookies from "js-cookie";
+import { setUser, stopLoading } from "./redux/auth/authSlice";
+import { getUser } from "./api/user/getUser";
+
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+import RestrictedRoute from "./components/routes/RestrictedRoute";
+import PrivateRoute from "./components/routes/PrivateRoute";
 import Redirect from "./pages/auth/Redirect";
-import Historia from "../src/components/Historia/Historia";
+import Loader from "./components/ui/Loader";
+
+const Layout = lazy(() => import("./pages/Layout"));
+const Home = lazy(() => import("./pages/Home"));
+const CreateStoryForm = lazy(() => import("./pages/CreateStory"));
+
+const UserPage = lazy(() => import("./pages/UserPage"));
+const Historia = lazy(() => import("./sections/historia/Historia"));
+const AllTravelersPage = lazy(() => import("./pages/AllTravelersPage"));
+const Profile = lazy(() => import("./pages/Profile"));
+const ProfileUserPosts = lazy(() => import("./pages/ProfileUserPosts"));
+const ProfileFavoritePosts = lazy(() => import("./pages/ProfileFavoritePosts"));
+const Auth = lazy(() => import("./pages/auth/Auth"));
+const Login = lazy(() => import("./pages/auth/Login"));
+const Register = lazy(() => import("./pages/auth/Register"));
 
 function App() {
   const dispatch = useAppDispatch();
+
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        dispatch(
-          setUser({
-            uid: user.uid,
-            displayName: user.displayName,
-            email: user.email,
-          })
-        );
-        const setCookies = async () => {
-          const token = await user.getIdToken();
-          Cookies.set("token", token);
-        };
-        setCookies();
-      } else {
-        dispatch(setUser(undefined));
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      try {
+        if (user) {
+          const data = await getUser(user.uid);
+          dispatch(setUser(data));
+        }
+      } catch (error) {
+        dispatch(setUser(null));
+      } finally {
+        dispatch(stopLoading());
       }
     });
+
     return () => unsubscribe();
   }, [dispatch]);
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
     <>
-      <Routes>
-        <Route
-          path="auth"
-          element={
-            <RestrictedRoute>
-              <Auth />
-            </RestrictedRoute>
-          }
-        >
-          <Route index element={<Redirect />} />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
-        </Route>
-        <Route path="/" element={""}>
-          <Route path="travellers" element={""} />
-          <Route path="traveller" element={""} />
-          <Route path="profile" element={""} />
-          <Route path="new-story" element={""} />
-        </Route>
-        <Route path="stories" element={""}>
+      <Suspense
+        fallback={
+          <div
+            style={{
+              minHeight: "100vh",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Loader loading={true} />
+          </div>
+        }
+      >
+        <Routes>
           <Route
-            path=":storyNumber"
+            path="auth"
             element={
-              <Historia
-                title="Колумбія"
-                author="Олександр Петренко"
-                date="12.03.2024"
-                continent="Південна Америка"
-                imgURL="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Colombia.svg/250px-Flag_of_Colombia.svg.png"
-                description="Колумбія - це країна, розташована в північній частині Південної Америки. Вона відома своєю багатою культурою, різноманітною природою та історією. Колумбія має багато визначних місць, таких як Картахена, Медельїн та Богота. Країна також славиться своєю музикою, танцями та кухнею."
-              />
+              <RestrictedRoute>
+                <Auth />
+              </RestrictedRoute>
             }
-          />
-        </Route>
-      </Routes>
+          >
+            <Route index element={<Redirect path="/auth/login" />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+          </Route>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="stories" element={""}>
+              <Route
+                path=":storyNumber"
+                element={
+                  <Historia
+                    title="Колумбія"
+                    author="Олександр Петренко"
+                    date="12.03.2024"
+                    continent="Південна Америка"
+                    imgURL="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Colombia.svg/250px-Flag_of_Colombia.svg.png"
+                    description="Колумбія - це країна, розташована в північній частині Південної Америки. Вона відома своєю багатою культурою, різноманітною природою та історією. Колумбія має багато визначних місць, таких як Картахена, Медельїн та Богота. Країна також славиться своєю музикою, танцями та кухнею."
+                  />
+                }
+              />
+            </Route>
+            <Route path="travellers" element={<AllTravelersPage />} />
+            <Route
+              path="traveller"
+              element={<Redirect path="/traveller/error" />}
+            />
+            <Route path="traveller/:travellerUid" element={<UserPage />} />
+            <Route
+              path="profile"
+              element={
+                <PrivateRoute>
+                  <Profile />
+                </PrivateRoute>
+              }
+            >
+              <Route index element={<Redirect path="/profile/favorite" />} />
+              <Route path="favorite" element={<ProfileFavoritePosts />} />
+              <Route path="user-posts" element={<ProfileUserPosts />} />
+            </Route>
+            <Route
+              path="new-story"
+              element={
+                <PrivateRoute>
+                  <Suspense
+                    fallback={
+                      <div
+                        style={{
+                          minHeight: "60vh",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Loader loading={true} />
+                      </div>
+                    }
+                  >
+                    <CreateStoryForm />
+                  </Suspense>
+                </PrivateRoute>
+              }
+            />
+          </Route>
+        </Routes>
+      </Suspense>
     </>
   );
 }

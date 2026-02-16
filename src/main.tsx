@@ -5,14 +5,12 @@ import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
 import { setupStore } from "./redux/store.ts";
 import { Provider } from "react-redux";
-import Footer from "./components/Footer/Footer.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={setupStore()}>
       <BrowserRouter>
         <App />
-        <Footer />
       </BrowserRouter>
     </Provider>
   </StrictMode>

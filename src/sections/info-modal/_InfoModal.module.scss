@@ -1,0 +1,190 @@
+@use "@/styles/variables" as *;
+
+.info_modal {
+    background: #f7f9ff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.25);
+
+
+    @media (min-width:$breakpoint-mobile) {
+        padding: 20px 20px 20px 20px;
+    }
+
+    @media (min-width:$breakpoint-tablet) {}
+
+    @media (min-width:$breakpoint-desktop) {}
+
+
+
+    &__content {
+        background-color: #f7f9ff;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 24px;
+
+
+        @media (min-width:$breakpoint-mobile) {
+            width: 335px;
+            padding: 64px 20px 20px 20px;
+        }
+
+        @media (min-width:$breakpoint-tablet) {
+            width: 704px;
+            padding: 64px 0 64px 0;
+        }
+
+        @media (min-width:$breakpoint-desktop) {
+            width: 768px;
+            padding: 64px 0 64px 0;
+        }
+    }
+
+    &__cross {
+        position: absolute;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+
+        @media (min-width:$breakpoint-mobile) {
+            right: 20px;
+            top: 20px;
+        }
+
+        @media (min-width:$breakpoint-tablet) {
+            right: 16px;
+            top: 16px;
+        }
+
+        @media (min-width:$breakpoint-desktop) {
+            justify-content: right;
+            right: 24px;
+            top: 24px;
+        }
+    }
+
+    &__title {
+        font-family: $font-heading;
+        color: $gray-900;
+        font-weight: 700;
+        line-height: 120%;
+        letter-spacing: -0.01em;
+        text-align: center;
+        margin-bottom: 16px;
+
+        @media (min-width:$breakpoint-mobile) {
+            font-size: 26px;
+        }
+
+        @media (min-width:$breakpoint-tablet) {
+            font-size: 32px;
+        }
+
+        @media (min-width:$breakpoint-desktop) {
+            font-size: 48px;
+        }
+    }
+
+    &__desc {
+        font-family: $font-main;
+        color: $gray-900;
+        line-height: 150%;
+        text-align: center;
+        font-weight: 400;
+        margin-bottom: 32px;
+
+        @media (min-width:$breakpoint-mobile) {
+            font-size: 16px;
+        }
+
+        @media (min-width:$breakpoint-tablet) {
+            font-size: 16px;
+        }
+
+        @media (min-width:$breakpoint-desktop) {
+            font-size: 20px;
+
+        }
+    }
+
+    &__btn {
+
+        @media (min-width:$breakpoint-tablet) {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        @media (min-width:$breakpoint-desktop) {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+        }
+    }
+
+    &__cancel {
+        font-family: $font-main;
+        color: $gray-900;
+        font-weight: 500;
+        border-radius: 8px;
+        line-height: 150%;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        height: 48px;
+        padding: 6px 12px;
+        background: rgba(0, 0, 0, 0.05);
+
+        @media (min-width:$breakpoint-mobile) {
+            width: 295px;
+
+            font-size: 16px;
+            margin-bottom: 24px;
+        }
+
+        @media (min-width:$breakpoint-tablet) {
+            width: 203px;
+
+            font-size: 16px;
+        }
+
+        @media (min-width:$breakpoint-desktop) {
+            width: 203px;
+
+            font-size: 18px;
+        }
+    }
+
+    &__exit {
+        font-family: $font-main;
+        border-radius: 8px;
+        padding: 6px 12px;
+        height: 48px;
+        line-height: 150%;
+        color: $gray-50;
+        font-weight: 500;
+        background: $blue-400;
+        border: 1px solid $blue-400;
+
+        @media (min-width:$breakpoint-mobile) {
+            width: 295px;
+
+            font-size: 16px;
+        }
+
+        @media (min-width:$breakpoint-tablet) {
+            width: 203px;
+
+            font-size: 16px;
+        }
+
+        @media (min-width:$breakpoint-desktop) {
+            width: 203px;
+
+            font-size: 18px;
+        }
+    }
+}

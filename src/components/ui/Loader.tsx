@@ -1,9 +1,8 @@
+import type { CSSProperties } from "react";
 import { SyncLoader } from "react-spinners";
 interface IProps {
   color?: string;
-  cssOverride?: {
-    x: string;
-  };
+  cssOverride?: CSSProperties;
   loading: boolean;
 }
 const Loader = ({ color = "#000", cssOverride, loading }: IProps) => {
@@ -13,6 +12,7 @@ const Loader = ({ color = "#000", cssOverride, loading }: IProps) => {
       cssOverride={{
         display: "flex",
         margin: "0 auto",
+        justifyContent: "center",
         ...cssOverride,
       }}
       loading={loading}
