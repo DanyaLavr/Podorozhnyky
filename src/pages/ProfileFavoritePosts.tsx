@@ -1,6 +1,7 @@
 import getFavoritesPosts from "@/api/user/getFavoritesPosts";
 import Button from "@/components/ui/Button";
 import Loader from "@/components/ui/Loader";
+import StoryCard from "@/components/ui/popular-stories/StoryCard";
 import StoriesMessage from "@/components/ui/StoriesMessage";
 import useAsync from "@/hooks/useAsync";
 import { selectUser } from "@/redux/auth/selectors";
@@ -65,20 +66,22 @@ const ProfileFavoritePosts = () => {
     );
   }
   return (
-    <div>
+    <div className="flex flex-wrap gap-6 mt-10">
       {stories.map((elem) => (
-        <p>{elem.title}</p>
+        <StoryCard data={elem} key={elem.id} />
       ))}
       {isLoading && (
         <Loader cssOverride={{ marginTop: "20px" }} loading={isLoading} />
       )}
-      <Button
-        className="px-4 py-2"
-        variant="primary"
-        onClick={handlePagination}
-      >
-        завантажити більше!
-      </Button>
+      {stories.length >= 6 && (
+        <Button
+          className="px-4 py-2"
+          variant="primary"
+          onClick={handlePagination}
+        >
+          Завантажити більше!
+        </Button>
+      )}
     </div>
   );
 };
