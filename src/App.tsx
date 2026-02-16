@@ -10,7 +10,7 @@ import { useAppDispatch } from "./redux/hooks";
 import { setUser } from "./redux/auth/authSlice";
 import Cookies from "js-cookie";
 import Redirect from "./pages/auth/Redirect";
-
+import Historia from "../src/components/Historia/Historia";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -51,13 +51,25 @@ function App() {
           <Route path="register" element={<Register />} />
         </Route>
         <Route path="/" element={""}>
-          <Route path="stories" element={""}>
-            <Route path=":storyNumber" element={""} />
-          </Route>
           <Route path="travellers" element={""} />
           <Route path="traveller" element={""} />
           <Route path="profile" element={""} />
           <Route path="new-story" element={""} />
+        </Route>
+        <Route path="stories" element={""}>
+          <Route
+            path=":storyNumber"
+            element={
+              <Historia
+                title="Колумбія"
+                author="Олександр Петренко"
+                date="12.03.2024"
+                continent="Південна Америка"
+                imgURL="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Colombia.svg/250px-Flag_of_Colombia.svg.png"
+                description="Колумбія - це країна, розташована в північній частині Південної Америки. Вона відома своєю багатою культурою, різноманітною природою та історією. Колумбія має багато визначних місць, таких як Картахена, Медельїн та Богота. Країна також славиться своєю музикою, танцями та кухнею."
+              />
+            }
+          />
         </Route>
       </Routes>
     </>

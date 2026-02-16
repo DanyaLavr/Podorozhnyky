@@ -1,5 +1,6 @@
 import "./_historia.scss";
 
+
 export default function Historia({
   title,
   author,
