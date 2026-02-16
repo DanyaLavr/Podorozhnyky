@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import SaveIcon from "./save.svg";
 type TType = "text" | "icon";
 interface IProps {
   type?: TType;
@@ -31,7 +30,11 @@ const Link = ({
     ${className}
   `}
     >
-      {type === "text" ? children : <SaveIcon />}
+      {type === "text" ? (
+        children
+      ) : (
+        <img src="/icons/save.svg" alt="save icon" loading="lazy" />
+      )}
     </a>
   );
 };

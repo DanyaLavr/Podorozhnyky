@@ -19,14 +19,16 @@ export default function AllTravelersPage() {
   const [loading, setLoading] = useState(true);
 
   const getData = async () => {
-    setLoading(true);
-    const querySnapshot = await getDocs(collection(db, "users"));
-    const data = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...(doc.data() as Omit<Traveler, "id">),
-    }));
-    setTravelers(data);
-    setLoading(false);
+    try {
+      const querySnapshot = await getDocs(collection(db, "users"));
+      const data = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...(doc.data() as Omit<Traveler, "id">),
+      }));
+      setTravelers(data);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -45,11 +47,11 @@ export default function AllTravelersPage() {
             <div className="travelers-grid">
               {travelers.slice(0, visibleCount).map((traveler) => (
                 <TravelerCard
-                  
+
                   key={traveler.id}
                   name={traveler.displayName}
                   avatar={traveler.imageUrl}
-                  description={traveler.description} id={""}                />
+                  description={traveler.description} id={traveler.id} />
               ))}
             </div>
 

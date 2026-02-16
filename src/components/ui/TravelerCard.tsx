@@ -1,6 +1,6 @@
 import "../../styles/TravelerCard.scss";
 import Button from "./Button";
-import Link from "./Link";
+// import Link from "./Link";
 
 interface Props {
   id:string;
@@ -9,7 +9,7 @@ interface Props {
   description: string;
 }
 
-export default function TravelerCard({ name, avatar, description }: Props) {
+export default function TravelerCard({ name, avatar, description, id }: Props) {
   return (
     <div className="traveler-card">
       <img src={avatar} alt={name} className="traveler-avatar" />
@@ -18,7 +18,7 @@ export default function TravelerCard({ name, avatar, description }: Props) {
 
       <p className="traveler-description">{description}</p>
 
-      <Link link="/travellers/id"  className="bg-grey-900/5 view-profile-btn"> Переглянути профіль</Link>
+      <Button variant="secondary" pathTo={`/travellers/${id}`} className="bg-grey-900/5 view-profile-btn"> Переглянути профіль</Button>
      
     </div>
   );
