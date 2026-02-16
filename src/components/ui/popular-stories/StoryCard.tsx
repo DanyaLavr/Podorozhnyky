@@ -11,10 +11,9 @@ const bem = createBem("storyCard__list", styles);
 
 interface IProps {
   data: IStory;
-  savedStories: ReturnType<typeof useSavedStories>;
 }
 
-export default function StoryCard({ data, savedStories }: IProps) {
+export default function StoryCard({ data }: IProps) {
   const {
     category,
     title,
@@ -27,7 +26,7 @@ export default function StoryCard({ data, savedStories }: IProps) {
     id,
   } = data;
 
-  const { isSaved, toggle } = savedStories;
+  const { isSaved, toggle } = useSavedStories();
   const [imgError, setImgError] = useState(false);
 
   const formatDate = (num: number) => new Date(num).toLocaleDateString("uk-UA");
