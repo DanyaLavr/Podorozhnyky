@@ -2,7 +2,7 @@
 
 .hero {
   min-height: 100vh;
-  background-image: url("../../public/images/bg.webp");
+  background-image: url("/images/bg.webp");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -25,7 +25,7 @@
 
 @media (min-width: $breakpoint-tablet) {
   .hero {
-    background-image: url("../../public/images/bg-tablet.webp");
+    background-image: url("/images/bg-tablet.webp");
     &__content {
       max-width: 704px;
     }
@@ -34,7 +34,7 @@
 
 @media (min-width: $breakpoint-desktop) {
   .hero {
-    background-image: url("../../public/images/bg-pc.webp");
+    background-image: url("/images/bg-pc.webp");
     &__text {
       font-size: 20px;
     }

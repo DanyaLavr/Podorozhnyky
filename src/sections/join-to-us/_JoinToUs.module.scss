@@ -6,9 +6,9 @@
   width: 100%;
 
   background-image: image-set(
-    url("../../../../public/images/JoinToUS/mobileBg.jpg") 1x,
-    url("../../../../public/images/JoinToUS/mobileBg@2x.jpg") 2x,
-    url("../../../../public/images/JoinToUS/mobileBg@3x.jpg") 3x
+    url("/images/JoinToUS/mobileBg.jpg") 1x,
+    url("/images/JoinToUS/mobileBg@2x.jpg") 2x,
+    url("/images/JoinToUS/mobileBg@3x.jpg") 3x
   );
 
   background-size: cover;
@@ -56,9 +56,9 @@
     padding: 32px 32px;
 
     background-image: image-set(
-      url("../../../../public/images/JoinToUS/tabletBg.jpg") 1x,
-      url("../../../../public/images/JoinToUS/tabletBg@2x.jpg") 2x,
-      url("../../../../public/images/JoinToUS/tabletBg@3x.jpg") 3x
+      url("/images/JoinToUS/tabletBg.jpg") 1x,
+      url("/images/JoinToUS/tabletBg@2x.jpg") 2x,
+      url("/images/JoinToUS/tabletBg@3x.jpg") 3x
     );
 
     &__title {
@@ -85,9 +85,9 @@
     height: 436px;
     padding: 78px 64px;
     background-image: image-set(
-      url("../../../../public/images/JoinToUS/desktopBg.jpg") 1x,
-      url("../../../../public/images/JoinToUS/desktopBg@2x.jpg") 2x,
-      url("../../../../public/images/JoinToUS/desktopBg@3x.jpg") 3x
+      url("/images/JoinToUS/desktopBg.jpg") 1x,
+      url("/images/JoinToUS/desktopBg@2x.jpg") 2x,
+      url("/images/JoinToUS/desktopBg@3x.jpg") 3x
     );
 
     &__title {

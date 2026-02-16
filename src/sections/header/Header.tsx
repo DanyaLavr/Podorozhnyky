@@ -57,7 +57,9 @@ export const Header = ({ content = "full", variant = "light" }: IProps) => {
         <div className={bem("inner")}>
           <div className={bem("logo")}>
             <Logo />
-            <span className={`${colorStyles} font-heading font-normal  `}>Подорожники</span>
+            <span className={`${colorStyles} font-heading font-normal  `}>
+              Подорожники
+            </span>
           </div>
           {content === "full" && (
             <div className="flex gap-8 items-center">
@@ -68,7 +70,7 @@ export const Header = ({ content = "full", variant = "light" }: IProps) => {
                 <Link className={colorStyles} to="/stories">
                   Історії
                 </Link>
-                <Link className={colorStyles} to="/travelers">
+                <Link className={colorStyles} to="/travellers">
                   Мандрівники
                 </Link>
                 {isAuth && (
@@ -83,11 +85,14 @@ export const Header = ({ content = "full", variant = "light" }: IProps) => {
                   {!isMenuOpen &&
                     (!isAuth ? (
                       <>
-                        <Button  pathTo="/auth/login" className={`py-1 px-2.5 transition ${
-                        isScrolled
-                          ? "bg-blue-500 text-black"
-                          : "bg-white/10 text-white"
-                      }`} >
+                        <Button
+                          pathTo="/auth/login"
+                          className={`py-1 px-2.5 transition ${
+                            isScrolled
+                              ? "bg-blue-500 text-black"
+                              : "bg-white/10 text-white"
+                          }`}
+                        >
                           Вхід
                         </Button>
                         <Button
