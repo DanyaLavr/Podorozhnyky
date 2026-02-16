@@ -12,7 +12,7 @@ interface Props {
 export default function TravelerCard({ name, avatar, description, id }: Props) {
   return (
     <div className="traveler-card">
-      <img src={avatar} alt={name} className="traveler-avatar" />
+      <img src={avatar} alt={name} className="traveler-avatar w-[112px] h-[112px]" />
 
       <h3 className="traveler-name">{name}</h3>
 
