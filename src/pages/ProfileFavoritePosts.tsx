@@ -1,7 +1,7 @@
 import getFavoritesPosts from "@/api/user/getFavoritesPosts";
 import Button from "@/components/ui/Button";
 import Loader from "@/components/ui/Loader";
-import StoryCard from "@/components/ui/popular-stories/StoryCard";
+import StoryCard from "@/components/popular-stories/StoryCard";
 import StoriesMessage from "@/components/ui/StoriesMessage";
 import useAsync from "@/hooks/useAsync";
 import { selectUser } from "@/redux/auth/selectors";

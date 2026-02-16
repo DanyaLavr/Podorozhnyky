@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import type { IStory } from "@/types/user/user";
 import { getUserStories } from "@/api/user/getUserStories";
 import type { QueryDocumentSnapshot } from "firebase/firestore";
-import StoryCard from "@/components/ui/popular-stories/StoryCard";
+import StoryCard from "@/components/popular-stories/StoryCard";
 import Button from "@/components/ui/Button";
 
 const UserStories = () => {
